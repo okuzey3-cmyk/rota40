@@ -72,12 +72,19 @@ button{font-family:inherit;}
   padding:14px 16px 12px;
   display:flex; align-items:flex-end; justify-content:space-between;
 }
+.wordmark-col{display:flex; flex-direction:column; gap:2px;}
 .wordmark{
   font-family:var(--font-display);
   font-size:20px;
   font-weight:600;
   letter-spacing:0.5px;
   display:flex; align-items:center; gap:6px;
+}
+.wordmark-sub{
+  font-size:11px;
+  color:var(--text-muted);
+  line-height:1.3;
+  max-width:210px;
 }
 .wordmark .dot{color:var(--accent);}
 .countdown-badge{
@@ -357,7 +364,10 @@ main{
 <body>
 <div id="app">
   <div class="topbar">
-    <div class="wordmark">ROTA<span class="dot">40</span></div>
+    <div class="wordmark-col">
+      <div class="wordmark">ROTA<span class="dot">40</span></div>
+      <div class="wordmark-sub" id="wordmarkSub"></div>
+    </div>
     <div class="countdown-badge">
       <span class="num" id="cdNum">—</span>
       <span class="label">GÜN KALDI</span>
@@ -781,6 +791,19 @@ const COACH_LINES = [
   "Rakip senin karşındaki soru kağıdı, başka kimse değil."
 ];
 
+const ENCOURAGE_LINES = [
+  "Sen bunu başarırsın.",
+  "Bir günde bir adım, 40 günde bir hedef.",
+  "Bugün de buradasın — bu bile bir başarı.",
+  "Küçük adımlar seni uzağa taşır.",
+  "Kendine güven, plan zaten hazır.",
+  "Her gün biraz daha güçleniyorsun.",
+  "Vazgeçmedin, bu en önemlisi.",
+  "Bugünü kazan, gerisi kendiliğinden gelir.",
+  "Emeğin boşa gitmiyor, birikiyor.",
+  "25 Ekim'de karşına çıkacak sen, bugünkü senden daha hazır olacaksın."
+];
+
 /* ---------- Plan üretimi ---------- */
 function buildDayTypes(){
   const flexDays = 37; // gün 2-38 arası (gün 1=tespit, 39=deneme, 40=final sabit)
@@ -955,6 +978,8 @@ function esc(s){ const d=document.createElement('div'); d.textContent=s; return 
 
 function renderTopBar(){
   document.getElementById('cdNum').textContent = daysUntilExam();
+  const sub = document.getElementById('wordmarkSub');
+  if(sub) sub.textContent = ENCOURAGE_LINES[todayIndex() % ENCOURAGE_LINES.length];
 }
 
 function subjectDotHtml(sid){
