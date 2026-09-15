@@ -358,6 +358,42 @@ main{
 }
 .checklist li:last-child{border-bottom:none;}
 .checklist li .ck{color:var(--success); flex-shrink:0;}
+.worked-card{
+  background:var(--bg-elev);
+  border:1px solid var(--accent);
+  border-radius:var(--radius);
+  padding:16px;
+  margin-bottom:12px;
+}
+.worked-card .kicker{color:var(--accent);}
+.worked-q{
+  font-size:14.5px;
+  font-weight:600;
+  line-height:1.45;
+  margin:2px 0 14px;
+  padding-bottom:12px;
+  border-bottom:1px dashed var(--line);
+}
+.steps-list{list-style:none; padding:0; margin:0;}
+.steps-list li{
+  display:flex; gap:11px; align-items:flex-start;
+  font-size:14px; line-height:1.5;
+  padding:8px 0;
+}
+.steps-list .stepnum{
+  flex-shrink:0;
+  width:20px; height:20px;
+  border-radius:50%;
+  background:var(--accent);
+  color:#fff;
+  font-family:var(--font-display);
+  font-size:11.5px;
+  font-weight:600;
+  display:flex; align-items:center; justify-content:center;
+  margin-top:1px;
+}
+.steps-list li:last-child{font-weight:600; color:var(--success);}
+.steps-list li:last-child .stepnum{background:var(--success);}
 ::selection{background:var(--accent); color:#fff;}
 </style>
 </head>
@@ -411,6 +447,7 @@ const TOPICS = [
  analogy:"Bölünebilme kuralları, uzun bölme yapmadan “bu sayı tam bölünür mü” diye anlamanı sağlayan kısayollardır — markette para üstünü hızlı hesaplamak gibi.",
  explain:"2 ile bölünme: son rakam çift. 3 ile: rakamlar toplamı 3’e bölünür. 4 ile: son iki basamak 4’e bölünür. 5 ile: son rakam 0 veya 5. 6 ile: hem 2 hem 3’e bölünmeli. 8 ile: son üç basamak 8’e bölünür. 9 ile: rakamlar toplamı 9’a bölünür. 11 ile: sağdan sola dönüşümlü artı-eksi ile toplanan rakamların sonucu 11’in katı olmalı.",
  strategy:"Büyük sayı verilen sorularda direkt bölme yapma, uygun kuralı seç ve zaman kazan.",
+ worked:{q:"2436 sayısı 4’e tam bölünür mü?", steps:["4 ile bölünebilme kuralı, sayının son iki basamağına bakmayı söyler.","2436 sayısının son iki basamağı: 36.","36 ÷ 4 = 9, kalansız bölünüyor.","Cevap: Evet, 2436 sayısı 4’e tam bölünür."]},
  questions:[
    {q:"2436 sayısının 4’e tam bölünüp bölünmediğini anlamak için hangi basamaklara bakılır?", options:["Sadece son basamağa","Son iki basamağa","Son üç basamağa","Tüm basamakların toplamına"], answer:1, exp:"4 kuralında son iki basamağın oluşturduğu sayıya bakılır; 2436’da bu 36’dır ve 4’e tam bölünür."},
    {q:"Rakamları toplamı 9’a bölünen bir sayı kesinlikle hangisine de tam bölünür?", options:["2","3","5","11"], answer:1, exp:"9’un bir böleni 3 olduğundan, 9’a bölünen bir sayı otomatik olarak 3’e de tam bölünür."},
@@ -422,6 +459,7 @@ const TOPICS = [
  analogy:"Kesirler bir pastayı eşit dilimlere bölmek gibidir: a/b, pastanın b eş parçaya bölünüp a parçasının alınması demektir.",
  explain:"a/b biçiminde yazılabilen (b≠0) sayılara rasyonel sayı denir. Toplama-çıkarmada paydalar eşitlenir (OKEK), çarpmada pay pay ile payda payda çarpılır, bölmede ikinci kesir ters çevrilip çarpılır. Ondalık sayıyı kesre çevirirken virgülden sonraki basamak sayısı kadar sıfır paydaya yazılır (0,25 = 25/100 = 1/4).",
  strategy:"İşlem önceliğini unutma: önce çarpma-bölme, sonra toplama-çıkarma; sonunda mutlaka sadeleştir.",
+ worked:{q:"3/4 ile 2/5 kesirlerini toplayın.", steps:["Paydaları eşitlemek için OKEK(4,5)=20 bulunur.","3/4 = 15/20, 2/5 = 8/20 olarak yazılır.","Paylar toplanır: 15/20 + 8/20 = 23/20.","Cevap: 23/20."]},
  questions:[
    {q:"3/4 ile 2/5 kesirlerinin toplamı kaçtır?", options:["23/20","5/9","1/2","23/9"], answer:0, exp:"Paydalar eşitlenir (OKEK=20): 15/20 + 8/20 = 23/20."},
    {q:"0,375 ondalık sayısının en sade kesir hâli nedir?", options:["3/8","3/7","375/100","1/3"], answer:0, exp:"375/1000 kesri sadeleştirilince 3/8 elde edilir."},
@@ -433,6 +471,7 @@ const TOPICS = [
  analogy:"Üs, bir sayıyı kendisiyle kaç kez çarptığını gösteren bir kısayoldur; kök ise bu çarpımı geri sarmaktır.",
  explain:"aᵐ × aⁿ = aᵐ⁺ⁿ; aᵐ ÷ aⁿ = aᵐ⁻ⁿ; (aᵐ)ⁿ = aᵐⁿ; a⁰=1 (a≠0); a⁻ⁿ=1/aⁿ. Köklü ifadelerde √(a×b)=√a×√b; kök içindeki tam kare çarpanlar dışarı çıkarılır (√12 = √(4×3) = 2√3).",
  strategy:"Üslü ifadelerde tabanı eşitlemeye çalış; köklü ifadelerde kök içini asal çarpanlarına ayırıp tam kareleri dışarı çıkar.",
+ worked:{q:"2³ × 2⁴ işlemini yapın.", steps:["Taban aynı (2) olduğu için üsler toplanır kuralı uygulanır: aᵐ×aⁿ=aᵐ⁺ⁿ.","3+4=7, yani sonuç 2⁷ olur.","2⁷ = 128.","Cevap: 128."]},
  questions:[
    {q:"2³ × 2⁴ işleminin sonucu kaçtır?", options:["128","64","2¹²","16"], answer:0, exp:"Taban aynı olduğunda üsler toplanır: 2³×2⁴=2⁷=128."},
    {q:"√48 ifadesinin en sade hâli nedir?", options:["4√3","2√12","16√3","6√2"], answer:0, exp:"48=16×3 olduğundan √48=√16×√3=4√3."},
@@ -444,6 +483,7 @@ const TOPICS = [
  analogy:"Çarpanlara ayırmak, bir ifadeyi Lego parçalarına ayırıp hangi parçalardan oluştuğunu görmektir.",
  explain:"Ortak çarpan parantezine alma: ab+ac=a(b+c). İki kare farkı: a²-b²=(a-b)(a+b). Tam kare özdeşlikleri: (a+b)²=a²+2ab+b², (a-b)²=a²-2ab+b².",
  strategy:"İfadede kare veya çarpım kalıbı ara; hangi özdeşliğe uyduğunu belirleyip doğrudan aç ya da çarpanlarına ayır.",
+ worked:{q:"x²-49 ifadesini çarpanlarına ayırın.", steps:["49 = 7² olduğu için ifade a²-b² kalıbındadır (a=x, b=7).","İki kare farkı özdeşliği: a²-b²=(a-b)(a+b).","Yerine koyarsak: (x-7)(x+7).","Cevap: (x-7)(x+7)."]},
  questions:[
    {q:"x²-49 ifadesinin çarpanları nedir?", options:["(x-7)(x+7)","(x-49)(x+1)","(x-7)²","(x+7)²"], answer:0, exp:"İki kare farkı özdeşliği: a²-b²=(a-b)(a+b), burada 49=7²."},
    {q:"(x+3)² ifadesinin açılımı nedir?", options:["x²+6x+9","x²+9","x²+3x+9","x²+6x+6"], answer:0, exp:"Tam kare özdeşliği: (a+b)²=a²+2ab+b² → x²+6x+9."},
@@ -455,6 +495,7 @@ const TOPICS = [
  analogy:"Oran-orantı, bir tarif için pasta malzemelerini iki katına çıkarmak gibidir — oran sabit kaldığı sürece büyüklükler birlikte değişir.",
  explain:"Doğru orantıda bir büyüklük artarken diğeri aynı oranda artar (a/b=c/d). Ters orantıda biri artarken diğeri aynı oranda azalır (a×b=c×d sabit). Paylaştırma problemlerinde toplam, oranların toplamına bölünüp her paya oranı kadar dağıtılır.",
  strategy:"Önce doğru mu ters mi orantı olduğuna karar ver, sonra iç çarpım-dış çarpım eşitliğini kur.",
+ worked:{q:"3 işçi bir işi 12 günde bitiriyorsa, 6 işçi kaç günde bitirir?", steps:["İşçi sayısı arttıkça süre azalır, bu yüzden ters orantı kurulur.","Ters orantıda çarpımlar eşitlenir: 3×12 = 6×x.","36 = 6x → x = 6.","Cevap: 6 gün."]},
  questions:[
    {q:"3 işçi bir işi 12 günde bitiriyorsa, 6 işçi aynı işi kaç günde bitirir?", options:["6","24","18","4"], answer:0, exp:"İşçi sayısı ile süre ters orantılıdır: 3×12=6×x → x=6 gün."},
    {q:"240 TL, 3:5 oranında iki kişi arasında paylaştırılıyor. Küçük pay kaç TL’dir?", options:["90","150","80","120"], answer:0, exp:"Oranlar toplamı 3+5=8, birim pay 240/8=30 TL; küçük pay 3×30=90 TL."},
@@ -466,6 +507,7 @@ const TOPICS = [
  analogy:"Yaş ve sayı problemleri bir hikâyeyi denklemle anlatmak gibidir; cümledeki her ilişkiyi bir harfle (x) ifade edip denklem kurarsın.",
  explain:"Ardışık sayı problemlerinde sayılar x, x+1, x+2... şeklinde ifade edilir. Yaş problemlerinde “kaç yıl sonra/önce” ifadelerinde her iki kişinin yaşına aynı sayı eklenir/çıkarılır. Kesir problemlerinde “bir sayının X’te biri Y kadardır” ifadeleri doğrudan denkleme çevrilir.",
  strategy:"Bilinmeyeni x koy, cümledeki her ilişkiyi ayrı bir denklem parçasına çevir, sonra çöz.",
+ worked:{q:"İki ardışık çift sayının toplamı 46 ise büyük sayı kaçtır?", steps:["Küçük sayıyı x, büyük sayıyı x+2 olarak yazarız (ardışık çift sayılar 2 farklıdır).","Denklemi kurarız: x + (x+2) = 46.","2x + 2 = 46 → 2x = 44 → x = 22.","Cevap: Büyük sayı x+2 = 24."]},
  questions:[
    {q:"İki ardışık çift sayının toplamı 46 ise büyük sayı kaçtır?", options:["24","22","26","23"], answer:0, exp:"x ve x+2 ardışık çift sayılardır: x+(x+2)=46 → x=22, büyük sayı 24."},
    {q:"Bir baba bugün 40, oğlu 10 yaşındadır. Kaç yıl sonra babanın yaşı oğlunun yaşının 3 katı olur?", options:["5","4","6","10"], answer:0, exp:"40+t=3(10+t) denklemi çözülünce t=5 yıl bulunur."},
@@ -477,6 +519,7 @@ const TOPICS = [
  analogy:"Hareket problemleri bir yol filmi gibidir: Yol=Hız×Zaman formülü sahne sahne ilerler. Yüzde problemleri ise indirim etiketlerini okumaktır.",
  explain:"Yol=Hız×Zaman. Zıt yönde hareket edenlerin hızları toplanır, aynı yönde gidenlerin hız farkı kullanılır. İşçi-havuz sorularında birim zamandaki iş oranları toplanır (1/a+1/b=1/t). Yüzde X indirim sonrası fiyat = fiyat×(100-x)/100. Kâr-zarar: Satış fiyatı = Alış fiyatı + Kâr.",
  strategy:"Hareket sorularında önce yönü (aynı/zıt) belirle; işçi-havuz sorularında “1 günlük iş” oranı üzerinden düşün.",
+ worked:{q:"Aralarında 300 km olan iki şehirden karşılıklı yola çıkan iki araç 60 km/sa ve 40 km/sa hızla gidiyorsa kaç saat sonra karşılaşır?", steps:["Araçlar zıt yönde hareket ettiği için hızları toplanır: 60+40=100 km/sa.","Karşılaşma süresi = toplam mesafe ÷ toplam hız.","300 ÷ 100 = 3.","Cevap: 3 saat sonra karşılaşırlar."]},
  questions:[
    {q:"Aralarında 300 km olan iki şehirden aynı anda karşılıklı yola çıkan iki araç, biri 60 km/sa diğeri 40 km/sa hızla gidiyorsa kaç saat sonra karşılaşırlar?", options:["3","5","2","4"], answer:0, exp:"Zıt yönde hareket edenlerin hızları toplanır: 300/(60+40)=3 saat."},
    {q:"Bir işi Ali 6 günde, Veli 12 günde tek başına bitiriyor. Birlikte çalışırlarsa işi kaç günde bitirirler?", options:["4","3","9","18"], answer:0, exp:"Günlük iş oranları toplanır: 1/6+1/12=3/12=1/4 → iş 4 günde biter."},
@@ -488,6 +531,7 @@ const TOPICS = [
  analogy:"Üçgenler geometri sorularının iskeletidir — üç kenar, bir masa ayağı gibi açılarla birbirine bağlanır.",
  explain:"Bir üçgenin iç açıları toplamı 180°’dir. Bir dış açı, kendisine komşu olmayan iki iç açının toplamına eşittir. Eşkenar üçgende tüm açılar 60°, ikizkenar üçgende taban açıları eşittir. Pisagor bağıntısı: dik üçgende a²+b²=c² (c hipotenüs).",
  strategy:"Şekilli sorularda önce bilinen açı/kenarları işaretle, sonra iç açılar toplamı ya da Pisagor bağıntısıyla eksik değeri bul.",
+ worked:{q:"Bir üçgenin iç açılarından ikisi 50° ve 70° ise üçüncü açı kaç derecedir?", steps:["Bir üçgenin iç açıları toplamı her zaman 180°’dir.","Bilinen iki açı toplanır: 50+70=120°.","Üçüncü açı = 180 - 120.","Cevap: 60°."]},
  questions:[
    {q:"Bir üçgenin iç açılarından ikisi 50° ve 70° ise üçüncü açı kaç derecedir?", options:["60°","50°","70°","65°"], answer:0, exp:"İç açılar toplamı 180°’dir: 180-(50+70)=60°."},
    {q:"Dik kenarları 6 cm ve 8 cm olan dik üçgenin hipotenüsü kaç cm’dir?", options:["10","14","7","12"], answer:0, exp:"Pisagor bağıntısı: 6²+8²=36+64=100, hipotenüs=√100=10 cm."},
@@ -499,6 +543,7 @@ const TOPICS = [
  analogy:"Permütasyon ve kombinasyon, bir grubu farklı şekillerde sıraya dizmenin ya da aralarından seçim yapmanın kaç yolu olduğunu sayan bir yöntemdir; olasılık ise bir olayın gerçekleşme şansını ölçer.",
  explain:"Permütasyonda sıralama önemlidir: n farklı elemanın n! (n faktöriyel) farklı dizilişi vardır; n elemandan r tanesinin sıralı seçimi nPr=n!/(n-r)! ile bulunur. Kombinasyonda sıralama önemli değildir: n elemandan r tanesinin seçimi nCr=n!/(r!(n-r)!) ile bulunur. Olasılık = istenen durum sayısı / mümkün tüm durum sayısı.",
  strategy:"Soruda sıralamanın (kimin önce, hangi görevde) önemli olup olmadığına bak: önemliyse permütasyon, önemsizse kombinasyon kullan.",
+ worked:{q:"5 farklı kitap bir rafa yan yana kaç farklı şekilde dizilebilir?", steps:["Sıralamanın önemli olduğu, n farklı nesnenin dizilişi problemi bu.","n farklı nesnenin dizilişi n! (n faktöriyel) ile bulunur.","5! = 5×4×3×2×1 = 120.","Cevap: 120."]},
  questions:[
    {q:"5 farklı kitap bir rafa yan yana kaç farklı şekilde dizilebilir?", options:["120","20","25","60"], answer:0, exp:"5 farklı nesnenin sıralanışı 5!=120’dir."},
    {q:"8 kişilik bir gruptan başkan ve yardımcısı (2 farklı görev) kaç farklı şekilde seçilebilir?", options:["56","28","64","16"], answer:0, exp:"Görevler farklı olduğu için sıralama önemlidir: 8P2=8×7=56."},
@@ -511,6 +556,7 @@ const TOPICS = [
  analogy:"Türkçedeki ünlüler bir orkestra gibi çalışır: kalın sesler (a,ı,o,u) ile ince sesler (e,i,ö,ü) bir kelime içinde karışmaz.",
  explain:"Büyük ünlü uyumuna göre bir kelimenin ilk hecesinde kalın ünlü varsa sonraki hecelerde de kalın, ince ünlü varsa ince ünlü bulunur. Kaynaştırma harfleri (y, ş, s, n) ünlüyle biten kelime ünlüyle başlayan ek aldığında araya girer (kapı-y-a, araba-s-ı). Sert ünsüzle (p,ç,t,k) biten kelimeler ünlüyle başlayan ek aldığında yumuşar: kitap-ı değil kitab-ı.",
  strategy:"Kelimeyi hecelere ayırıp ünlüleri tek tek kontrol et; yabancı kökenli bazı kelimeler (kalem gibi) kurala aykırı istisnadır.",
+ worked:{q:"Aşağıdakilerden hangisi büyük ünlü uyumuna aykırıdır: kitaplık, radyo, hediye, kalemlik?", steps:["Her kelimenin ünlülerini tek tek kalın (a,ı,o,u) / ince (e,i,ö,ü) olarak işaretle.","kitaplık: ı,ı kalın-kalın uyumlu. radyo: a,o kalın-kalın uyumlu. hediye: e,i,e ince-ince-ince uyumlu.","kalemlik: a(kalın)-e(ince)-i(ince) karışık — “kalem” kökü zaten yabancı kökenli bir istisnadır.","Cevap: kalemlik, büyük ünlü uyumuna aykırıdır."]},
  questions:[
    {q:"Aşağıdakilerden hangisi büyük ünlü uyumuna aykırıdır?", options:["kitaplık","radyo","hediye","kalemlik"], answer:3, exp:"“Kalem” Arapça kökenlidir ve tek başına büyük ünlü uyumuna aykırıdır (a kalın, e ince); aldığı ekler kurala uysa da kelime bütünüyle aykırı sayılır."},
    {q:"“Arabasını çok sever.” cümlesinde “araba” sözcüğüne getirilen iyelik ekinde hangi kaynaştırma harfi kullanılmıştır?", options:["y","ş","s","n"], answer:2, exp:"“Araba” ünlüyle bitiyor, iyelik eki “-ı” ünlüyle başladığı için araya kaynaştırma harfi “s” girer: araba-s-ı."},
@@ -522,6 +568,7 @@ const TOPICS = [
  analogy:"Ekler, bir kelimeye takılan lego parçaları gibidir; yapım ekleri kelimenin türünü değiştirir, çekim ekleri sadece cümledeki görevini belirtir.",
  explain:"Yapım ekleri kelimenin türünü değiştirebilir ve yeni bir kelime oluşturur: göz-lük, oku-ma. Çekim ekleri kelimenin anlamını temelden değiştirmez, sadece görevini/durumunu belirtir: hâl ekleri, çoğul eki (-ler/-lar), iyelik ekleri, fiil çekim ekleri.",
  strategy:"“Yeni bir kelime mi oluştu yoksa sadece görev mi değişti” diye sor — yeni kelime oluştuysa yapım eki, sadece görev değiştiyse çekim ekidir.",
+ worked:{q:"“Göz-lük-çü-lük” kelimesinde kaç tane yapım eki vardır?", steps:["Kelimeyi köküne ve eklerine ayır: göz + lük + çü + lük.","Her ekin yeni bir kelime/tür oluşturup oluşturmadığına bak.","+lük (eşya), +çü (meslek), +lük (meslek alanı) — üçü de yeni anlam/tür kattığı için yapım ekidir.","Cevap: 3 yapım eki vardır."]},
  questions:[
    {q:"“Göz-lük-çü-lük” kelimesinde kaç tane yapım eki vardır?", options:["3","2","1","4"], answer:0, exp:"göz+lük, +çü, +lük eklerinin üçü de yeni kelime/tür oluşturduğu için yapım ekidir."},
    {q:"Aşağıdaki eklerden hangisi bir çekim ekidir?", options:["Çoğul eki (-ler/-lar)","Meslek adı yapan “-çı/-ci”","Küçültme eki “-cik”","İsimden fiil yapan “-le”"], answer:0, exp:"Çoğul eki kelimenin türünü değiştirmez, sadece sayı bilgisi ekler; bu yüzden çekim ekidir."},
@@ -533,6 +580,7 @@ const TOPICS = [
  analogy:"Kelimeler bazen tek anlamlı bir valizle, bazen çok gözlü bir çantayla gezer; bağlama göre hangi gözünü açtığını anlarsın.",
  explain:"Gerçek (temel) anlam, kelimenin sözlük anlamıdır. Mecaz anlam, kelimenin gerçek anlamından uzaklaşarak kazandığı yeni anlamdır. Deyimler, en az iki kelimeden oluşan, kalıplaşmış ve çoğunlukla mecazlı anlatımlardır. Eş anlamlı kelimeler aynı, zıt anlamlı kelimeler karşıt anlam taşır.",
  strategy:"Cümledeki kelimenin somut/nesnel bir durumu mu yoksa soyutlaşmış bir durumu mu anlattığına bak.",
+ worked:{q:"“Bu haberi duyunca yüreği dağlandı.” cümlesindeki altı çizili söz hangi anlamda kullanılmıştır?", steps:["Sözün gerçek/somut bir olayı mı, yoksa soyut bir duyguyu mu anlattığına bak.","“Yürek dağlanmak” gerçekte bir yanma/dağlanma değildir.","Bu ifade üzüntü, acı duyma durumunu anlatan kalıplaşmış bir söz (deyim)dir.","Cevap: Mecaz anlamda kullanılmıştır."]},
  questions:[
    {q:"“Bu haberi duyunca yüreği dağlandı.” cümlesindeki altı çizili söz için ne söylenebilir?", options:["Mecaz anlamda kullanılmıştır","Gerçek anlamda kullanılmıştır","Terim anlamda kullanılmıştır","Yan anlamda kullanılmıştır"], answer:0, exp:"“Yürek dağlanmak” gerçek bir yanma değil, üzüntü duymayı ifade eden mecazlı bir deyimdir."},
    {q:"Aşağıdaki kelime çiftlerinden hangisi zıt (karşıt) anlamlıdır?", options:["Karanlık - Aydınlık","Güzel - Hoş","Akıllı - Zeki","Ev - Konut"], answer:0, exp:"Diğer çiftler eş/yakın anlamlıyken karanlık-aydınlık birbirinin karşıtıdır."},
@@ -544,6 +592,7 @@ const TOPICS = [
  analogy:"Bir cümle, bir haber sunucusu (nesnel: sadece olguyu aktarır) ya da bir yorumcu (öznel: kendi görüşünü katar) gibi konuşabilir.",
  explain:"Nesnel (objektif) yargı, kişiden kişiye değişmeyen, kanıtlanabilir bilgi içerir. Öznel (sübjektif) yargı kişinin kendi görüş/beğenisini yansıtır ve kanıtlanamaz. Cümlede ayrıca koşul, karşılaştırma, amaç-sonuç, neden-sonuç ilişkileri de sorulur.",
  strategy:"Cümlede “bence, göre, en güzel, bana kalırsa” gibi ifadeler varsa öznel; sayı, tarih, somut olgu varsa nesneldir.",
+ worked:{q:"“Roman, 300 sayfadan oluşmaktadır.” cümlesi için ne söylenebilir?", steps:["Cümlede kişisel bir görüş mü yoksa ölçülebilir bir bilgi mi var, ona bak.","Sayfa sayısı kişiden kişiye değişmeyen, kontrol edilebilir bir bilgidir.","Bu tür bilgiler nesnel (objektif) yargı olarak adlandırılır.","Cevap: Nesnel bir yargıdır."]},
  questions:[
    {q:"“Roman, 300 sayfadan oluşmaktadır.” cümlesi için ne söylenebilir?", options:["Nesnel bir yargıdır","Öznel bir yargıdır","Hem nesnel hem öznel bir yargıdır","Varsayıma dayalı bir yargıdır"], answer:0},
    {q:"“Bence bu romanın en etkileyici yanı sonundaki sürpriz bitiştir.” cümlesi için ne söylenebilir?", options:["Öznel bir yargıdır","Nesnel bir yargıdır","Kanıtlanabilir bir yargıdır","Sayısal veri içeren bir yargıdır"], answer:0},
@@ -555,6 +604,7 @@ const TOPICS = [
  analogy:"Bir paragraf, bir ana yolun etrafında ilerleyen yan sokaklar gibidir — ana düşünce, tüm cümlelerin birleştiği yerdir.",
  explain:"Ana düşünce, paragrafın anlatmak istediği temel fikirdir; genelde yardımcı düşüncelerin (örnek, açıklama, kanıt) toplamından çıkarılır. Paragraf sorularında sıkça “bu parçadan çıkarılabilecek en kapsamlı yargı” ya da “neye değinilmemiştir” tarzı sorular gelir.",
  strategy:"Paragrafı hızlıca oku, ilk ve son cümlelere özellikle dikkat et, sonra soruyu tekrar okuyup parçaya dön.",
+ worked:{q:"Bir paragrafta anlatılmak istenen temel fikre ne ad verilir?", steps:["Paragraftaki cümleleri ayır: bazıları örnek/açıklama (yardımcı düşünce), biri de bütünü özetleyen temel fikir.","Yardımcı düşünceler bu temel fikri destekler, tek başına paragrafın özünü vermez.","Paragrafın anlatmak istediği bu temel fikre “ana düşünce” denir.","Cevap: Ana düşünce."]},
  questions:[
    {q:"Bir paragrafta anlatılmak istenen temel fikre ne ad verilir?", options:["Ana düşünce","Yardımcı düşünce","Konu","Bakış açısı"], answer:0},
    {q:"Paragraf sorularında “Bu parçada aşağıdakilerden hangisine değinilmemiştir?” tarzı bir soruda nasıl bir strateji izlenmelidir?", options:["Şıklar parçayla tek tek karşılaştırılıp parçada geçmeyen bulunmalıdır","Sadece ilk cümleye bakılmalıdır","Paragrafın konusu tahmin edilip şıklara bakılmadan cevaplanmalıdır","Sadece son cümleye bakılmalıdır"], answer:0},
@@ -566,6 +616,7 @@ const TOPICS = [
  analogy:"Yazım kuralları ve noktalama işaretleri, bir metnin trafik işaretleri gibidir — nerede duracağını, nerede vurgu yapacağını gösterir.",
  explain:"“de/da” bağlacı her zaman ayrı yazılır (Ali de geldi); bulunma hâli eki “-de/-da” bitişik yazılır (Evde kaldı). “ki” bağlacı genelde ayrı yazılır, ilgi eki “-ki” bitişik yazılır (Benimki, sabahki). İki nokta, açıklama yapılacağı zaman kullanılır.",
  strategy:"“de/da” ve “ki” sorularında kelimeyi cümleden çıkar; anlam bozulmuyorsa bağlaçtır (ayrı), bozuluyorsa ektir (bitişik).",
+ worked:{q:"“Ali de sınava girecek.” cümlesindeki “de” neden ayrı yazılmıştır?", steps:["“de/da” bağlaç mı yoksa bulunma hâli eki mi, anlamak için kelimeyi cümleden çıkar.","“Ali sınava girecek” — cümle hâlâ anlamlı, anlam bozulmadı.","Anlam bozulmadığı için bu bir bağlaçtır, bağlaçlar her zaman ayrı yazılır.","Cevap: Bağlaç olduğu ve cümleden çıkarılabildiği için ayrı yazılır."]},
  questions:[
    {q:"“Ali de sınava girecek.” cümlesindeki “de” neden ayrı yazılmıştır?", options:["Bağlaç olduğu ve cümleden çıkarılabildiği için","Bulunma hâli eki olduğu için","Özel isimden sonra geldiği için","Cümlenin sonunda olduğu için"], answer:0, exp:"“de” çıkarılınca anlam bozulmaz (Ali sınava girecek), bu yüzden ayrı yazılır."},
    {q:"Açıklama yapılacağı zaman hangi noktalama işareti kullanılır?", options:["İki nokta (:)","Noktalı virgül (;)","Ünlem (!)","Kesme işareti (')"], answer:0},
@@ -578,6 +629,7 @@ const TOPICS = [
  analogy:"İlk Türk devletlerini bir aile soyağacı gibi düşün — her biri bir öncekinden gelen gelenekleri (kurultay, ordu-millet anlayışı) miras almıştır.",
  explain:"Bilinen ilk Türk devleti Asya Hun Devleti’dir (Mete Han döneminde en güçlü dönemini yaşamıştır). Göktürkler, Türk adını taşıyan ve alfabesi (Orhun Yazıtları) olan ilk devlettir. Uygurlar yerleşik hayata geçen, matbaayı kullanan ilk Türk devletidir. Eski Türklerde “kurultay” devlet işlerinin görüşüldüğü danışma meclisiydi.",
  strategy:"“İlk” ifadesi geçen sorularda hangi devletin hangi konuda öncü olduğunu eşleştir.",
+ worked:{q:"Orhun Yazıtları hangi Türk devletine aittir?", steps:["Orhun Yazıtları’nın özelliğini hatırla: Türk adının geçtiği ilk yazılı belgedir.","Bu yazıtları hangi devletin diktiğini eşleştir.","Göktürkler, kendi alfabeleriyle bu yazıtları oluşturmuştur.","Cevap: Göktürkler."]},
  questions:[
    {q:"Orhun Yazıtları hangi Türk devletine aittir?", options:["Göktürkler","Uygurlar","Asya Hun Devleti","Avarlar"], answer:0, exp:"Türk adının geçtiği ilk yazılı belge olan Orhun Yazıtları, Göktürkler dönemine aittir."},
    {q:"Yerleşik hayata geçen ve matbaayı kullanan ilk Türk devleti hangisidir?", options:["Uygurlar","Göktürkler","Hazarlar","Kırgızlar"], answer:0},
@@ -589,6 +641,7 @@ const TOPICS = [
  analogy:"Türklerin İslamiyet’i kabulü, eski alışkanlıkların yeni bir kültürle harmanlanması gibidir — devlet gelenekleri korunurken İslami kurumlar da benimsenmiştir.",
  explain:"Karahanlılar, İslamiyet’i kabul eden ilk Türk devletidir. Gazneliler, Türk-İslam dünyasında “sultan” unvanını ilk kullanan devlettir. Büyük Selçuklu Devleti, Malazgirt Zaferi (1071) ile Anadolu’nun kapılarını Türklere açmıştır; bu zaferi Sultan Alparslan kazanmıştır.",
  strategy:"Bu dönemde hangi devletin “ilk” olduğuna dikkat et; dönüm noktası olayların tarih ve sonuçlarını eşleştir.",
+ worked:{q:"İslamiyet’i kabul eden ilk Türk devleti hangisidir?", steps:["Türk-İslam devletleri arasında “ilk” unvanını taşıyan devleti hatırla.","Karahanlılar, Türkler arasında İslamiyet’i resmi olarak kabul eden ilk devlettir.","Gazneliler ve Selçuklular bu tarihten sonra kurulmuştur.","Cevap: Karahanlılar."]},
  questions:[
    {q:"İslamiyet’i kabul eden ilk Türk devleti hangisidir?", options:["Karahanlılar","Gazneliler","Büyük Selçuklu","Harzemşahlar"], answer:0},
    {q:"Malazgirt Savaşı hangi yıl ve kimin komutasında kazanılmıştır?", options:["1071, Alparslan","1176, I. Kılıçarslan","1243, Kösedağ","1048, Tuğrul Bey"], answer:0, exp:"1071 Malazgirt Zaferi, Sultan Alparslan komutasında kazanılmış ve Anadolu’nun Türk yurdu olmasının önünü açmıştır."},
@@ -600,6 +653,7 @@ const TOPICS = [
  analogy:"Osmanlı’nın kuruluşu küçük bir beylikten imparatorluğa uzanan bir büyüme hikâyesidir — her padişah devlete yeni bir toprak katmıştır.",
  explain:"Osmanlı Devleti 1299’da Osman Bey tarafından kurulmuştur. İstanbul’un fethi (1453) II. Mehmet (Fatih) tarafından gerçekleştirilmiş, Orta Çağ’ın kapanıp Yeni Çağ’ın açıldığı kabul edilir. Yükselme döneminin zirvesi Kanuni Sultan Süleyman dönemidir (en geniş sınırlar).",
  strategy:"Padişah-olay eşleştirmelerine odaklan; fetih tarihlerini kronolojik sırayla akılda tut.",
+ worked:{q:"İstanbul’un fethi hangi padişah döneminde gerçekleşmiştir?", steps:["1453 tarihini ve bu fethi gerçekleştiren padişahın lakabını hatırla.","Bu padişah, fetihten sonra “Fatih” unvanını almıştır.","Fatih unvanı II. Mehmet’e aittir.","Cevap: II. Mehmet (Fatih)."]},
  questions:[
    {q:"İstanbul’un fethi hangi padişah döneminde gerçekleşmiştir?", options:["II. Mehmet (Fatih)","I. Bayezid","II. Bayezid","Yavuz Sultan Selim"], answer:0},
    {q:"Osmanlı Devleti’nin sınırlarının en geniş olduğu dönem hangi padişaha aittir?", options:["Kanuni Sultan Süleyman","Fatih Sultan Mehmet","Yavuz Sultan Selim","I. Ahmet"], answer:0},
@@ -611,6 +665,7 @@ const TOPICS = [
  analogy:"Bu dönem, büyümüş bir kurumun rakiplerine karşı avantajını kaybetmesi gibidir — Avrupa ilerlerken Osmanlı eski yöntemlerde ısrar etmiştir.",
  explain:"Karlofça Antlaşması (1699), Osmanlı’nın toprak kaybettiği ilk büyük antlaşmadır ve gerileme döneminin başlangıcı kabul edilir. III. Selim döneminde başlayan Nizam-ı Cedit hareketleri, Osmanlı’nın ilk ciddi yenileşme adımlarındandır. Islahat Fermanı (1856), gayrimüslim azınlıklara Müslümanlarla eşit haklar tanımıştır.",
  strategy:"“İlk toprak kaybı”, “gerilemenin başlangıcı” gibi dönüm noktası olayları birbirine karıştırma.",
+ worked:{q:"Osmanlı’nın toprak kaybettiği ilk büyük antlaşma ve gerileme döneminin başlangıcı sayılan antlaşma hangisidir?", steps:["“İlk toprak kaybı” ve “gerilemenin başlangıcı” ifadelerini birlikte hatırla.","1699 tarihli bir antlaşma bu iki özelliği birden taşır.","Bu antlaşma Karlofça Antlaşması’dır.","Cevap: Karlofça Antlaşması (1699)."]},
  questions:[
    {q:"Osmanlı Devleti’nin toprak kaybettiği ilk antlaşma olarak kabul edilen ve gerileme döneminin başlangıcı sayılan antlaşma hangisidir?", options:["Karlofça Antlaşması (1699)","Küçük Kaynarca Antlaşması (1774)","Kasr-ı Şirin Antlaşması","Zitvatorok Antlaşması"], answer:0},
    {q:"Nizam-ı Cedit yenileşme hareketleri hangi padişah döneminde başlamıştır?", options:["III. Selim","II. Mahmut","I. Abdülhamit","III. Ahmet"], answer:0},
@@ -622,6 +677,7 @@ const TOPICS = [
  analogy:"Milli Mücadele, dağınık direniş ateşlerinin (Kuvâ-yi Milliye) tek bir meşaleye — düzenli ordu ve TBMM’ye — dönüşme hikâyesidir.",
  explain:"Milli Mücadele’nin başlangıcı Mustafa Kemal’in 19 Mayıs 1919’da Samsun’a çıkışı kabul edilir. TBMM 23 Nisan 1920’de Ankara’da açılmıştır. Büyük Taarruz (1922) ile Anadolu işgalden kurtarılmış, Lozan Antlaşması (1923) ile Kurtuluş Savaşı diplomatik olarak sonuçlandırılmıştır.",
  strategy:"Genelge-kongre-antlaşma sıralamasını kronolojik olarak ezberle; her birinin “ilk kez” özelliğine dikkat et.",
+ worked:{q:"Mustafa Kemal, Milli Mücadele’yi başlatmak amacıyla hangi tarihte Samsun’a çıkmıştır?", steps:["Milli Mücadele’nin başlangıç tarihi olarak kabul edilen olayı hatırla.","Bu, Mustafa Kemal’in Samsun’a resmi görevle çıkışıdır.","Tarih: 19 Mayıs 1919.","Cevap: 19 Mayıs 1919."]},
  questions:[
    {q:"Mustafa Kemal, Milli Mücadele’yi başlatmak amacıyla hangi tarihte Samsun’a çıkmıştır?", options:["19 Mayıs 1919","23 Nisan 1920","22 Haziran 1919","30 Ağustos 1922"], answer:0},
    {q:"TBMM hangi tarihte açılmıştır?", options:["23 Nisan 1920","19 Mayıs 1919","29 Ekim 1923","24 Temmuz 1923"], answer:0},
@@ -633,6 +689,7 @@ const TOPICS = [
  analogy:"İnkılaplar, eski bir evi yıkıp yerine modern bir ev inşa etmek gibidir — siyasi, hukuki, eğitim ve toplumsal alanlarda yeni bir yapı kurulmuştur.",
  explain:"Cumhuriyet 29 Ekim 1923’te ilan edilmiştir. Tevhid-i Tedrisat Kanunu (1924) eğitimi birleştirmiştir. Atatürk’ün altı ilkesi: Cumhuriyetçilik, Milliyetçilik, Halkçılık, Devletçilik, Laiklik, İnkılapçılık.",
  strategy:"İnkılapların hangi alanda ve hangi yılda gerçekleştiğini eşleştirerek çalış.",
+ worked:{q:"Türkiye Cumhuriyeti hangi tarihte ilan edilmiştir?", steps:["TBMM’nin cumhuriyeti resmen ilan ettiği tarihi hatırla.","Bu, Milli Mücadele’nin ve Lozan’ın ardından gerçekleşen anayasal bir dönüm noktasıdır.","Tarih: 29 Ekim 1923.","Cevap: 29 Ekim 1923."]},
  questions:[
    {q:"Türkiye Cumhuriyeti hangi tarihte ilan edilmiştir?", options:["29 Ekim 1923","23 Nisan 1920","3 Mart 1924","30 Ağustos 1922"], answer:0},
    {q:"Öğretimi millileştiren ve dinî-laik eğitim ikiliğine son veren kanun hangisidir?", options:["Tevhid-i Tedrisat Kanunu (1924)","Medeni Kanun (1926)","Harf İnkılabı (1928)","Kabotaj Kanunu (1926)"], answer:0},
@@ -644,6 +701,7 @@ const TOPICS = [
  analogy:"Bu dönem, genç Türkiye Cumhuriyeti’nin dünyadaki büyük fırtınalar (dünya savaşları, Soğuk Savaş) arasında ayakta kalma ve yerini sağlamlaştırma hikâyesidir.",
  explain:"Türkiye, II. Dünya Savaşı (1939-1945) boyunca fiilen savaşa girmeyip tarafsız kalmayı tercih etmiştir. 1945’te Birleşmiş Milletler’e kurucu üye olarak katılmıştır. Soğuk Savaş döneminde Sovyet tehdidine karşı Batı bloğuna yakınlaşan Türkiye, 1952’de NATO’ya üye olmuştur. Kıbrıs Barış Harekâtı 1974’te gerçekleştirilmiştir.",
  strategy:"Türkiye’nin uluslararası kuruluşlara üyelik tarihlerini (BM 1945, NATO 1952) ve II. Dünya Savaşı’ndaki tarafsızlık politikasını net biçimde ayırt et.",
+ worked:{q:"Türkiye II. Dünya Savaşı’nda nasıl bir politika izlemiştir?", steps:["Türkiye’nin bu dönemdeki dış politika önceliğini hatırla: yeni kurulan devleti savaşın yıkımından korumak.","Türkiye, savaşan taraflardan biriyle ittifaka girmemiştir.","Savaşın büyük bölümünde tarafsızlığını korumuştur.","Cevap: Savaşın sonuna kadar büyük ölçüde tarafsız kalmıştır."]},
  questions:[
    {q:"Türkiye, II. Dünya Savaşı’nda nasıl bir politika izlemiştir?", options:["Savaşın sonuna kadar büyük ölçüde tarafsız kalmıştır","Almanya’nın yanında savaşa girmiştir","Müttefiklerin yanında baştan itibaren savaşmıştır","Savaşın başından itibaren fiilen çatışmaya girmiştir"], answer:0},
    {q:"Türkiye, Birleşmiş Milletler’e hangi yıl kurucu üye olarak katılmıştır?", options:["1945","1952","1923","1960"], answer:0},
@@ -656,6 +714,7 @@ const TOPICS = [
  analogy:"Türkiye’nin konumu, üç kıtanın kesiştiği bir kavşakta duran bir şehir merkezi gibidir — bu kavşak konumu hem avantaj hem çeşitlilik getirir.",
  explain:"Türkiye, matematik konum olarak 36-42° kuzey paralelleri ile 26-45° doğu meridyenleri arasında yer alır. Özel konumu; Asya-Avrupa arasında köprü olması, üç tarafının denizlerle çevrili olması, önemli boğazlara sahip olması gibi sonuçlar doğurur.",
  strategy:"Bir sonucun matematik konum mu yoksa özel konum mu kaynaklı olduğunu ayırt et: enlem/boylamla ilgiliyse matematik, komşuluk/denizlerle ilgiliyse özel konumdur.",
+ worked:{q:"Türkiye’nin doğusu ile batısı arasında yerel saat farkının olması hangi konumun sonucudur?", steps:["Yerel saat farkı enlem-boylam (matematik konum) ile mi, yoksa komşuluk (özel konum) ile mi ilgili, ona bak.","Saat farkı doğrudan boylam farkından kaynaklanır.","Boylam, matematik konumun bir parçasıdır.","Cevap: Matematik konum."]},
  questions:[
    {q:"Türkiye’nin doğusu ile batısı arasında yerel saat farkının olması hangi konumun sonucudur?", options:["Matematik konum","Özel konum","Coğrafi bölge konumu","İklim konumu"], answer:0},
    {q:"Türkiye’nin üç kıtanın kesişim noktasında yer alması ve önemli ticaret yolları üzerinde bulunması hangi konumun sonucudur?", options:["Özel konum","Matematik konum","Astronomik konum","Yerel konum"], answer:0},
@@ -667,6 +726,7 @@ const TOPICS = [
  analogy:"Türkiye’nin iklim çeşitliliği, aynı anda farklı gardıraplardan kıyafet seçmek zorunda kalmak gibidir — kıyıda mayo, İç Anadolu’da kalın mont gerekebilir.",
  explain:"Karadeniz İklimi: her mevsim yağışlı, yazı serin kışı ılık. Akdeniz/Ege İklimi: yazlar sıcak-kurak, kışlar ılık-yağışlı. İç Anadolu (karasal) iklimi: yazlar sıcak-kurak, kışlar soğuk ve kar yağışlı, yıllık yağış azdır. Denize uzaklık ve yükselti arttıkça karasallık artar.",
  strategy:"Tarif edilen sıcaklık-yağış özelliklerinden hangi bölgenin iklimi olduğunu çıkar; “her mevsim yağışlı” ifadesi hep Karadeniz’i işaret eder.",
+ worked:{q:"Her mevsim yağışlı, yazı serin kışı ılık geçen iklim tipi hangi bölgemizde görülür?", steps:["“Her mevsim yağışlı” ifadesi hep aynı bölgeyi işaret eder, bunu ezberden hatırla.","Bu özellik Türkiye’de sadece bir bölgede belirgindir.","Nem ve yağışın kaynağı, bölgeyi çevreleyen deniz ve dağların konumudur.","Cevap: Karadeniz."]},
  questions:[
    {q:"Her mevsim yağışlı, yazı serin kışı ılık geçen iklim tipi hangi bölgemizde görülür?", options:["Karadeniz","İç Anadolu","Akdeniz","Doğu Anadolu"], answer:0},
    {q:"Yazları sıcak-kurak, kışları soğuk-kar yağışlı geçen, yıllık yağışı düşük iklim tipi nerede görülür?", options:["İç Anadolu","Karadeniz","Ege","Marmara"], answer:0, exp:"Bu özellikler karasal iklimin tanımıdır ve en belirgin biçimde İç Anadolu’da görülür."},
@@ -678,6 +738,7 @@ const TOPICS = [
  analogy:"Türkiye’nin yerşekilleri farklı jeolojik dönemlerin izlerini taşıyan bir maket gibidir — genç kıvrım dağlar, geniş platolar, derin vadiler.",
  explain:"Türkiye, Alp-Himalaya kıvrım kuşağında yer aldığı için dağları genç ve diktir (deprem riski yüksektir). Kuzey Anadolu Dağları ve Toros Dağları kıyıya paralel uzanır. Akarsuların çoğu Karadeniz ve Akdeniz’e dökülür, boyları kısa, akış hızları fazladır (enerji potansiyeli yüksek, ulaşıma elverişsiz).",
  strategy:"“Genç-diri, deprem riski” ifadeleri hep Alp-Himalaya kuşağıyla, “kısa boylu hızlı akarsu” ifadesi hidroelektrik potansiyeliyle ilişkilendirilir.",
+ worked:{q:"Türkiye’de dağların genç ve diri olmasının, deprem riskinin yüksek olmasının temel nedeni nedir?", steps:["Türkiye’nin hangi büyük kıvrım/deprem kuşağında yer aldığını hatırla.","Genç, diri dağlar aktif yer hareketlerinin göstergesidir.","Türkiye, Alp-Himalaya kıvrım kuşağında yer alır.","Cevap: Alp-Himalaya kıvrım kuşağında yer alması."]},
  questions:[
    {q:"Türkiye’de dağların genç ve diri olmasının, deprem riskinin yüksek olmasının temel nedeni nedir?", options:["Alp-Himalaya kıvrım kuşağında yer alması","Üç tarafının denizlerle çevrili olması","Ilıman iklim kuşağında bulunması","Yüzölçümünün büyük olması"], answer:0},
    {q:"Türkiye’de akarsuların boylarının kısa, akış hızlarının fazla olmasının temel sonucu nedir?", options:["Hidroelektrik enerji potansiyelinin yüksek, ulaşıma elverişsiz olması","Ulaşıma çok elverişli olmaları","Taşımacılıkta yoğun kullanılmaları","Tuzluluk oranlarının artması"], answer:0},
@@ -689,6 +750,7 @@ const TOPICS = [
  analogy:"Nüfus dağılımı, kalabalık bir cadde ile boş bir ara sokak farkı gibidir — iklim, yeryüzü şekli ve ekonomik fırsatlar insanları belirli yerlere çeker.",
  explain:"Türkiye’de nüfus kıyı bölgelerde (özellikle Marmara) ve büyük ovalarda yoğunken, dağlık ve yüksek bölgelerde seyrektir. Nüfus yoğunluğunu artıran etkenler: sanayileşme, ticaret, tarıma elverişli ovalar. Azaltan etkenler: engebeli arazi, olumsuz iklim.",
  strategy:"Nüfusu artıran/azaltan etkenleri beşeri (sanayi, ticaret) ve doğal (iklim, yerşekli) olarak ayır.",
+ worked:{q:"Türkiye’de kırdan kente göçün temel nedeni aşağıdakilerden hangisidir?", steps:["Göçün “çekici” (kentte ne var) ve “itici” (kırda ne eksik) nedenlerini ayır.","Soru en güçlü çekici nedeni soruyor.","Kentlerde iş ve gelir imkânı sunan sektörler sanayi ve hizmettir.","Cevap: Sanayi ve hizmet sektörünün kentlerde yoğunlaşması."]},
  questions:[
    {q:"Türkiye’de nüfusun en yoğun olduğu bölge hangisidir?", options:["Marmara","Doğu Anadolu","Güneydoğu Anadolu","Karadeniz"], answer:0},
    {q:"Aşağıdakilerden hangisi bir bölgede nüfus yoğunluğunu artıran etkenlerden biridir?", options:["Sanayileşme","Engebeli arazi","Şiddetli iklim koşulları","Ulaşım imkânlarının yetersizliği"], answer:0},
@@ -700,6 +762,7 @@ const TOPICS = [
  analogy:"Türkiye ekonomisi, her bölgenin kendi uzmanlık alanına sahip olduğu bir atölyeler zinciri gibidir.",
  explain:"Çukurova pamuk ve narenciyeyle, Ege tütün-zeytin-üzümle, Karadeniz fındık-çayla öne çıkar. Sanayi, başta Marmara olmak üzere ulaşımın kolay olduğu, hammadde ve pazara yakın bölgelerde yoğunlaşmıştır.",
  strategy:"Bir ürünün/sektörün hangi bölgeyle özdeşleştiğini eşleştir; sınavda sıkça “hangi bölge hangi ürünle öne çıkar” sorulur.",
+ worked:{q:"Türkiye’de fındık üretiminde en önemli bölge hangisidir?", steps:["Fındığın yetiştiği iklim koşullarını (nemli, ılıman) hatırla.","Bu koşullara en uygun bölgeyi belirle.","Karadeniz, nemli-ılıman ikliminden dolayı fındık üretiminde öne çıkar.","Cevap: Karadeniz."]},
  questions:[
    {q:"Türkiye’de fındık üretiminde en önemli bölge hangisidir?", options:["Karadeniz","Ege","Akdeniz","İç Anadolu"], answer:0},
    {q:"Çukurova bölgesi hangi tarım ürünleriyle öne çıkar?", options:["Pamuk ve narenciye","Fındık ve çay","Tütün ve zeytin","Buğday ve şeker pancarı"], answer:0},
@@ -711,6 +774,7 @@ const TOPICS = [
  analogy:"Türkiye’nin 7 coğrafi bölgesi, her biri kendi iklimi, tarımı ve yaşam tarzıyla ayrı bir mahalle gibidir; bölgeler iklim ve bitki örtüsü benzerliğine göre belirlenmiştir.",
  explain:"Türkiye 7 coğrafi bölgeye ayrılır: Marmara (sanayi ve nüfus yoğunluğu en fazla, yüzölçümü en küçük), Ege (tarım ve turizm), Akdeniz (turizm, narenciye, seracılık), İç Anadolu (tahıl tarımı, hayvancılık, başkent Ankara), Karadeniz (fındık, çay, engebeli arazi), Doğu Anadolu (yüzölçümü en büyük, en yüksek ve engebeli, nüfus yoğunluğu en düşük), Güneydoğu Anadolu (GAP projesi, pamuk tarımı, en sıcak yazlar).",
  strategy:"Her bölgenin “birinci” olduğu bir özelliği (yüzölçümü en büyük/en küçük, nüfusu en yoğun/en seyrek, öne çıkan proje/ürün) net biçimde birbirinden ayır.",
+ worked:{q:"Yüzölçümü bakımından Türkiye’nin en büyük coğrafi bölgesi hangisidir?", steps:["Bölgelerin yüzölçümü sıralamasını, nüfus yoğunluğuyla karıştırmadan hatırla.","En büyük yüzölçümüne sahip bölge, en kalabalık bölge değildir.","Doğu Anadolu, geniş ve engebeli arazisiyle yüzölçümü en büyük bölgedir.","Cevap: Doğu Anadolu."]},
  questions:[
    {q:"Yüzölçümü bakımından Türkiye’nin en büyük coğrafi bölgesi hangisidir?", options:["Doğu Anadolu","İç Anadolu","Karadeniz","Akdeniz"], answer:0},
    {q:"Yüzölçümü en küçük olmasına rağmen nüfus yoğunluğu ve sanayileşmesi en fazla olan bölge hangisidir?", options:["Marmara","Ege","Akdeniz","Karadeniz"], answer:0},
@@ -723,6 +787,7 @@ const TOPICS = [
  analogy:"Hukuk kuralları bir oyunun kuralları gibidir — herkes uymalıdır ve uyulmadığında bir yaptırım devreye girer; ahlak kurallarında yaptırım ise vicdanidir.",
  explain:"Hukuk kurallarını diğer sosyal düzen kurallarından ayıran temel özellik, devlet gücüyle desteklenen maddi yaptırıma sahip olmasıdır. Kamu hukuku (devlet-birey ilişkileri) ile özel hukuk (bireyler arası ilişkiler: medeni, borçlar, ticaret hukuku) ayrımı önemlidir.",
  strategy:"“Hangisi özel/kamu hukuku dalıdır” sorularında ilişkinin taraflarına bak: devlet-birey ise kamu, birey-birey ise özel hukuktur.",
+ worked:{q:"Hukuk kurallarını ahlak kurallarından ayıran temel özellik nedir?", steps:["İki kural türünün de var olduğunu ama yaptırımlarının farklı olduğunu düşün.","Ahlak kurallarına uyulmamasının yaptırımı vicdani/toplumsaldır, devlet zoru yoktur.","Hukuk kurallarının arkasında devlet gücüyle desteklenen somut bir yaptırım vardır.","Cevap: Devlet gücüyle desteklenen maddi yaptırıma sahip olması."]},
  questions:[
    {q:"Hukuk kurallarını ahlak kurallarından ayıran temel özellik nedir?", options:["Devlet gücüyle desteklenen maddi yaptırıma sahip olması","Yazılı olması","Herkesi bağlaması","Zamanla değişebilmesi"], answer:0},
    {q:"Aşağıdakilerden hangisi özel hukuk dallarından biridir?", options:["Medeni Hukuk","Anayasa Hukuku","Ceza Hukuku","İdare Hukuku"], answer:0},
@@ -734,6 +799,7 @@ const TOPICS = [
  analogy:"Anayasalar, bir ülkenin kurum kültürü el kitabı gibidir — her yeni anayasa dönemin ihtiyaçlarına göre bu el kitabını günceller.",
  explain:"1876 Kanun-i Esasi, Türk tarihinin ilk yazılı anayasasıdır. 1921 Teşkilat-ı Esasiye Kanunu, TBMM döneminin ilk anayasasıdır. 1924 Anayasası Cumhuriyetin ilk anayasasıdır. Şu an yürürlükte olan 1982 Anayasası’dır.",
  strategy:"Hangi anayasanın “ilk” olduğuna (Osmanlı’nın / Cumhuriyet’in / TBMM döneminin ilk anayasası) dikkat ederek ayırt et.",
+ worked:{q:"Türk tarihinin ilk yazılı anayasası hangisidir?", steps:["“İlk” ifadesi geçtiği için en eski tarihli anayasayı ara.","Osmanlı döneminde I. Meşrutiyet ile ilan edilen anayasayı hatırla.","Bu anayasa 1876 tarihli Kanun-i Esasi’dir.","Cevap: 1876 Kanun-i Esasi."]},
  questions:[
    {q:"Türk tarihinin ilk yazılı anayasası hangisidir?", options:["1876 Kanun-i Esasi","1921 Teşkilat-ı Esasiye Kanunu","1924 Anayasası","1982 Anayasası"], answer:0},
    {q:"Şu anda yürürlükte olan Türkiye Cumhuriyeti Anayasası hangi yıla aittir?", options:["1982","1961","1924","1921"], answer:0},
@@ -745,6 +811,7 @@ const TOPICS = [
  analogy:"TBMM, ülkenin kurallar fabrikasıdır — kanunlar burada tasarlanır, tartışılır ve üretilir.",
  explain:"Yasama yetkisi TBMM’ye aittir ve devredilemez. TBMM 600 milletvekilinden oluşur, milletvekili seçilme yaşı 18’dir. TBMM’nin görevleri arasında kanun koymak-değiştirmek-kaldırmak, bütçeyi görüşüp kabul etmek sayılabilir.",
  strategy:"Yasama-yürütme-yargı görev ayrımını net tut; kanun yapma yetkisi her zaman yasama (TBMM) ile ilişkilendirilir.",
+ worked:{q:"Türkiye’de yasama yetkisi hangi organa aittir?", steps:["Yasama-yürütme-yargı ayrımını hatırla: kanun yapma hangi organın işidir?","Kanun yapma, değiştirme, kaldırma yetkisi yasamaya aittir.","Türkiye’de bu organ TBMM’dir.","Cevap: TBMM."]},
  questions:[
    {q:"Türkiye’de yasama yetkisi hangi organa aittir?", options:["TBMM","Cumhurbaşkanlığı","Anayasa Mahkemesi","Danıştay"], answer:0},
    {q:"TBMM kaç milletvekilinden oluşur?", options:["600","550","500","450"], answer:0},
@@ -756,6 +823,7 @@ const TOPICS = [
  analogy:"Yürütme, alınan kararları hayata geçiren operasyon ekibi gibidir; yargı ise anlaşmazlıkları çözen hakemdir.",
  explain:"Cumhurbaşkanlığı hükümet sisteminde yürütme yetkisi Cumhurbaşkanına aittir. Yüksek mahkemeler arasında Anayasa Mahkemesi (kanunların anayasaya uygunluğunu denetler), Yargıtay (adli yargının en üst mercii), Danıştay (idari yargının en üst mercii) sayılabilir.",
  strategy:"Hangi yüksek mahkemenin hangi işi yaptığını net ayır: Anayasa Mahkemesi=anayasaya uygunluk, Yargıtay=adli, Danıştay=idari.",
+ worked:{q:"Kanunların Anayasa’ya uygunluğunu denetleyen yüksek mahkeme hangisidir?", steps:["Yüksek mahkemelerin görev alanlarını ayır: adli, idari, anayasal denetim.","“Kanunun anayasaya uygunluğu” ifadesi anayasal denetimi işaret eder.","Bu denetimi yapan özel bir mahkeme vardır.","Cevap: Anayasa Mahkemesi."]},
  questions:[
    {q:"Kanunların Anayasa’ya uygunluğunu denetleyen yüksek mahkeme hangisidir?", options:["Anayasa Mahkemesi","Yargıtay","Danıştay","Sayıştay"], answer:0},
    {q:"Adli yargının en üst mercii hangisidir?", options:["Yargıtay","Danıştay","Anayasa Mahkemesi","Hâkimler ve Savcılar Kurulu"], answer:0},
@@ -767,6 +835,7 @@ const TOPICS = [
  analogy:"Temel haklar, her vatandaşa doğuştan verilen kişisel donanım gibidir — devlet bu donanımı korumak ve gerektiğinde sınırlarını belirlemekle yükümlüdür.",
  explain:"Temel hak ve özgürlükler ancak kanunla ve Anayasa’da öngörülen sebeplere bağlı olarak sınırlanabilir. Temel haklar; kişi hakları, sosyal-ekonomik haklar (eğitim, sağlık, çalışma), siyasi haklar (seçme-seçilme) olarak gruplanır.",
  strategy:"Bir hakkın hangi kategoriye girdiğini belirle; sınırlamanın ancak kanunla yapılabileceğini unutma.",
+ worked:{q:"Temel hak ve özgürlükler ancak neyle sınırlandırılabilir?", steps:["Temel hakların keyfi olarak sınırlanamayacağını, bir güvenceye bağlı olduğunu hatırla.","Anayasa bu güvenceyi tek bir yasama işlemine bağlamıştır.","Yönetmelik veya genelge ile sınırlama yapılamaz, sadece kanunla yapılabilir.","Cevap: Kanunla."]},
  questions:[
    {q:"Temel hak ve özgürlükler ancak neyle sınırlandırılabilir?", options:["Kanunla","Yönetmelikle","Genelgeyle","Cumhurbaşkanlığı kararnamesiyle"], answer:0},
    {q:"Seçme ve seçilme hakkı hangi hak kategorisine girer?", options:["Siyasi haklar","Sosyal haklar","Kişi hakları","Ekonomik haklar"], answer:0},
@@ -976,6 +1045,19 @@ const DAY_TYPE_LABEL = {diagnostic:'Seviye Tespit', lesson:'Günlük Ders', revi
 
 function esc(s){ const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
 
+function renderWorkedExampleHtml(worked){
+  if(!worked) return '';
+  let html = '<div class="worked-card">';
+  html += '<div class="kicker">ADIM ADIM ÖRNEK ÇÖZÜM</div>';
+  html += '<div class="worked-q">'+esc(worked.q)+'</div>';
+  html += '<ul class="steps-list">';
+  worked.steps.forEach((s,i)=>{
+    html += '<li><span class="stepnum">'+(i+1)+'</span><span>'+esc(s)+'</span></li>';
+  });
+  html += '</ul></div>';
+  return html;
+}
+
 function renderTopBar(){
   document.getElementById('cdNum').textContent = daysUntilExam();
   const sub = document.getElementById('wordmarkSub');
@@ -1162,6 +1244,7 @@ function showDay(day){
       '<div class="card"><div class="kicker">GÜNLÜK HAYATTAN</div><p>'+esc(t.analogy)+'</p></div>'+
       '<div class="card"><div class="kicker">KONU ANLATIMI</div><p>'+esc(t.explain)+'</p></div>'+
       '<div class="card"><div class="kicker">SORUYA YAKLAŞIM</div><p>'+esc(t.strategy)+'</p></div>'+
+      renderWorkedExampleHtml(t.worked)+
       (plan.isReview? '<div class="card"><p style="color:var(--text-muted);font-size:13px;">Bu, önceki bir konunun ek pratik turu — özet üstünden hızlıca geçip sorulara geç.</p></div>':'')+
       '<button class="btn btn-primary" id="startBtn">Soruları Çöz ('+t.questions.length+' soru)</button>';
     document.getElementById('startBtn').addEventListener('click', ()=> startDaySession(day, plan, body));
