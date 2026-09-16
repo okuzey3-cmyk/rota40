@@ -1084,8 +1084,20 @@ function buildFullPlan(){
 const LS_PLAN='rota40_plan', LS_START='rota40_start', LS_PROGRESS='rota40_progress';
 
 function loadOrCreatePlan(){
-  let plan = localStorage.getItem(LS_PLAN);
-  if(plan){ try{ return JSON.parse(plan); }catch(e){} }
+  let raw = localStorage.getItem(LS_PLAN);
+  if(raw){
+    try{
+      const parsed = JSON.parse(raw);
+      const validTypes = ['lesson','review','deneme','final'];
+      const lessonCount = parsed.filter(p=>p.type==='lesson').length;
+      const allTypesValid = Array.isArray(parsed) && parsed.every(p=>validTypes.includes(p.type));
+      // Kayıtlı plan güncel motorla (gün sayısı, tip isimleri, konu sayısı) uyuşuyorsa kullan;
+      // uyuşmuyorsa (eski bir sürümden kalmışsa) sessizce yeniden oluştur.
+      if(parsed.length===40 && allTypesValid && lessonCount===TOPICS.length){
+        return parsed;
+      }
+    }catch(e){}
+  }
   const fresh = buildFullPlan();
   localStorage.setItem(LS_PLAN, JSON.stringify(fresh));
   return fresh;
