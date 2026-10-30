@@ -1,112 +1,41 @@
 <!DOCTYPE html>
-<html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Sağlık Hizmetleri Pazarlaması – Çalışma</title>
+<html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sağlık Hizmetleri Pazarlaması</title>
 <style>
-:root{--bg:#f7f7f5;--card:#fff;--ink:#17181a;--mut:#6a6e73;--line:#e6e6e2;--acc:#0b7a62;--acc2:#e3f4ee;--ok:#0b7a62;--okbg:#e3f4ee;--bad:#b3261e;--badbg:#fdeceb;--warn:#b26a00}
-@media(prefers-color-scheme:dark){:root{--bg:#111213;--card:#1b1c1e;--ink:#f1f1ee;--mut:#9a9ea3;--line:#2b2d30;--acc:#4cc9a6;--acc2:#0f2f27;--ok:#4cc9a6;--okbg:#0f2f27;--bad:#f2837c;--badbg:#3a1a18;--warn:#e0a94a}}
+:root{--bg:#fafaf8;--card:#fff;--ink:#1a1a1a;--mut:#6b6b6b;--line:#e4e4df;--acc:#0b7a62;--accbg:#e3f4ee;--bad:#b3261e;--badbg:#fdeceb}
+@media(prefers-color-scheme:dark){:root{--bg:#121212;--card:#1d1d1d;--ink:#f2f2f0;--mut:#a0a0a0;--line:#2e2e2e;--acc:#4cc9a6;--accbg:#10322a;--bad:#f2837c;--badbg:#3a1a18}}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html{background:var(--bg)}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
-#app{max-width:560px;margin:0 auto;padding:14px 16px calc(96px + env(safe-area-inset-bottom))}
-button{font:inherit;color:inherit;cursor:pointer;border:none;background:none;padding:0}
-button:disabled{opacity:.4;cursor:default}
-h1{font-size:22px;line-height:1.25;margin:6px 0 2px;letter-spacing:-.01em}
-h2{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);margin:26px 0 10px;font-weight:600}
-h3{margin:0 0 4px;font-size:18px}
-.sub{color:var(--mut);font-size:14px;margin:2px 0 12px}
-.kick{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--acc);font-weight:700}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+#app{max-width:520px;margin:0 auto;padding:20px 18px 60px}
+button{font:inherit;color:inherit;border:none;background:none;cursor:pointer;padding:0}
+button:disabled{opacity:.35}
+h1{font-size:24px;margin:10px 0 2px;line-height:1.25}
+h2{font-size:14px;color:var(--mut);font-weight:600;margin:28px 0 8px}
+.sub{color:var(--mut);margin:0 0 22px}
+.big{width:100%;display:block;text-align:left;background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:16px 18px;margin-bottom:12px}
+.big b{display:block;font-size:19px}.big span{color:var(--mut);font-size:14px}
+.big.main{background:var(--acc);border-color:var(--acc);color:#fff}
+.big.main span{color:#fff;opacity:.85}
+@media(prefers-color-scheme:dark){.big.main{color:#06251d}.big.main span{color:#06251d}}
+.item{width:100%;display:flex;justify-content:space-between;text-align:left;padding:14px 4px;border-bottom:1px solid var(--line);font-size:17px}
+.item i{font-style:normal;color:var(--mut)}
+.foot{text-align:center;color:var(--mut);font-size:13px;margin-top:30px}
+.top{display:flex;justify-content:space-between;align-items:center;color:var(--mut);margin-bottom:18px}
+.back{color:var(--acc);font-size:17px}
+#tm{color:var(--ink)}
+.q{font-size:21px;font-weight:600;line-height:1.4;margin-bottom:20px}
+.opt{width:100%;text-align:left;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:15px 16px;margin-bottom:10px;font-size:17px}
+.opt.sel{border-color:var(--acc);background:var(--accbg)}
+.opt.ok{border-color:var(--acc);background:var(--accbg)}
+.opt.bad{border-color:var(--bad);background:var(--badbg)}
+.exp{background:var(--card);border-left:4px solid var(--acc);border-radius:10px;padding:12px 14px;margin:14px 0;font-size:16px}
+.next{width:100%;background:var(--acc);color:#fff;border-radius:14px;padding:15px;font-weight:600;font-size:18px;margin-top:8px}
+@media(prefers-color-scheme:dark){.next{color:#06251d}}
 .ctr{text-align:center}
-header{margin-bottom:12px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:12px}
-.hero{display:flex;gap:16px;align-items:center}
-.ringbox{position:relative;width:96px;height:96px;flex:none}
-.rtxt{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:20px}
-.hstats{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px;flex:1}
-.hstats b,.mini b{display:block;font-size:20px;font-variant-numeric:tabular-nums;line-height:1.1}
-.hstats span,.mini span{font-size:12px;color:var(--mut)}
-.g{color:var(--ok)}.r{color:var(--bad)}
-.mini{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center;margin-bottom:12px}
-.cta{width:100%;display:flex;flex-direction:column;align-items:flex-start;background:var(--acc);color:#fff;border-radius:16px;padding:15px 18px;margin:4px 0 10px;text-align:left}
-.cta span{font-size:17px;font-weight:650}.cta small{font-size:13px;opacity:.85}
-@media(prefers-color-scheme:dark){.cta{color:#06251d}}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px}
-.chip{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:8px 14px;font-size:14px}
-.bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin:6px 0}
-.bar i{display:block;height:100%;background:var(--acc);border-radius:3px}
-.bar.big{height:8px;margin:0}
-.stack{display:flex;height:8px;background:var(--line);border-radius:4px;overflow:hidden}
-.stack.s{height:6px;margin-top:6px}
-.sg{background:var(--ok)}.sr{background:var(--bad)}
-.row{width:100%;display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:8px;text-align:left}
-.rn{width:30px;height:30px;border-radius:50%;background:var(--acc2);color:var(--acc);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex:none}
-.rm{flex:1;min-width:0}.rm b{font-size:15px;font-weight:600;display:block}
-.rm small,.row small{color:var(--mut);font-size:12px}
-.rp{font-variant-numeric:tabular-nums;font-weight:600;font-size:14px;color:var(--mut);flex:none}
-.rowr{display:flex;align-items:center;gap:12px;padding:10px 2px;border-bottom:1px solid var(--line)}
-.foot{text-align:center;color:var(--mut);font-size:12px;margin-top:24px}
-.link{color:var(--acc);font-size:14px}.center{display:block;margin:12px auto}
-.topbar,.qtop{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
-.back{color:var(--acc);font-size:16px;padding:6px 0}
-.pos{font-weight:600;font-variant-numeric:tabular-nums}
-.ttl{color:var(--mut);font-size:13px;max-width:45%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
-.tm{font-weight:700;font-variant-numeric:tabular-nums}.tm.low{color:var(--bad)}
-.qrow{width:100%;display:flex;align-items:center;gap:10px;padding:11px 2px;border-bottom:1px solid var(--line);text-align:left}
-.qt{flex:1;font-size:14px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.dot{width:10px;height:10px;border-radius:50%;flex:none;border:2px solid var(--line)}
-.dot.c{background:var(--ok);border-color:var(--ok)}.dot.w{background:var(--bad);border-color:var(--bad)}
-.star{color:var(--warn)}
-.seg{display:flex;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:3px;gap:3px}
-.seg button{flex:1;padding:9px;border-radius:9px;font-weight:600}
-.seg button.on{background:var(--acc);color:#fff}
-@media(prefers-color-scheme:dark){.seg button.on{color:#06251d}}
-.chk{width:100%;display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px 14px;margin-bottom:8px;text-align:left;font-size:15px}
-.chk span:nth-child(2){flex:1}.chk small{color:var(--mut)}
-.box{width:22px;height:22px;border-radius:6px;border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff;flex:none}
-.chk.on .box{background:var(--acc);border-color:var(--acc)}
-.strip{display:flex;gap:6px;overflow-x:auto;padding:2px 0 10px;scrollbar-width:none}
-.strip::-webkit-scrollbar{display:none}
-.sq{flex:none;width:34px;height:34px;border-radius:9px;border:1.5px solid var(--line);background:var(--card);font-size:13px;font-weight:600;color:var(--mut)}
-.sq.ans{background:var(--acc2);color:var(--acc);border-color:transparent}
-.sq.flag{border-color:var(--warn);color:var(--warn)}
-.sq.cur{border-color:var(--acc);background:var(--acc);color:#fff}
-.qhead{display:flex;justify-content:space-between;align-items:center;margin:4px 0 8px}
-.tag{font-size:12px;background:var(--acc2);color:var(--acc);padding:3px 10px;border-radius:10px;font-weight:600;max-width:60%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
-.starb{font-size:14px;color:var(--mut)}.starb.on{color:var(--warn)}
-.q{font-size:19px;font-weight:600;line-height:1.4;margin:6px 0 16px;letter-spacing:-.005em}
-.opt{width:100%;display:flex;gap:12px;align-items:flex-start;text-align:left;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:13px 14px;margin-bottom:9px}
-.opt .l{width:24px;height:24px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--mut);flex:none;margin-top:1px}
-.opt .t{flex:1;font-size:16px}
-.opt.sel{border-color:var(--acc);background:var(--acc2)}.opt.sel .l{background:var(--acc);color:#fff}
-.opt.ok{border-color:var(--ok);background:var(--okbg)}.opt.ok .l{background:var(--ok);color:#fff}
-.opt.bad{border-color:var(--bad);background:var(--badbg)}.opt.bad .l{background:var(--bad);color:#fff}
-.exp{border-radius:14px;padding:12px 14px;margin:6px 0 12px;border:1px solid var(--line);background:var(--card)}
-.exp b{font-size:13px;text-transform:uppercase;letter-spacing:.06em}
-.exp p{margin:4px 0 0;font-size:15px}
-.exp.good{border-left:4px solid var(--ok)}.exp.good b{color:var(--ok)}
-.exp.badx{border-left:4px solid var(--bad)}.exp.badx b{color:var(--bad)}
-.dock{display:flex;gap:10px;margin-top:14px}
-.dock button{flex:1;padding:14px;border-radius:14px;font-weight:650;font-size:16px}
-.pri{background:var(--acc);color:#fff}
-@media(prefers-color-scheme:dark){.pri{color:#06251d}}
-.sec{background:var(--card);border:1px solid var(--line)!important}
-.sheet{position:fixed;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:flex-end;justify-content:center;z-index:30}
-.box2{background:var(--card);width:100%;max-width:560px;border-radius:20px 20px 0 0;padding:20px 18px calc(20px + env(safe-area-inset-bottom))}
-.box2 p{color:var(--mut);margin:0}
-.score{font-size:60px;font-weight:700;line-height:1.1;letter-spacing:-.02em}.score small{font-size:26px;color:var(--mut);font-weight:500}
+.score{font-size:64px;font-weight:700;text-align:center;margin:10px 0 20px}
 .rev{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px}
-.rev b{font-size:15px;display:block;margin-bottom:6px}
-.rev p{margin:2px 0;font-size:14px}
-.you{color:var(--bad)}.cor{color:var(--ok);font-weight:600}.why{color:var(--mut);margin-top:6px!important}
-#nav{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:center;background:var(--card);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom);z-index:20}
-#nav button{flex:1;max-width:190px;padding:10px 4px 9px;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;color:var(--mut);font-weight:600}
-#nav button.on{color:var(--acc)}
-#nav svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.rev p{margin:6px 0 0;font-size:15px}.mut{color:var(--mut)}
 </style></head><body>
 <div id="app"></div>
-<nav id="nav">
-<button data-t="home"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Ana sayfa</button>
-<button data-t="exam"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/></svg>Deneme</button>
-<button data-t="stats"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>İstatistik</button>
-</nav>
 <script>
 var TOPICS=["Bölüm 1 · Kavramsal çerçeve ve gelişim","Bölüm 2 · Pazar çevresi ve pazar yapıları","Bölüm 3 · Tüketici (hasta) davranışları","Bölüm 4 · Pazarlama araştırması","Bölüm 5 · Bölümlendirme, hedef pazar, konumlandırma","Bölüm 6 · Ürün","Bölüm 7 · Fiyat","Bölüm 8 · Tutundurma","Bölüm 9 · Dağıtım","Bölüm 10 · İnsan","Bölüm 11 · Süreç yönetimi","Bölüm 12 · Fiziksel kanıtlar","Bölüm 13 · Yeni yaklaşımlar","Bölüm 14 · Planlama ve değerlendirme"];
 var Q=[
@@ -438,287 +367,89 @@ Q=Q.concat(Q2a,Q2b);
 
 
 var app=document.getElementById('app');
-var nav=document.getElementById('nav');
 var store={get:function(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set:function(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
-
-// ---- durum ----
-var REC=store.get('shp_rec',{});      // soru id -> 'c' (son cevap doğru) | 'w' (son cevap yanlış)
-var MARK=store.get('shp_mark',[]);    // kaydedilen soru id'leri
-var HIST=store.get('shp_hist',[]);    // sınav geçmişi
-(function migrate(){
-  if(store.get('shp_migrated',0))return;
-  var old=store.get('shp_wrong',[]);old.forEach(function(id){REC[id]='w'});
-  store.set('shp_rec',REC);store.set('shp_migrated',1);
-})();
-function save(){store.set('shp_rec',REC);store.set('shp_mark',MARK);store.set('shp_hist',HIST)}
-
-var TAB='home',VIEW={t:'tab'},sess=null,timer=null,examCfg={n:20,chs:null};
+var REC=store.get('shp_rec',{});
 var SHORT=TOPICS.map(function(t){return t.replace(/^Bölüm \d+ · /,'')});
-
+var sess=null,timer=null;
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
 function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
-function idsOf(ch){var r=[];Q.forEach(function(q,i){if(ch===null||q[0]===ch)r.push(i)});return r}
-function cnt(ids){var c=0,w=0;ids.forEach(function(i){if(REC[i]==='c')c++;else if(REC[i]==='w')w++});return {n:ids.length,c:c,w:w,u:ids.length-c-w}}
-function pct(a,b){return b?Math.round(100*a/b):0}
+function ids(f){var r=[];Q.forEach(function(q,i){if(!f||f(q,i))r.push(i)});return r}
 function fmt(s){var m=Math.floor(s/60),r=s%60;return m+':'+(r<10?'0':'')+r}
-function ring(p,size){
-  var r=size/2-7,C=2*Math.PI*r;
-  return '<svg width="'+size+'" height="'+size+'" viewBox="0 0 '+size+' '+size+'"><circle cx="'+size/2+'" cy="'+size/2+'" r="'+r+'" fill="none" stroke="var(--line)" stroke-width="8"/><circle cx="'+size/2+'" cy="'+size/2+'" r="'+r+'" fill="none" stroke="var(--acc)" stroke-width="8" stroke-linecap="round" stroke-dasharray="'+(C*p/100).toFixed(1)+' '+C.toFixed(1)+'" transform="rotate(-90 '+size/2+' '+size/2+')"/></svg>';
-}
+function save(){store.set('shp_rec',REC)}
 
-// ---- gezinme ----
-function go(tab){TAB=tab;VIEW={t:'tab'};render()}
-function open_(v){VIEW=v;render()}
-function render(){
-  clearInterval(timer);
-  nav.style.display='flex';
-  if(VIEW.t==='chapter')viewChapter(VIEW.ch);
-  else if(VIEW.t==='setup')viewSetup();
-  else if(TAB==='home')viewHome();
-  else if(TAB==='exam')viewSetup();
-  else viewStats();
-  var bs=nav.querySelectorAll('button');
-  var cur=VIEW.t==='chapter'?'home':(VIEW.t==='setup'?'exam':TAB);
-  bs.forEach(function(b){b.className=b.getAttribute('data-t')===cur?'on':''});
-  window.scrollTo(0,0);
+function home(){
+  clearInterval(timer);sess=null;
+  var wrong=ids(function(q,i){return REC[i]==='w'}).length;
+  var h='<h1>Sağlık Hizmetleri Pazarlaması</h1><p class="sub">AUZEF çalışma soruları</p>';
+  h+='<button class="big main" onclick="start(\'mix\')"><b>Soru çöz</b><span>Karışık 20 soru</span></button>';
+  h+='<button class="big" onclick="start(\'exam\')"><b>Deneme sınavı</b><span>20 soru · 30 dakika</span></button>';
+  if(wrong)h+='<button class="big" onclick="start(\'wrong\')"><b>Yanlışlarım</b><span>'+wrong+' soru</span></button>';
+  h+='<h2>Konuya göre</h2>';
+  TOPICS.forEach(function(t,i){h+='<button class="item" onclick="start(\'ch\','+i+')">'+esc(SHORT[i])+'<i>›</i></button>'});
+  h+='<p class="foot">Sorular çalışma amaçlıdır, gerçek çıkmış soru değildir.</p>';
+  app.innerHTML=h;window.scrollTo(0,0);
 }
-nav.addEventListener('click',function(e){var b=e.target.closest('button');if(b)go(b.getAttribute('data-t'))});
-
-// ---- ana sayfa ----
-function viewHome(){
-  var all=cnt(idsOf(null)),p=pct(all.c,all.n),ans=all.c+all.w;
-  var h='<header><h1>Sağlık Hizmetleri Pazarlaması</h1><p class="sub">AUZEF · Sağlık Yönetimi Lisans Tamamlama</p></header>';
-  h+='<section class="card hero"><div class="ringbox">'+ring(p,96)+'<div class="rtxt"><b>%'+p+'</b></div></div><div class="hstats">'+
-    '<div><b>'+all.n+'</b><span>toplam soru</span></div><div><b>'+ans+'</b><span>çözülen</span></div>'+
-    '<div><b class="g">'+all.c+'</b><span>doğru</span></div><div><b class="r">'+all.w+'</b><span>yanlış</span></div></div></section>';
-  var next=shuffle(idsOf(null).filter(function(i){return !REC[i]})).slice(0,10);
-  var lab=next.length?'Çözülmemiş '+next.length+' soru':(all.w?'Yanlışlarını tekrar et':'Hepsini karışık çöz');
-  h+='<button class="cta" onclick="startContinue()"><span>Devam et</span><small>'+lab+'</small></button>';
-  var tools=[];
-  if(all.w)tools.push('<button class="chip" onclick="startWrong(null)">Yanlışlarım · '+all.w+'</button>');
-  if(MARK.length)tools.push('<button class="chip" onclick="startMarked()">Kaydedilenler · '+MARK.length+'</button>');
-  if(tools.length)h+='<div class="chips">'+tools.join('')+'</div>';
-  h+='<h2>Bölümler</h2>';
-  TOPICS.forEach(function(t,i){
-    var c=cnt(idsOf(i)),pp=pct(c.c,c.n);
-    h+='<button class="row" onclick="open_({t:\'chapter\',ch:'+i+'})"><div class="rn">'+(i+1)+'</div><div class="rm"><b>'+esc(SHORT[i])+'</b>'+
-      '<div class="bar"><i style="width:'+pp+'%"></i></div><small>'+c.n+' soru · '+c.c+' doğru'+(c.w?' · '+c.w+' yanlış':'')+'</small></div><div class="rp">%'+pp+'</div></button>';
-  });
-  h+='<p class="foot">Sorular özgündür; gerçek çıkmış soru değildir. Bölüm sırası AUZEF 2023 ders kitabının içindekilerine göredir.</p>';
-  app.innerHTML=h;
-}
-function startContinue(){
-  var un=shuffle(idsOf(null).filter(function(i){return !REC[i]})).slice(0,10);
-  if(!un.length)un=shuffle(idsOf(null).filter(function(i){return REC[i]==='w'})).slice(0,10);
-  if(!un.length)un=shuffle(idsOf(null)).slice(0,10);
-  begin(un,{mode:'learn',title:'Devam'});
-}
-function startWrong(ch){var ids=shuffle(idsOf(ch).filter(function(i){return REC[i]==='w'}));if(ids.length)begin(ids,{mode:'learn',title:'Yanlışlarım'})}
-function startMarked(){var ids=MARK.slice();if(ids.length)begin(shuffle(ids),{mode:'learn',title:'Kaydedilenler'})}
-
-// ---- bölüm ----
-function viewChapter(ch){
-  var ids=idsOf(ch),c=cnt(ids),p=pct(c.c,c.n);
-  var h='<div class="topbar"><button class="back" onclick="go(\'home\')">‹ Bölümler</button></div>';
-  h+='<header><div class="kick">Bölüm '+(ch+1)+'</div><h1>'+esc(SHORT[ch])+'</h1></header>';
-  h+='<section class="card"><div class="mini"><div><b>'+c.n+'</b><span>soru</span></div><div><b class="g">'+c.c+'</b><span>doğru</span></div><div><b class="r">'+c.w+'</b><span>yanlış</span></div><div><b>'+c.u+'</b><span>yeni</span></div></div><div class="bar big"><i style="width:'+p+'%"></i></div></section>';
-  h+='<button class="cta" onclick="startChapter('+ch+',\'all\')"><span>Tümünü çöz</span><small>'+c.n+' soru · karışık sıra</small></button>';
-  h+='<div class="chips"><button class="chip" '+(c.u?'':'disabled')+' onclick="startChapter('+ch+',\'new\')">Yeni sorular · '+c.u+'</button><button class="chip" '+(c.w?'':'disabled')+' onclick="startChapter('+ch+',\'wrong\')">Yanlışlarım · '+c.w+'</button></div>';
-  h+='<h2>Soru listesi</h2>';
-  ids.forEach(function(id,k){
-    var st=REC[id]||'u',q=Q[id];
-    h+='<button class="qrow" onclick="startFrom('+ch+','+k+')"><span class="dot '+st+'"></span><span class="qt">'+esc(q[1])+'</span>'+(MARK.indexOf(id)>=0?'<span class="star">★</span>':'')+'</button>';
-  });
-  app.innerHTML=h;
-}
-function startChapter(ch,kind){
-  var ids=idsOf(ch);
-  if(kind==='new')ids=ids.filter(function(i){return !REC[i]});
-  if(kind==='wrong')ids=ids.filter(function(i){return REC[i]==='w'});
-  if(ids.length)begin(shuffle(ids),{mode:'learn',title:SHORT[ch],ch:ch});
-}
-function startFrom(ch,k){begin(idsOf(ch),{mode:'learn',title:SHORT[ch],ch:ch,start:k})}
-
-// ---- deneme kurulumu ----
-function viewSetup(){
-  if(!examCfg.chs)examCfg.chs=TOPICS.map(function(_,i){return i});
-  var pool=0;examCfg.chs.forEach(function(c){pool+=idsOf(c).length});
-  var n=Math.min(examCfg.n,pool),mins=Math.round(n*1.5);
-  var h='<header><h1>Deneme sınavı</h1><p class="sub">AUZEF formatı: çoktan seçmeli, süreli. Sonuçlar sınav bitince gösterilir.</p></header>';
-  h+='<h2>Soru sayısı</h2><div class="seg">';
-  [20,40,60].forEach(function(k){h+='<button class="'+(examCfg.n===k?'on':'')+'" onclick="examCfg.n='+k+';viewSetup();setTab()">'+k+'</button>'});
-  h+='</div><p class="sub">Süre: '+mins+' dakika (soru başına 1,5 dk). AUZEF vizesinde 20 soru / 30 dakika.</p>';
-  h+='<h2>Bölümler</h2><div class="chips"><button class="chip" onclick="selAll(1)">Hepsi</button><button class="chip" onclick="selAll(0)">Hiçbiri</button><button class="chip" onclick="selRange()">1–7</button></div>';
-  TOPICS.forEach(function(t,i){
-    var on=examCfg.chs.indexOf(i)>=0;
-    h+='<button class="chk '+(on?'on':'')+'" onclick="togCh('+i+')"><span class="box">'+(on?'✓':'')+'</span><span>'+esc(TOPICS[i])+'</span><small>'+idsOf(i).length+'</small></button>';
-  });
-  h+='<button class="cta" '+(pool?'':'disabled')+' onclick="startExam()"><span>Sınavı başlat</span><small>'+n+' soru · '+mins+' dakika</small></button>';
-  app.innerHTML=h;
-}
-function setTab(){var bs=nav.querySelectorAll('button');bs.forEach(function(b){b.className=b.getAttribute('data-t')==='exam'?'on':''})}
-function togCh(i){var p=examCfg.chs.indexOf(i);if(p>=0)examCfg.chs.splice(p,1);else examCfg.chs.push(i);var y=window.scrollY;viewSetup();setTab();window.scrollTo(0,y)}
-function selAll(on){examCfg.chs=on?TOPICS.map(function(_,i){return i}):[];viewSetup();setTab()}
-function selRange(){examCfg.chs=[0,1,2,3,4,5,6];viewSetup();setTab()}
-function startExam(){
-  var ids=[];examCfg.chs.forEach(function(c){ids=ids.concat(idsOf(c))});
-  var n=Math.min(examCfg.n,ids.length);
-  begin(shuffle(ids).slice(0,n),{mode:'exam',title:'Deneme sınavı',secs:Math.round(n*90)});
-}
-
-// ---- oturum ----
-function begin(ids,o){
-  sess={mode:o.mode,title:o.title,ch:o.ch,i:o.start||0,t0:Date.now(),end:o.secs?Date.now()+o.secs*1000:0,secs:o.secs||0,nav:false,confirm:false,
-    items:ids.map(function(id){var q=Q[id];return {id:id,flag:false,pick:-1,opts:shuffle([{t:q[2][0],c:1},{t:q[2][1],c:0},{t:q[2][2],c:0},{t:q[2][3],c:0}])}})};
-  nav.style.display='none';
-  if(sess.end)timer=setInterval(tick,1000);
+function start(kind,ch){
+  var list,exam=false,title='';
+  if(kind==='mix'){list=shuffle(ids()).slice(0,20)}
+  else if(kind==='exam'){list=shuffle(ids()).slice(0,20);exam=true}
+  else if(kind==='wrong'){list=shuffle(ids(function(q,i){return REC[i]==='w'}))}
+  else{list=shuffle(ids(function(q){return q[0]===ch}));title=SHORT[ch]}
+  if(!list.length)return;
+  sess={exam:exam,i:0,end:exam?Date.now()+1800000:0,items:list.map(function(id){
+    var q=Q[id];return {id:id,pick:-1,opts:shuffle([{t:q[2][0],c:1},{t:q[2][1],c:0},{t:q[2][2],c:0},{t:q[2][3],c:0}])}})};
+  if(exam)timer=setInterval(tick,1000);
   show();
 }
 function tick(){
   var left=Math.max(0,Math.round((sess.end-Date.now())/1000));
-  var el=document.getElementById('tm');if(el){el.textContent=fmt(left);el.className='tm'+(left<=300?' low':'')}
-  if(left<=0){clearInterval(timer);finish()}
+  var el=document.getElementById('tm');if(el)el.textContent=fmt(left);
+  if(left<=0)finish();
 }
-function leave(){clearInterval(timer);sess=null;render()}
 function show(){
-  var it=sess.items[sess.i],q=Q[it.id],n=sess.items.length,exam=sess.mode==='exam';
-  var done=!exam&&it.pick>=0;
-  var left=exam?Math.max(0,Math.round((sess.end-Date.now())/1000)):0;
-  var marked=exam?it.flag:MARK.indexOf(it.id)>=0;
-  var h='<div class="qtop"><button class="back" onclick="'+(exam?'askExit()':'leave()')+'">‹ '+(exam?'Çık':'Geri')+'</button><span class="pos">'+(sess.i+1)+' / '+n+'</span>'+
-    (exam?'<span id="tm" class="tm'+(left<=300?' low':'')+'">'+fmt(left)+'</span>':'<span class="ttl">'+esc(sess.title)+'</span>')+'</div>';
-  h+='<div class="bar"><i style="width:'+pct(sess.i+(done?1:0),n)+'%"></i></div>';
-  if(exam){
-    h+='<div class="strip">';
-    sess.items.forEach(function(x,k){h+='<button class="sq'+(k===sess.i?' cur':'')+(x.pick>=0?' ans':'')+(x.flag?' flag':'')+'" onclick="jump('+k+')">'+(k+1)+'</button>'});
-    h+='</div>';
-  }
-  h+='<div class="qhead"><span class="tag">'+esc(SHORT[q[0]])+'</span><button class="starb'+(marked?' on':'')+'" onclick="toggleMark()">'+(marked?'★':'☆')+' '+(exam?'İşaretle':'Kaydet')+'</button></div>';
+  var it=sess.items[sess.i],q=Q[it.id],n=sess.items.length,done=!sess.exam&&it.pick>=0;
+  var h='<div class="top"><button class="back" onclick="'+(sess.exam?'confirmExit()':'home()')+'">‹ Geri</button><span>'+(sess.i+1)+' / '+n+'</span>'+
+    (sess.exam?'<b id="tm">'+fmt(Math.max(0,Math.round((sess.end-Date.now())/1000)))+'</b>':'<span></span>')+'</div>';
   h+='<div class="q">'+esc(q[1])+'</div>';
   it.opts.forEach(function(o,k){
-    var cls='opt';
-    if(done){if(o.c)cls+=' ok';else if(k===it.pick)cls+=' bad'}
-    else if(exam&&k===it.pick)cls+=' sel';
-    h+='<button class="'+cls+'" onclick="pick('+k+')"><span class="l">'+'ABCD'[k]+'</span><span class="t">'+esc(o.t)+'</span></button>';
+    var c='opt';
+    if(done){if(o.c)c+=' ok';else if(k===it.pick)c+=' bad'}else if(sess.exam&&k===it.pick)c+=' sel';
+    h+='<button class="'+c+'" onclick="pick('+k+')">'+esc(o.t)+'</button>';
   });
-  if(done){
-    var ok=it.opts[it.pick].c;
-    h+='<div class="exp '+(ok?'good':'badx')+'"><b>'+(ok?'Doğru':'Yanlış')+'</b><p>'+esc(q[3])+'</p></div>';
-  }
-  var last=sess.i===n-1;
-  h+='<div class="dock">';
-  if(exam){
-    h+='<button class="sec" '+(sess.i?'':'disabled')+' onclick="jump('+(sess.i-1)+')">‹ Önceki</button>';
-    h+=last?'<button class="pri" onclick="askFinish()">Sınavı bitir</button>':'<button class="pri" onclick="jump('+(sess.i+1)+')">Sonraki ›</button>';
-  }else{
-    h+='<button class="sec" '+(sess.i?'':'disabled')+' onclick="jump('+(sess.i-1)+')">‹ Önceki</button>';
-    h+='<button class="pri" '+(done||last?'':'disabled')+' onclick="'+(last?'finish()':'jump('+(sess.i+1)+')')+'">'+(last?'Bitir':'Sonraki ›')+'</button>';
-  }
-  h+='</div>';
-  if(exam&&last===false)h+='<button class="link center" onclick="askFinish()">Sınavı şimdi bitir</button>';
-  if(sess.confirm){
-    var blank=sess.items.filter(function(x){return x.pick<0}).length;
-    h+='<div class="sheet"><div class="box2"><h3>Sınav bitirilsin mi?</h3><p>'+(blank?blank+' soru boş. Boş sorular yanlış sayılır.':'Tüm sorular cevaplandı.')+'</p><div class="dock"><button class="sec" onclick="sess.confirm=false;show()">Devam et</button><button class="pri" onclick="finish()">Bitir</button></div></div></div>';
-  }
-  if(sess.exit){
-    h+='<div class="sheet"><div class="box2"><h3>Sınavdan çıkılsın mı?</h3><p>Cevapların kaydedilmez.</p><div class="dock"><button class="sec" onclick="sess.exit=false;show()">Devam et</button><button class="pri" onclick="leave()">Çık</button></div></div></div>';
-  }
-  app.innerHTML=h;
-  window.scrollTo(0,0);
-  var st=document.querySelector('.strip .cur');if(st&&st.scrollIntoView)try{st.scrollIntoView({inline:'center',block:'nearest'})}catch(e){}
-}
-function askExit(){sess.exit=true;show()}
-function askFinish(){sess.confirm=true;show()}
-function jump(k){if(k<0||k>=sess.items.length)return;sess.i=k;sess.confirm=false;show()}
-function toggleMark(){
-  var it=sess.items[sess.i];
-  if(sess.mode==='exam'){it.flag=!it.flag}
-  else{var p=MARK.indexOf(it.id);if(p>=0)MARK.splice(p,1);else MARK.push(it.id);save()}
-  show();
-}
-function pick(k){
-  var it=sess.items[sess.i];
-  if(sess.mode==='learn'){
-    if(it.pick>=0)return;
-    it.pick=k;REC[it.id]=it.opts[k].c?'c':'w';save();
-  }else{it.pick=k}
-  show();
-}
-
-// ---- bitiş ----
-function finish(){
-  clearInterval(timer);
-  var n=sess.items.length,ok=0,bad=[],byCh={};
-  var dur=Math.round((Date.now()-sess.t0)/1000);
-  sess.items.forEach(function(it){
-    var good=it.pick>=0&&it.opts[it.pick].c,ch=Q[it.id][0];
-    if(sess.mode==='exam'){
-      byCh[ch]=byCh[ch]||{n:0,c:0};byCh[ch].n++;
-      if(good){ok++;byCh[ch].c++}
-      if(it.pick>=0)REC[it.id]=good?'c':'w';
-      if(!good)bad.push(it);
-    }else{if(good)ok++}
-  });
-  if(sess.mode==='exam')HIST.push({t:Date.now(),ok:ok,n:n,sec:dur});
-  save();
-  var p=pct(ok,n),h='';
-  nav.style.display='none';
-  if(sess.mode==='exam'){
-    h+='<div class="topbar"><button class="back" onclick="leave()">‹ Ana sayfa</button></div>';
-    h+='<header class="ctr"><div class="kick">Sınav sonucu</div><div class="score">'+ok+'<small> / '+n+'</small></div><p class="sub">%'+p+' · Süre '+fmt(dur)+'</p></header>';
-    h+='<h2>Bölümlere göre</h2>';
-    Object.keys(byCh).sort(function(a,b){return a-b}).forEach(function(c){
-      var v=byCh[c],pp=pct(v.c,v.n);
-      h+='<div class="rowr"><div class="rm"><b>'+esc(SHORT[c])+'</b><div class="bar"><i style="width:'+pp+'%"></i></div></div><div class="rp">'+v.c+'/'+v.n+'</div></div>';
-    });
-    if(bad.length){
-      h+='<h2>Yanlış ve boş sorular · '+bad.length+'</h2>';
-      bad.forEach(function(it){
-        var q=Q[it.id],c=it.opts.filter(function(o){return o.c})[0].t;
-        h+='<div class="rev"><b>'+esc(q[1])+'</b><p class="you">'+(it.pick>=0?'Cevabın: '+esc(it.opts[it.pick].t):'Boş bıraktın')+'</p><p class="cor">Doğru: '+esc(c)+'</p><p class="why">'+esc(q[3])+'</p></div>';
-      });
-      h+='<button class="cta" onclick="retryBad()"><span>Yanlışları tekrar çöz</span><small>'+bad.length+' soru</small></button>';
-    }else h+='<p class="sub ctr">Tüm sorular doğru. Harika.</p>';
-    window._bad=bad.map(function(x){return x.id});
-  }else{
-    h+='<div class="topbar"><button class="back" onclick="leave()">‹ Geri</button></div>';
-    h+='<header class="ctr"><div class="kick">Tur tamamlandı</div><div class="score">'+ok+'<small> / '+n+'</small></div><p class="sub">%'+p+' doğru</p></header>';
-    h+='<button class="cta" onclick="leave()"><span>Tamam</span><small>Bölümlere dön</small></button>';
-  }
+  if(done)h+='<p class="exp"><b>'+(it.opts[it.pick].c?'Doğru. ':'Yanlış. ')+'</b>'+esc(q[3])+'</p>';
+  var last=sess.i===n-1,can=done||(sess.exam&&it.pick>=0);
+  h+='<button class="next" '+(can?'':'disabled')+' onclick="next()">'+(last?'Bitir':'Sonraki')+'</button>';
   app.innerHTML=h;window.scrollTo(0,0);
 }
-function retryBad(){begin(shuffle(window._bad),{mode:'learn',title:'Yanlışlar'})}
-
-// ---- istatistik ----
-function viewStats(){
-  var all=cnt(idsOf(null)),ans=all.c+all.w;
-  var h='<header><h1>İstatistikler</h1><p class="sub">Her sorunun son cevabına göre hesaplanır.</p></header>';
-  h+='<section class="card"><div class="mini"><div><b>'+ans+'</b><span>çözülen</span></div><div><b class="g">'+all.c+'</b><span>doğru</span></div><div><b class="r">'+all.w+'</b><span>yanlış</span></div><div><b>'+all.u+'</b><span>yeni</span></div></div>'+
-    '<div class="stack"><i class="sg" style="width:'+pct(all.c,all.n)+'%"></i><i class="sr" style="width:'+pct(all.w,all.n)+'%"></i></div></section>';
-  h+='<h2>Bölümler</h2>';
-  var rows=TOPICS.map(function(_,i){var c=cnt(idsOf(i));return {i:i,c:c,acc:c.c+c.w?pct(c.c,c.c+c.w):-1}});
-  rows.forEach(function(r){
-    h+='<div class="rowr"><div class="rm"><b>'+(r.i+1)+'. '+esc(SHORT[r.i])+'</b><div class="stack s"><i class="sg" style="width:'+pct(r.c.c,r.c.n)+'%"></i><i class="sr" style="width:'+pct(r.c.w,r.c.n)+'%"></i></div></div><div class="rp">'+(r.acc<0?'–':'%'+r.acc)+'</div></div>';
+function confirmExit(){if(confirm_()){home()}}
+function confirm_(){return true}
+function pick(k){
+  var it=sess.items[sess.i];
+  if(sess.exam){it.pick=k}
+  else{if(it.pick>=0)return;it.pick=k;REC[it.id]=it.opts[k].c?'c':'w';save()}
+  show();
+}
+function next(){if(sess.i>=sess.items.length-1)finish();else{sess.i++;show()}}
+function finish(){
+  clearInterval(timer);
+  var n=sess.items.length,ok=0,bad=[];
+  sess.items.forEach(function(it){
+    var g=it.pick>=0&&it.opts[it.pick].c;
+    if(g)ok++;
+    if(sess.exam){if(it.pick>=0)REC[it.id]=g?'c':'w';if(!g)bad.push(it)}
   });
-  var weak=rows.filter(function(r){return r.c.c+r.c.w>=3}).sort(function(a,b){return a.acc-b.acc}).slice(0,3);
-  if(weak.length){
-    h+='<h2>Çalışman gereken bölümler</h2>';
-    weak.forEach(function(r){h+='<button class="row" onclick="open_({t:\'chapter\',ch:'+r.i+'})"><div class="rn">'+(r.i+1)+'</div><div class="rm"><b>'+esc(SHORT[r.i])+'</b><small>Doğru oranı %'+r.acc+'</small></div><div class="rp">›</div></button>'});
+  save();
+  var h='<h1 class="ctr">'+(sess.exam?'Sınav bitti':'Bitti')+'</h1><div class="score">'+ok+' / '+n+'</div>';
+  if(sess.exam&&bad.length){
+    h+='<h2>Yanlış ya da boş</h2>';
+    bad.forEach(function(it){
+      var q=Q[it.id],c=it.opts.filter(function(o){return o.c})[0].t;
+      h+='<div class="rev"><b>'+esc(q[1])+'</b><p>Doğru cevap: <strong>'+esc(c)+'</strong></p><p class="mut">'+esc(q[3])+'</p></div>';
+    });
   }
-  h+='<h2>Son denemeler</h2>';
-  if(!HIST.length)h+='<p class="sub">Henüz deneme sınavı çözülmedi.</p>';
-  HIST.slice(-8).reverse().forEach(function(x){
-    var d=new Date(x.t);
-    h+='<div class="rowr"><div class="rm"><b>'+x.ok+' / '+x.n+'</b><small>'+d.toLocaleDateString('tr-TR')+' · '+fmt(x.sec)+'</small></div><div class="rp">%'+pct(x.ok,x.n)+'</div></div>';
-  });
-  h+='<p class="foot"><button class="link" onclick="askReset()">İlerlemeyi sıfırla</button></p>';
-  app.innerHTML=h;
+  h+='<button class="big main" onclick="home()"><b>Ana sayfa</b></button>';
+  app.innerHTML=h;window.scrollTo(0,0);
 }
-function askReset(){
-  app.insertAdjacentHTML('beforeend','<div class="sheet"><div class="box2"><h3>İlerleme sıfırlansın mı?</h3><p>Tüm cevaplar, kayıtlar ve deneme geçmişi silinir.</p><div class="dock"><button class="sec" onclick="render()">Vazgeç</button><button class="pri" onclick="doReset()">Sıfırla</button></div></div></div>');
-}
-function doReset(){REC={};MARK=[];HIST=[];save();render()}
-
-render();
+home();
 
 </script></body></html>
