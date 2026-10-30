@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Sağlık Hizmetleri Pazarlaması – Çalışma</title>
+<style>
+:root{--bg:#f7f7f5;--card:#fff;--ink:#17181a;--mut:#6a6e73;--line:#e6e6e2;--acc:#0b7a62;--acc2:#e3f4ee;--ok:#0b7a62;--okbg:#e3f4ee;--bad:#b3261e;--badbg:#fdeceb;--warn:#b26a00}
+@media(prefers-color-scheme:dark){:root{--bg:#111213;--card:#1b1c1e;--ink:#f1f1ee;--mut:#9a9ea3;--line:#2b2d30;--acc:#4cc9a6;--acc2:#0f2f27;--ok:#4cc9a6;--okbg:#0f2f27;--bad:#f2837c;--badbg:#3a1a18;--warn:#e0a94a}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+#app{max-width:560px;margin:0 auto;padding:14px 16px calc(96px + env(safe-area-inset-bottom))}
+button{font:inherit;color:inherit;cursor:pointer;border:none;background:none;padding:0}
+button:disabled{opacity:.4;cursor:default}
+h1{font-size:22px;line-height:1.25;margin:6px 0 2px;letter-spacing:-.01em}
+h2{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);margin:26px 0 10px;font-weight:600}
+h3{margin:0 0 4px;font-size:18px}
+.sub{color:var(--mut);font-size:14px;margin:2px 0 12px}
+.kick{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--acc);font-weight:700}
+.ctr{text-align:center}
+header{margin-bottom:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:12px}
+.hero{display:flex;gap:16px;align-items:center}
+.ringbox{position:relative;width:96px;height:96px;flex:none}
+.rtxt{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:20px}
+.hstats{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px;flex:1}
+.hstats b,.mini b{display:block;font-size:20px;font-variant-numeric:tabular-nums;line-height:1.1}
+.hstats span,.mini span{font-size:12px;color:var(--mut)}
+.g{color:var(--ok)}.r{color:var(--bad)}
+.mini{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center;margin-bottom:12px}
+.cta{width:100%;display:flex;flex-direction:column;align-items:flex-start;background:var(--acc);color:#fff;border-radius:16px;padding:15px 18px;margin:4px 0 10px;text-align:left}
+.cta span{font-size:17px;font-weight:650}.cta small{font-size:13px;opacity:.85}
+@media(prefers-color-scheme:dark){.cta{color:#06251d}}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px}
+.chip{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:8px 14px;font-size:14px}
+.bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin:6px 0}
+.bar i{display:block;height:100%;background:var(--acc);border-radius:3px}
+.bar.big{height:8px;margin:0}
+.stack{display:flex;height:8px;background:var(--line);border-radius:4px;overflow:hidden}
+.stack.s{height:6px;margin-top:6px}
+.sg{background:var(--ok)}.sr{background:var(--bad)}
+.row{width:100%;display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:8px;text-align:left}
+.rn{width:30px;height:30px;border-radius:50%;background:var(--acc2);color:var(--acc);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex:none}
+.rm{flex:1;min-width:0}.rm b{font-size:15px;font-weight:600;display:block}
+.rm small,.row small{color:var(--mut);font-size:12px}
+.rp{font-variant-numeric:tabular-nums;font-weight:600;font-size:14px;color:var(--mut);flex:none}
+.rowr{display:flex;align-items:center;gap:12px;padding:10px 2px;border-bottom:1px solid var(--line)}
+.foot{text-align:center;color:var(--mut);font-size:12px;margin-top:24px}
+.link{color:var(--acc);font-size:14px}.center{display:block;margin:12px auto}
+.topbar,.qtop{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.back{color:var(--acc);font-size:16px;padding:6px 0}
+.pos{font-weight:600;font-variant-numeric:tabular-nums}
+.ttl{color:var(--mut);font-size:13px;max-width:45%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.tm{font-weight:700;font-variant-numeric:tabular-nums}.tm.low{color:var(--bad)}
+.qrow{width:100%;display:flex;align-items:center;gap:10px;padding:11px 2px;border-bottom:1px solid var(--line);text-align:left}
+.qt{flex:1;font-size:14px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.dot{width:10px;height:10px;border-radius:50%;flex:none;border:2px solid var(--line)}
+.dot.c{background:var(--ok);border-color:var(--ok)}.dot.w{background:var(--bad);border-color:var(--bad)}
+.star{color:var(--warn)}
+.seg{display:flex;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:3px;gap:3px}
+.seg button{flex:1;padding:9px;border-radius:9px;font-weight:600}
+.seg button.on{background:var(--acc);color:#fff}
+@media(prefers-color-scheme:dark){.seg button.on{color:#06251d}}
+.chk{width:100%;display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px 14px;margin-bottom:8px;text-align:left;font-size:15px}
+.chk span:nth-child(2){flex:1}.chk small{color:var(--mut)}
+.box{width:22px;height:22px;border-radius:6px;border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff;flex:none}
+.chk.on .box{background:var(--acc);border-color:var(--acc)}
+.strip{display:flex;gap:6px;overflow-x:auto;padding:2px 0 10px;scrollbar-width:none}
+.strip::-webkit-scrollbar{display:none}
+.sq{flex:none;width:34px;height:34px;border-radius:9px;border:1.5px solid var(--line);background:var(--card);font-size:13px;font-weight:600;color:var(--mut)}
+.sq.ans{background:var(--acc2);color:var(--acc);border-color:transparent}
+.sq.flag{border-color:var(--warn);color:var(--warn)}
+.sq.cur{border-color:var(--acc);background:var(--acc);color:#fff}
+.qhead{display:flex;justify-content:space-between;align-items:center;margin:4px 0 8px}
+.tag{font-size:12px;background:var(--acc2);color:var(--acc);padding:3px 10px;border-radius:10px;font-weight:600;max-width:60%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.starb{font-size:14px;color:var(--mut)}.starb.on{color:var(--warn)}
+.q{font-size:19px;font-weight:600;line-height:1.4;margin:6px 0 16px;letter-spacing:-.005em}
+.opt{width:100%;display:flex;gap:12px;align-items:flex-start;text-align:left;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:13px 14px;margin-bottom:9px}
+.opt .l{width:24px;height:24px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--mut);flex:none;margin-top:1px}
+.opt .t{flex:1;font-size:16px}
+.opt.sel{border-color:var(--acc);background:var(--acc2)}.opt.sel .l{background:var(--acc);color:#fff}
+.opt.ok{border-color:var(--ok);background:var(--okbg)}.opt.ok .l{background:var(--ok);color:#fff}
+.opt.bad{border-color:var(--bad);background:var(--badbg)}.opt.bad .l{background:var(--bad);color:#fff}
+.exp{border-radius:14px;padding:12px 14px;margin:6px 0 12px;border:1px solid var(--line);background:var(--card)}
+.exp b{font-size:13px;text-transform:uppercase;letter-spacing:.06em}
+.exp p{margin:4px 0 0;font-size:15px}
+.exp.good{border-left:4px solid var(--ok)}.exp.good b{color:var(--ok)}
+.exp.badx{border-left:4px solid var(--bad)}.exp.badx b{color:var(--bad)}
+.dock{display:flex;gap:10px;margin-top:14px}
+.dock button{flex:1;padding:14px;border-radius:14px;font-weight:650;font-size:16px}
+.pri{background:var(--acc);color:#fff}
+@media(prefers-color-scheme:dark){.pri{color:#06251d}}
+.sec{background:var(--card);border:1px solid var(--line)!important}
+.sheet{position:fixed;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:flex-end;justify-content:center;z-index:30}
+.box2{background:var(--card);width:100%;max-width:560px;border-radius:20px 20px 0 0;padding:20px 18px calc(20px + env(safe-area-inset-bottom))}
+.box2 p{color:var(--mut);margin:0}
+.score{font-size:60px;font-weight:700;line-height:1.1;letter-spacing:-.02em}.score small{font-size:26px;color:var(--mut);font-weight:500}
+.rev{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px}
+.rev b{font-size:15px;display:block;margin-bottom:6px}
+.rev p{margin:2px 0;font-size:14px}
+.you{color:var(--bad)}.cor{color:var(--ok);font-weight:600}.why{color:var(--mut);margin-top:6px!important}
+#nav{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:center;background:var(--card);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom);z-index:20}
+#nav button{flex:1;max-width:190px;padding:10px 4px 9px;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;color:var(--mut);font-weight:600}
+#nav button.on{color:var(--acc)}
+#nav svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+</style></head><body>
+<div id="app"></div>
+<nav id="nav">
+<button data-t="home"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Ana sayfa</button>
+<button data-t="exam"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/></svg>Deneme</button>
+<button data-t="stats"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>İstatistik</button>
+</nav>
+<script>
+var TOPICS=["Bölüm 1 · Kavramsal çerçeve ve gelişim","Bölüm 2 · Pazar çevresi ve pazar yapıları","Bölüm 3 · Tüketici (hasta) davranışları","Bölüm 4 · Pazarlama araştırması","Bölüm 5 · Bölümlendirme, hedef pazar, konumlandırma","Bölüm 6 · Ürün","Bölüm 7 · Fiyat","Bölüm 8 · Tutundurma","Bölüm 9 · Dağıtım","Bölüm 10 · İnsan","Bölüm 11 · Süreç yönetimi","Bölüm 12 · Fiziksel kanıtlar","Bölüm 13 · Yeni yaklaşımlar","Bölüm 14 · Planlama ve değerlendirme"];
+var Q=[
+[0,"Müşteri ihtiyaçlarını belirleyip bunları rakiplerden daha etkili karşılamayı esas alan anlayış hangisidir?",["Pazarlama anlayışı","Üretim anlayışı","Satış anlayışı","Ürün anlayışı"],"Mahalle bakkalı \"ne lazım?\" diye sorup rafını ona göre dizer; yola müşteriden çıkar. Üretim, ürün ve satış anlayışları ise işletmeden yola çıkar."],
+[0,"Üretim anlayışı hangi durumda mantıklıdır?",["Talebin arzdan fazla olduğu ve ürünün pahalı olduğu durumda","Rekabetin çok yoğun olduğu durumda","Müşteri istekleri hızla değiştiğinde","Toplum refahı ön plana çıktığında"],"Köyde tek fırın varsa herkes kuyrukta bekler; fırının işi daha çok ekmek üretip yaygınlaştırmaktır."],
+[0,"\"Müşteri ikna edilmezse yeterince satın almaz\" görüşüne dayanan, yoğun satış ve tanıtım çabasını öne çıkaran anlayış hangisidir?",["Satış anlayışı","Üretim anlayışı","Toplumsal pazarlama anlayışı","Pazarlama anlayışı"],"Kapınızı çalıp \"bu süpürgeyi almadan gitmem\" diyen satıcı gibi: ürün hazır, amaç onu kabul ettirmek."],
+[0,"Toplumsal pazarlama anlayışı neyi birlikte gözetir?",["Müşteri isteklerini, işletme kârını ve toplum refahını","Yalnızca kârı","Yalnızca üretim maliyetini","Yalnızca satış hacmini"],"Hem müşterinin ağzına hoş gelen hem de çevreye ve sağlığa zarar vermeyen ürün yapmaya benzer; üç tarafın da kazanması hedeflenir."],
+[0,"\"Tüketiciler en kaliteli ve yenilikçi ürünü tercih eder\" varsayımına dayanan anlayış hangisidir?",["Ürün anlayışı","Üretim anlayışı","Satış anlayışı","Toplumsal pazarlama anlayışı"],"\"Ben en iyi ekmeği yapıyorum\" diyen fırıncı, müşteriler o hafta diyette olsa bile ekmeğe odaklanır. Bu körlüğe pazarlama miyopluğu denir."],
+[0,"Pazarlamanın temelinde yatan kavram aşağıdakilerden hangisidir?",["Değişim","Üretim","Stok","Dağıtım"],"Simit alırken para verir, simit alırsınız; iki taraf da kazançlı çıktığını düşündüğü için işlem olur."],
+[0,"Susayan Ali'nin ayran istemesi ve ayran alacak parasının da olması durumunda ayran için ortaya çıkan şey nedir?",["Talep","Yalnızca ihtiyaç","Yalnızca istek","Arz"],"Susuzluk ihtiyaçtır, \"ayran\" demek istektir, cebinde para varsa bu istek talebe dönüşür (satın alma gücüyle desteklenmiş istek)."],
+[0,"Sağlık hizmetlerinde pazarlamanın geç benimsenmesinin nedenlerinden biri hangisidir?",["Sağlık hizmetinin ticari bir faaliyet gibi görülmemesi ve etik kaygılar","Sağlık hizmetine talep olmaması","Hastaların hizmeti seçebilmesi","Sağlık harcamalarının çok düşük olması"],"\"Doktor reklam yapmaz\" anlayışı gibi; hizmet kâr amacından çok kutsal bir görev sayıldığı için pazarlama dili uzak durulan bir şeydi."],
+
+[1,"Hastanın ameliyatın sonucunu satın almadan önce görememesi, dokunamaması hizmetin hangi özelliğidir?",["Soyutluk","Değişkenlik","Dayanıksızlık","Ayrılmazlık"],"Telefonu elinize alıp denersiniz; ama ameliyatı önceden deneyemezsiniz. Hizmet elle tutulmaz."],
+[1,"Aynı hekimin farklı günlerde farklı performans gösterebilmesi hizmetin hangi özelliğine örnektir?",["Değişkenlik (heterojenlik)","Soyutluk","Dayanıksızlık","Mülkiyet"],"Aynı berber bir gün harika, başka gün ortalama kesim yapabilir; hizmet fabrika ürünü gibi birebir aynı çıkmaz."],
+[1,"Boş kalan bir muayene saatinin sonraki güne saklanamaması hizmetin hangi özelliğidir?",["Dayanıksızlık (stoklanamama)","Soyutluk","Değişkenlik","Ayrılmazlık"],"Boş kalan otobüs koltuğu gibi: sefer kalktıysa o koltuğun geliri kaybolur, depoya konup sonra satılmaz."],
+[1,"Hizmetin üretildiği anda tüketilmesi, hasta ve hekimin birlikte bulunması hizmetin hangi özelliğidir?",["Ayrılmazlık (eşzamanlılık)","Soyutluk","Değişkenlik","Dayanıksızlık"],"Saç kesimini siz yokken yapamazsınız; üretim ve tüketim aynı anda, aynı yerde gerçekleşir."],
+[1,"Hizmetin soyutluğunu azaltmak için işletme ne yapabilir?",["Temiz ortam, sertifikalar, hasta yorumları gibi somut ipuçları sunmak","Hizmeti stoklamak","Aracı sayısını artırmak","Fiyatı sürekli düşürmek"],"Yemeğin tadına bakamıyorsanız lokantanın temizliğine ve yorumlarına bakarsınız; somut ipuçları belirsizliği azaltır."],
+[1,"Sağlık hizmetlerinde hasta ile hekim arasındaki bilgi farkına ne ad verilir?",["Bilgi asimetrisi","Değişkenlik","Dayanıksızlık","Segmentasyon"],"Araba tamircisine \"şu parça bozuk\" dediğinde itiraz edemezsin; çünkü bilgi onda. Hasta da hekime güvenmek zorunda kalır."],
+[1,"Sağlık hizmetlerinde bedelin çoğu zaman hasta yerine SGK ya da sigorta şirketince ödenmesi neyi gösterir?",["Üçüncü taraf ödeyicinin varlığını","Hizmetin soyutluğunu","Talebin tamamen tahmin edilebilir olmasını","Hizmetin stoklanabilmesini"],"Yemek siparişini babanızın kartıyla ödemeye benzer: yiyen kişi ile ödeyen kişi farklıdır, bu da kararları etkiler."],
+
+[2,"Nüfusun yaşlanması sağlık kurumları için hangi çevre unsuruna girer?",["Demografik çevre","Teknolojik çevre","Yasal çevre","Doğal çevre"],"Mahallede yaşlı sayısı artarsa eczane ve poliklinik talebi değişir; nüfusun yapısı demografik çevredir."],
+[2,"Aşağıdakilerden hangisi işletmenin mikro çevresinde yer alır?",["Tedarikçiler","Ekonomik koşullar","Teknolojik gelişmeler","Kültürel değerler"],"Mikro çevre işletmenin doğrudan muhatabıdır (tedarikçi, rakip, müşteri); makro çevre ise hava durumu gibi herkesi etkiler, kontrol edilemez."],
+[2,"Yeni nesil görüntüleme cihazlarının ortaya çıkması hangi çevre unsurudur?",["Teknolojik çevre","Demografik çevre","Ekonomik çevre","Sosyokültürel çevre"],"Akıllı telefon çıkınca fotoğrafçılık değişti; teknoloji sunulan hizmeti ve rekabeti değiştirir."],
+[2,"Sağlık mevzuatındaki değişikliklerin sağlık kurumlarını etkilemesi hangi çevreyle ilgilidir?",["Politik-yasal çevre","Doğal çevre","Demografik çevre","Teknolojik çevre"],"Trafik kuralı değişince tüm sürücüler uyum sağlar; kuralları işletme koymaz, ona uyar."],
+[2,"Bir kasabada tek sağlık kuruluşunun bulunması hangi pazar yapısına örnektir?",["Tekel","Oligopol","Tam rekabet","Monopolcü rekabet"],"Köyde tek market varsa fiyatı ve çeşidi o belirler; tek satıcı olan pazar tekeldir."],
+[2,"Az sayıda büyük satıcının pazara hâkim olduğu yapı hangisidir?",["Oligopol","Tekel","Tam rekabet","Monopsoni"],"Ülkede üç büyük operatör gibi: az sayıda oyuncu olduğundan biri fiyat indirince diğerleri hemen karşılık verir."],
+
+[3,"Satın alma karar sürecinin ilk aşaması hangisidir?",["İhtiyacın fark edilmesi","Bilgi arama","Satın alma","Satın alma sonrası değerlendirme"],"Önce \"dişim ağrıyor\" diye sorunu fark edersiniz, sonra doktor ararsınız; sıralama: ihtiyaç, bilgi arama, alternatifler, karar, satın alma sonrası."],
+[3,"Satın alma sonrası \"acaba yanlış mı seçtim?\" tedirginliğine ne denir?",["Bilişsel uyumsuzluk","Algı","Motivasyon","Tutum"],"Pahalı telefonu aldıktan sonra \"diğeri daha iyiydi\" diye düşünmek gibi; işletme hastayı arayıp memnuniyetini sorarak bunu azaltabilir."],
+[3,"Aile ve referans grupları tüketici davranışını etkileyen hangi faktör grubundadır?",["Sosyal faktörler","Psikolojik faktörler","Kişisel faktörler","Ekonomik faktörler"],"\"Hangi doktora gidelim?\" sorusuna annenizin ve komşunuzun fikri sosyal çevredir."],
+[3,"Algı, motivasyon, öğrenme ve tutum hangi faktör grubuna girer?",["Psikolojik faktörler","Kültürel faktörler","Sosyal faktörler","Kişisel faktörler"],"Bunlar kişinin kafasının içinde olan süreçlerdir; dışarıdan değil içeriden etkiler."],
+[3,"Maslow'a göre sağlık sigortası yaptıran kişi hangi ihtiyacını gidermeye çalışır?",["Güvenlik ihtiyacı","Fizyolojik ihtiyaç","Sosyal ihtiyaç","Kendini gerçekleştirme"],"Kapıya sağlam kilit taktırmak gibi: gelecekte başa gelebilecek risklere karşı güvende olma isteği."],
+[3,"Hizmetin kalitesi önceden değerlendirilemediğinden hastalar hangi bilgi kaynağına daha çok güvenir?",["Tanıdıkların tavsiyeleri (kişisel kaynaklar)","Reklam afişleri","Fiyat listeleri","Ürün broşürleri"],"Tamircinizi ararken komşunuza sorarsınız; deneyimi önceden göremediğiniz hizmette bir tanıdığın sözü reklamdan güçlüdür."],
+
+[4,"Pazarlama araştırması sürecinin ilk adımı hangisidir?",["Problemin ve araştırma amacının tanımlanması","Verilerin analizi","Raporun yazılması","Veri toplama"],"Kaybolan anahtarı ararken önce \"neyi arıyorum, nerede kaybettim?\" diye düşünürsünüz; önce problem net olmalı."],
+[4,"Hastalara anket uygulayarak ilk kez toplanan veri hangisidir?",["Birincil veri","İkincil veri","Tahmini veri","Nitel olmayan veri"],"Yemeği kendi pişirmek gibi: veriyi ilk elden siz ürettiniz."],
+[4,"Daha önce başkaları tarafından toplanmış istatistikleri (TÜİK raporu vb.) kullanmak hangi veri türüdür?",["İkincil veri","Birincil veri","Deneysel veri","Gözlem verisi"],"Hazır yemek almak gibi: veri zaten birisi tarafından hazırlanmış, ucuz ve hızlıdır."],
+[4,"Problem tam netleşmemişken ön bilgi edinmek için yapılan araştırma hangisidir?",["Keşfedici araştırma","Nedensel araştırma","Tanımlayıcı araştırma","Deneysel araştırma"],"Yeni bir mahalleye taşındığınızda önce etrafı gezip bakmanız gibi; amaç sorunu anlamaktır."],
+[4,"Odak grup görüşmesi hangi araştırma yöntemidir?",["Nitel yöntem","Nicel yöntem","Deneysel yöntem","İstatistiksel yöntem"],"Birkaç kişiyi masaya oturtup sohbetle derin fikir almak; sayı değil, düşünce ve neden önemlidir."],
+[4,"Hastane hasta kayıtları pazarlama bilgi sisteminin hangi alt sistemine girer?",["İç kayıtlar sistemi","Pazarlama istihbarat sistemi","Karar destek sistemi","Dış kaynak sistemi"],"Esnafın kendi veresiye defteri gibi: işletmenin kendi içinde tuttuğu kayıtlardır."],
+
+[5,"Hastaları yaş, cinsiyet ve gelire göre gruplamak hangi segmentasyon ölçütüdür?",["Demografik","Coğrafi","Psikografik","Davranışsal"],"Kimlik kartındaki bilgiler (yaş, cinsiyet, gelir, meslek) demografiktir."],
+[5,"Yaşam tarzı ve kişilik özelliklerine göre gruplama hangi ölçüttür?",["Psikografik","Demografik","Coğrafi","Davranışsal"],"\"Sporcu tipi\", \"sağlıklı beslenen\" gibi kişinin tarzı ve değerleri; psikoloji ile ilgilidir."],
+[5,"Kullanım sıklığı, sadakat düzeyi ve aranan fayda hangi ölçüte girer?",["Davranışsal","Demografik","Coğrafi","Psikografik"],"Ayda bir mi gidiyor, her zaman aynı doktora mı gidiyor? Kişinin ne yaptığına bakılır."],
+[5,"Hizmetin sunulduğu şehir, bölge ve iklime göre bölme hangi ölçüttür?",["Coğrafi","Demografik","Psikografik","Davranışsal"],"Harita üzerinde \"nerede\" sorusunun cevabı."],
+[5,"Bir kuruluşun yalnızca göz hastalıklarına odaklanması hangi hedef pazar stratejisidir?",["Yoğunlaştırılmış pazarlama","Farklılaştırılmamış pazarlama","Farklılaştırılmış pazarlama","Kitlesel pazarlama"],"Sadece kahve yapan butik dükkân gibi: tek bir segmente uzmanlaşıp ona odaklanır."],
+[5,"Her segment için ayrı bir pazarlama karması hazırlamak hangi stratejidir?",["Farklılaştırılmış pazarlama","Yoğunlaştırılmış pazarlama","Farklılaştırılmamış pazarlama","Tek segmentli pazarlama"],"Büyük market gibi: gençlere ayrı, ailelere ayrı, yaşlılara ayrı kampanya yapar."],
+[5,"Konumlandırma neyi ifade eder?",["Hedef kitlenin zihninde rakiplere göre ayırt edici bir yer edinmek","Ürünü depolamak","Fiyatı belirlemek","Dağıtım kanalı seçmek"],"\"Güvenli araba\" denince Volvo'nun akla gelmesi gibi; ürün raf değil, zihinde yer tutar."],
+[5,"Aşağıdakilerden hangisi etkili bir segmentin özelliklerindendir?",["Ölçülebilir ve ulaşılabilir olması","Çok küçük olması","Diğer segmentlerle hiç fark taşımaması","Gizli kalması"],"Kimi, ne kadar, nasıl ulaşacağını bilmiyorsanız o grup için pazarlama yapamazsınız."],
+
+[6,"Hastanın satın aldığı temel fayda (sağlığa kavuşma, rahatlama) ürünün hangi düzeyidir?",["Çekirdek ürün","Somut ürün","Genişletilmiş ürün","Potansiyel ürün"],"Matkap alan kişi aslında \"delik\" ister; hasta da ilaç ya da ameliyat değil, iyileşmeyi satın alır."],
+[6,"Ücretsiz servis, takip aramaları gibi ek hizmetler ürünün hangi düzeyidir?",["Genişletilmiş ürün","Çekirdek ürün","Somut ürün","Temel ürün"],"Telefonun yanında verilen ücretsiz kılıf ve garanti gibi; asıl işin üstüne eklenen değer."],
+[6,"Ürün yaşam eğrisinin doğru sıralaması hangisidir?",["Giriş, büyüme, olgunluk, düşüş","Büyüme, giriş, düşüş, olgunluk","Olgunluk, giriş, büyüme, düşüş","Düşüş, giriş, büyüme, olgunluk"],"Yeni açılan kafe: önce tanınır (giriş), kalabalıklaşır (büyüme), oturur (olgunluk), moda geçince boşalır (düşüş)."],
+[6,"Ürün karmasının genişliği neyi ifade eder?",["Ürün hatlarının (örneğin bölümlerin) sayısını","Bir hattaki çeşit sayısını","Ürünün fiyatını","Satış sayısını"],"Büyük bir hastanede kaç ayrı bölüm (hat) varsa genişlik odur; bir bölümdeki alt hizmet sayısı ise derinliktir."],
+[6,"Markanın tanımı aşağıdakilerden hangisidir?",["Ürünü rakiplerinden ayıran ad, simge, tasarım veya bunların birleşimi","Ürünün depolandığı yer","Ürünün üretim maliyeti","Ürünün satış fiyatı"],"Üç çizgili ayakkabıyı hemen tanıyorsanız marka işini yapıyor demektir."],
+
+[7,"Maliyetin üzerine belirli bir kâr payı eklenerek fiyat belirlemek hangi yaklaşımdır?",["Maliyet esaslı fiyatlama","Talep esaslı fiyatlama","Rekabet esaslı fiyatlama","Psikolojik fiyatlama"],"Pastanın maliyeti 50 TL, üstüne yüzde 40 koyup 70 TL demek; hesap işletmenin kendi maliyetine dayanır."],
+[7,"Yeni ürüne başta yüksek fiyat koyup zamanla düşürmek hangi stratejidir?",["Kaymağını alma (skimming)","Penetrasyon fiyatlaması","Rekabet fiyatlaması","İndirimli fiyatlama"],"Yeni çıkan telefonu ilk gün en pahalıya satıp sonra fiyat düşürmek gibi; önce meraklıların kaymağı alınır."],
+[7,"Pazara düşük fiyatla girip hızlı pazar payı kazanmayı amaçlamak hangi stratejidir?",["Penetrasyon (pazara nüfuz) fiyatlaması","Kaymağını alma","Maliyet esaslı fiyatlama","Prestij fiyatlaması"],"Yeni açılan dönerci ilk ay çok ucuza satıp müşteriyi alıştırmak gibi."],
+[7,"Fiyatın 100 yerine 99,90 TL yazılması hangi fiyatlandırma yaklaşımıdır?",["Psikolojik fiyatlama","Maliyet esaslı fiyatlama","Penetrasyon fiyatlaması","Tekel fiyatlaması"],"Tüketici 99,90'ı 100'den belirgin ucuz algılar; asıl etki zihindedir."],
+[7,"Fiyatı doğrudan rakiplerin fiyatına bakarak belirlemek hangi yaklaşımdır?",["Rekabet esaslı fiyatlama","Maliyet esaslı fiyatlama","Talep esaslı fiyatlama","Psikolojik fiyatlama"],"Çarşıda yan dükkân simidi 10 TL satıyorsa siz de 10 TL dersiniz."],
+
+[8,"Aşağıdakilerden hangisi tutundurma karması elemanlarından biridir?",["Halkla ilişkiler","Dağıtım kanalı","Ürün hattı","Maliyet analizi"],"Tutundurma beşlisi: reklam, kişisel satış, satış geliştirme, halkla ilişkiler, doğrudan pazarlama."],
+[8,"Kitle iletişim araçlarıyla yapılan, ücretli ve kişisel olmayan tanıtıma ne denir?",["Reklam","Kişisel satış","Halkla ilişkiler","Doğrudan pazarlama"],"TV'de reklam arası: karşıdaki kişi sizi tanımaz, para ödenerek herkese aynı mesaj verilir."],
+[8,"Yüz yüze ve iki yönlü iletişime dayanan tutundurma türü hangisidir?",["Kişisel satış","Reklam","Halkla ilişkiler","Satış geliştirme"],"Pazarda tezgâhtarla pazarlık yapmak: soru sorarsınız, cevap alırsınız, ikna sürecidir."],
+[8,"Kısa dönemli indirim kuponu ve check-up kampanyası hangi tutundurma türüdür?",["Satış geliştirme","Reklam","Halkla ilişkiler","Kişisel satış"],"\"Bu hafta sonuna kadar yüzde 20 indirim\" gibi; amaç satın almayı hemen tetiklemektir."],
+[8,"Kurumun itibarını ve olumlu imajını geliştirmeyi amaçlayan çalışmalar hangisine girer?",["Halkla ilişkiler","Satış geliştirme","Reklam","Doğrudan pazarlama"],"Bir esnafın mahallede okula yardım etmesi gibi: kimseye \"bunu al\" demeden güveni artırır."],
+[8,"Hizmet sektöründe en güçlü tutundurma etkilerinden biri hangisidir?",["Ağızdan ağıza iletişim","Afiş","Kupon","Katalog"],"\"Bu doktora git\" diyen tanıdık, reklamdan daha inandırıcıdır; çünkü hizmet önceden denenemez."],
+[8,"AIDA modelinin aşamaları hangisidir?",["Dikkat, ilgi, istek, eylem","Ürün, fiyat, yer, tutundurma","Algı, ilgi, davranış, analiz","Alım, indirim, dağıtım, ödeme"],"Vitrine bakarsınız (dikkat), içeri girersiniz (ilgi), beğenirsiniz (istek), satın alırsınız (eylem)."],
+
+[9,"Hizmetlerde dağıtım kanalının genellikle kısa ve doğrudan olmasının nedeni nedir?",["Ayrılmazlık: hizmet üretilirken tüketilir","Hizmetlerin stoklanabilmesi","Hizmetin somut olması","Hizmetin her yerde aynı olması"],"Saç kesimi için berber ile müşteri aynı yerde buluşmak zorunda; arada toptancı olamaz."],
+[9,"Hastane konumunun ulaşım kolaylığı hangi pazarlama karması elemanı ile ilgilidir?",["Dağıtım (yer)","Fiyat","Tutundurma","Ürün"],"Güzel bir lokanta bile ulaşılması zor yerdeyse tercih edilmez; hizmete erişim yer kararıdır."],
+[9,"Evde sağlık hizmeti, mobil klinik ve telesağlık uygulamaları ne sağlar?",["Hizmete erişimi kolaylaştırır","Fiyatı otomatik artırır","Hizmeti somutlaştırır","Hekimi gereksiz kılar"],"Marketin eve teslimat yapması gibi: hasta kuruluşa gitmeden hizmete ulaşabilir."],
+
+[10,"Hizmet pazarlamasında klasik 4P'ye eklenen üç öğe hangisidir?",["İnsan, süreç, fiziksel kanıt","İnsan, fiyat, planlama","Süreç, reklam, marka","Fiziksel kanıt, indirim, dağıtım"],"Hizmet görünmez olduğundan işi yapan insan, işin akışı ve gördüğünüz ortam da pazarlamanın parçası olur."],
+[10,"İç pazarlama neyi ifade eder?",["Çalışanlara iç müşteri gibi yaklaşıp onları memnun etmeyi","Hastaneyi içeriden tanıtmayı","Yalnızca iç mekân tasarımını","Sadece dahili telefon sistemini"],"Mutlu garson mutlu müşteri yaratır; önce çalışan memnun edilir ki o da hastayı memnun etsin."],
+[10,"Randevu sistemi ve bekleme süresi hangi pazarlama karması elemanıdır?",["Süreç","Fiziksel kanıt","İnsan","Fiyat"],"Kasaya kaç dakikada ulaştığınız, işlemin hangi sırayla ilerlediği süreçtir."],
+[10,"Bekleme salonunun temizliği, tabelalar ve personel üniforması hangi öğedir?",["Fiziksel kanıt","Süreç","İnsan","Tutundurma"],"Restoranın temiz masası yemeğin kalitesine dair ipucu verir; görünmeyen hizmeti görünür kılan işaretlerdir."],
+[10,"Hasta ile doğrudan temas eden personele neden \"yarı zamanlı pazarlamacı\" denir?",["Hastanın hizmet algısını doğrudan etkiledikleri için","Reklam yaptıkları için","Fiyat belirledikleri için","Hasta aradıkları için"],"Kasadaki görevli kaba davranırsa tüm marka kötü görünür; temas eden herkes kurumun yüzüdür."],
+[10,"Hastaya özel ilgi göstermek ve onu bireysel olarak anlamak hizmet kalitesinin hangi boyutudur?",["Empati","Güvenilirlik","Fiziksel unsurlar","Güvence"],"Hemşirenin adınızla hitap edip derdinizi dinlemesi gibi; kalite boyutları: güvenilirlik, heveslilik, güvence, empati, fiziksel unsurlar."]
+];
+
+var Q2a=[
+// ---- Bölüm 1: Kavramsal çerçeve ----
+[0,"Pazarlama anlayışlarının tarihsel gelişim sırası hangisidir?",["Üretim, ürün, satış, pazarlama, toplumsal pazarlama","Satış, üretim, ürün, toplumsal pazarlama, pazarlama","Pazarlama, satış, ürün, üretim, toplumsal pazarlama","Ürün, üretim, pazarlama, satış, toplumsal pazarlama"],"Önce “üretebildiğimizi satalım”, sonra “iyi ürün yapalım”, sonra “ikna edelim”, sonra “müşteriyi dinleyelim”, en sonda “topluma da bakalım” gelir."],
+[0,"Levitt’in “pazarlama miyopluğu” kavramı neyi anlatır?",["İşletmenin ürüne odaklanıp müşteri ihtiyacını gözden kaçırmasını","Müşterinin fiyata fazla odaklanmasını","Rakiplerin izlenmemesini","Reklamın çok kısa süreli olmasını"],"Film kaseti üreticisi “kaset satıyoruz” diye düşünüp insanların aslında “anı saklamak” istediğini kaçırırsa dijitale yenilir."],
+[0,"Klasik pazarlama karmasının (4P) öğeleri hangileridir?",["Ürün, fiyat, dağıtım, tutundurma","Ürün, insan, süreç, fiyat","Fiyat, reklam, personel, ambalaj","Dağıtım, marka, süreç, reklam"],"Bir fırının ne sattığı, kaça sattığı, nerede sattığı ve nasıl duyurduğu."],
+[0,"Pazarlama karmasını diğer işletme araçlarından ayıran temel özellik nedir?",["İşletmenin kontrol edebildiği araçlar olması","Kontrol edilemeyen dış etkenler olması","Yalnızca devlet tarafından belirlenmesi","Yalnızca rakipler tarafından belirlenmesi"],"Fiyatı, reklamı siz belirlersiniz (kontrol edilebilir); hava durumu ya da enflasyon ise sizin elinizde değildir."],
+[0,"Genişletilmiş pazarlama karması (7P) en çok hangi alanın özelliklerinden doğmuştur?",["Hizmet pazarlaması","Madencilik","Tarım ürünleri","Otomotiv üretimi"],"Hizmet elle tutulmadığı için çalışan, süreç ve ortam da ürünün parçası haline gelir."],
+[0,"Hekimin hem neyin gerekli olduğuna karar verip hem de bunu sunması sağlık hizmetinde hangi duruma yol açabilir?",["Arz kaynaklı talep","Talebin tamamen azalması","Fiyat esnekliğinin artması","Kanal çatışması"],"Tamirci hem arızayı teşhis edip hem parçayı takarsa gereğinden fazla parça önerme ihtimali doğar; hastanın bilgisi azdır."],
+[0,"Bulaşıcı hastalığa karşı aşı olan kişinin başkalarını da korumasına ne ad verilir?",["Pozitif dışsallık","Fiyat esnekliği","Segmentasyon","Bilgi asimetrisi"],"Evinizi boyatınca sokak da güzelleşir; sizin harcamanızın faydası başkalarına da ulaşır."],
+[0,"Kimin, ne zaman, hangi hastalığa yakalanacağının önceden bilinememesi sağlık hizmetlerinin hangi özelliğini gösterir?",["Talebin belirsizliği","Arzın esnekliği","Ürünün standardı","Fiyatın sabitliği"],"Yağmurun ne zaman yağacağını bilmediğimiz için şemsiyeyi hep hazır tutmaya benzer; hizmet talebi öngörülemez."],
+[0,"Sağlık hizmetleri pazarlamasının temel amaçlarından biri aşağıdakilerden hangisidir?",["Hasta memnuniyetini ve toplum sağlığını artırırken kurumun sürdürülebilirliğini sağlamak","Hastayı mümkün olduğunca uzun süre yatırmak","Yalnızca kısa dönemli kâr elde etmek","Rakiplerin hasta almasını yasal yollarla engellemek"],"İyi bir esnaf müşterisini memnun eder, böylece dükkânı da ayakta kalır."],
+[0,"Aşağıdakilerden hangisi mal ile hizmet arasındaki farklardandır?",["Hizmetler stoklanamaz, mallar stoklanabilir","Mallar soyuttur, hizmetler somuttur","Hizmetler hep aynı kalitede üretilir","Hizmetlerde üretim ve tüketim ayrı yerlerde olur"],"Bir koltuğu depoya koyabilirsiniz, ama berberin boş kalan saatini depolayamazsınız."],
+[0,"İstek kavramı ihtiyaçtan nasıl ayrılır?",["İstek, ihtiyacın kültür ve kişilik tarafından biçimlendirilmiş halidir","İstek, satın alma gücüyle desteklenmiş ihtiyaçtır","İstek, yalnızca zorunlu ihtiyaçtır","İstek, ürünün fiyatıdır"],"Acıkmak ihtiyaçtır; “simit olsun” demek kültürümüzün biçimlendirdiği istektir."],
+[0,"Müşteri değeri en iyi hangisiyle ifade edilir?",["Müşterinin elde ettiği fayda ile katlandığı maliyet arasındaki ilişki","Ürünün üretim maliyeti","Ürünün etiket fiyatı","Reklam bütçesi"],"Aynı parayı verip daha çok fayda alıyorsanız değer yüksektir."],
+[0,"Pazarlamanın en yaygın tanımına göre pazarlama neyi amaçlar?",["İnsan ihtiyaç ve isteklerini değişim yoluyla karşılamayı","Yalnızca ürün satmayı","Yalnızca reklam yapmayı","Maliyetleri düşürmeyi"],"Pazarda alışveriş: ihtiyaç var, mal var, değişim ile iki taraf da karşılık buluyor."],
+[0,"Sağlık hizmetinde hastanın ödemeyi yapan kişi olmaması, pazarlamada neyi zorlaştırır?",["Karar vericinin (hasta) ve ödeyenin (kurum) farklı olması nedeniyle iki tarafı da ikna etmeyi","Hizmetin soyutluğunu","Dağıtım kanalının kısalığını","Reklam etkisini"],"Çocuğa oyuncak alırken hem çocuğu hem ebeveyni ikna etmek gerekir; sağlıkta da kullanan ile ödeyen ayrıdır."],
+
+// ---- Bölüm 2: Pazar çevresi ve pazar yapıları ----
+[1,"Bir hastanenin yönetim kurulu ve çalışanları hangi kamuoyu grubuna girer?",["İç kamuoyu","Medya kamuoyu","Yerel kamuoyu","Finans kamuoyu"],"Evin sakinleri evin içindedir; kurumun içindeki herkes iç kamuoyudur."],
+[1,"Gazeteler, televizyon ve internet haber siteleri hangi kamuoyu grubundadır?",["Medya kamuoyu","Hükümet kamuoyu","Finans kamuoyu","İç kamuoyu"],"Kurumun haberi ve imajı onların aracılığıyla halka ulaşır."],
+[1,"Enflasyon, işsizlik ve gelir düzeyindeki değişimler hangi çevre unsurudur?",["Ekonomik çevre","Demografik çevre","Doğal çevre","Teknolojik çevre"],"Cebinizdeki para azalınca özel hastaneye gitmeyi erteleyebilirsiniz; bu satın alma gücüyle ilgilidir."],
+[1,"Toplumun sağlık okuryazarlığı ve değer yargıları hangi çevreye girer?",["Sosyo-kültürel çevre","Politik-yasal çevre","Doğal çevre","Rekabet çevresi"],"Bir toplumda “doktora geç gitmek” alışkansa, bu kültürel bir davranıştır."],
+[1,"Hava kirliliği ve iklim değişikliğinin sağlık hizmeti talebini etkilemesi hangi çevredir?",["Doğal çevre","Ekonomik çevre","Demografik çevre","Teknolojik çevre"],"Yaz sıcakları artınca klima servislerine talep artması gibi, doğa şartları talebi değiştirir."],
+[1,"Telesağlık ve yapay zekâ destekli tanı sistemlerinin yaygınlaşması hangi çevre unsurudur?",["Teknolojik çevre","Doğal çevre","Demografik çevre","Politik çevre"],"Cep telefonu çıkınca ankesörlü telefonlar azaldı; teknoloji hizmet biçimini değiştirir."],
+[1,"Çevre taraması sonucunda ulaşılan, işletmenin kontrolü dışındaki olumlu gelişmelere ne ad verilir?",["Fırsat","Güçlü yön","Zayıf yön","Tehdit"],"SWOT’ta dış çevre fırsat ve tehditleri, iç çevre güçlü ve zayıf yönleri verir."],
+[1,"Mahallede çok sayıda diş kliniği bulunup her birinin kendine özgü hizmet ve markasıyla ayrışması hangi pazar yapısına benzer?",["Monopolcü (tekelci) rekabet","Tekel","Oligopol","Tam rekabet"],"Mahalledeki berberler gibi: çok satıcı vardır ama her biri kendi tarzıyla ayrışır."],
+[1,"Tam rekabet piyasasının koşullarından biri hangisidir?",["Çok sayıda alıcı ve satıcının bulunması ve ürünün homojen olması","Tek satıcı bulunması","Giriş engellerinin çok yüksek olması","Satıcıların fiyatı tek başına belirlemesi"],"Pazardaki domates tezgâhları gibi: çok satıcı, hemen hemen aynı ürün; kimse fiyatı tek başına belirleyemez."],
+[1,"Sağlık hizmetlerinde tam rekabet koşulları neden sağlanamaz?",["Bilgi asimetrisi, giriş engelleri ve talep belirsizliği nedeniyle","Çok sayıda satıcı olduğu için","Fiyatın serbestçe belirlendiği için","Hizmetin homojen olduğu için"],"Hasta, doktor kadar bilgili olmadığı için “alıcı tam bilgili” varsayımı bozulur; ayrıca ruhsat gibi giriş engelleri vardır."],
+[1,"Devletin sağlık pazarına müdahale gerekçelerinden biri hangisidir?",["Bilgi asimetrisi ve dışsallık gibi piyasa başarısızlıklarının varlığı","Hizmetlerin tamamen ücretsiz olması","Hastaların hizmeti seçememesi","Hekim sayısının fazla olması"],"Piyasa kendi başına doğru sonucu vermiyorsa, trafik polisi gibi devlet düzenleyici olarak devreye girer."],
+[1,"Devletin sağlıkta hakkaniyet (herkesin hizmete erişimi) amacıyla müdahale etmesi nasıl bir gerekçedir?",["Sosyal adalet gerekçesi","Rekabeti artırma gerekçesi","Kâr maksimizasyonu gerekçesi","Reklam gerekçesi"],"Okulun herkese açık olması gibi: hizmet, ödeme gücüne bakmaksızın ulaşılabilir olmalıdır."],
+[1,"Yeni bir hastane açmak için ruhsat ve yüksek yatırım gerekmesi hangi kavramı örnekler?",["Pazara giriş engeli","Pazara nüfuz stratejisi","Fiyat esnekliği","Kanal çatışması"],"Fırın açmak için hem ruhsat hem fırın makinesi gerekiyorsa herkes kolayca giremez."],
+[1,"Doğurganlık hızının düşmesi ve nüfusun yaşlanması hangi çevre unsurudur?",["Demografik çevre","Ekonomik çevre","Doğal çevre","Teknolojik çevre"],"Nüfusun yaş yapısı değişince hizmet talebinin türü de değişir."],
+[1,"Gelir arttıkça özel sağlık sigortası talebinin artması hangi çevrenin etkisidir?",["Ekonomik çevre","Doğal çevre","Demografik çevre","Teknolojik çevre"],"Maaş artınca yeni bir şey almak gibi; satın alma gücü talebi şekillendirir."],
+[1,"Bir hastanenin rakipleri hangi çevrede incelenir?",["Rekabet çevresi","İç çevre","Doğal çevre","Demografik çevre"],"Aynı sokaktaki diğer lokantalar sizin rekabet çevrenizdir."],
+
+// ---- Bölüm 3: Tüketici davranışları ----
+[2,"Çocuğu için ilaç satın alan ebeveyn bu işlemde hangi rolü üstlenmiştir?",["Müşteri (satın alan)","Tüketici (son kullanıcı)","Hasta","Aracı"],"Çocuğa ayakkabı alan anne müşteridir, ayakkabıyı giyen çocuk ise tüketicidir."],
+[2,"Hasta memnuniyeti hangi karşılaştırmanın sonucudur?",["Beklenti ile algılanan hizmet performansı","Fiyat ile maliyet","Rakiplerin fiyatları","Ürünün stok miktarı"],"Beklediğinizden iyi servis alırsanız memnun, kötü alırsanız memnuniyetsiz olursunuz."],
+[2,"Algılanan performans beklentiyi aştığında ne oluşur?",["Memnuniyet","Memnuniyetsizlik","Bilişsel uyumsuzluk","Algı çarpıklığı"],"Beklentiniz 10’du, 12 aldınız: sevinirsiniz."],
+[2,"Memnun hastanın olası davranışlarından biri hangisidir?",["Kuruma sadakat ve olumlu ağızdan ağıza iletişim","Kurumdan şikâyet etmek","Hizmeti terk etmek","Sosyal medyada olumsuz yorum yapmak"],"İyi yemek yediğiniz lokantayı arkadaşlarınıza da önerirsiniz."],
+[2,"Satın alma karar sürecinde adayların birbiriyle kıyaslandığı aşama hangisidir?",["Alternatiflerin değerlendirilmesi","İhtiyacın fark edilmesi","Satın alma sonrası davranış","Bilgi arama"],"Telefon alırken üç modeli karşılaştırdığınız adım budur."],
+[2,"Alt kültür ve toplumsal değerler tüketici davranışını etkileyen hangi faktör grubundadır?",["Kültürel faktörler","Psikolojik faktörler","Kişisel faktörler","Ekonomik faktörler"],"Hangi bölgede yaşadığınız ve neye inandığınız tercihlerinizi biçimlendirir."],
+[2,"Yaş, meslek, gelir ve yaşam tarzı tüketici davranışını etkileyen hangi faktör grubundadır?",["Kişisel faktörler","Kültürel faktörler","Sosyal faktörler","Psikolojik faktörler"],"Kişisel özellikler kimlik kartı gibi bireye ait bilgilerdir."],
+[2,"Maslow’un ihtiyaçlar hiyerarşisinde en alt basamakta hangisi yer alır?",["Fizyolojik ihtiyaçlar","Güvenlik ihtiyacı","Sosyal ihtiyaçlar","Kendini gerçekleştirme"],"Önce yemek, su ve uyku; ardından diğerleri gelir."],
+[2,"Hekimin muayene sonrası uzman bakışıyla belirlediği ihtiyaç hangisidir?",["Normatif ihtiyaç","Hissedilen ihtiyaç","İfade edilen ihtiyaç","Karşılaştırmalı ihtiyaç"],"Okul öğretmeninin “bu çocuğun gözlük ihtiyacı var” demesi gibi; uzman tespit eder."],
+[2,"Kişinin kendisinin yaşadığı ve hissettiği ihtiyaca ne denir?",["Hissedilen ihtiyaç","Normatif ihtiyaç","Karşılaştırmalı ihtiyaç","Kurumsal ihtiyaç"],"“Başım ağrıyor” diye hissetmek, henüz doktora gitmemiş olsanız bile ihtiyacın başlangıcıdır."],
+[2,"Ameliyat olunacak hastane seçimi gibi riskli ve pahalı kararlar nasıl bir satın alma davranışıdır?",["Yüksek ilgilenimli, karmaşık karar","Alışkanlıkla satın alma","Anlık (dürtüsel) satın alma","Düşük ilgilenimli karar"],"Ev almak gibi: çok araştırır, çok kişiye danışırsınız."],
+[2,"Düzenli kullanılan bir ilacı hep aynı eczaneden almak nasıl bir davranıştır?",["Alışkanlığa dayalı satın alma","Karmaşık karar","Dürtüsel satın alma","Yüksek ilgilenimli karar"],"Her sabah aynı simitçiden simit almak gibi, ayrıca düşünmeden yapılan bir davranıştır."],
+[2,"İnsanın çok sayıda uyarıcıdan yalnızca bazılarına dikkat etmesi hangi kavramla ilgilidir?",["Seçici algı (dikkat)","Öğrenme","Tutum","Motivasyon"],"Kalabalık otogarda kendi otobüsünüzün anonsunu duyarsınız, diğerlerini duymazsınız."],
+[2,"Kurum tercihini etkileyen faktörlerden biri hangisidir?",["Hekimin itibarı ve çevrenin tavsiyesi","Hastane binasının yaşı","Rakibin reklam bütçesi","Personel maaşlarının miktarı"],"Çoğu insan “şu doktor iyi” denince oraya gider."],
+[2,"Bir nesneye karşı olumlu ya da olumsuz değerlendirme eğilimine ne denir?",["Tutum","Algı","Öğrenme","Motivasyon"],"“Bu hastaneyi pek sevmiyorum” demek bir tutumdur."],
+
+// ---- Bölüm 4: Pazarlama araştırması ----
+[3,"Pazarlama araştırma sürecinin doğru sırası hangisidir?",["Problemin tanımlanması, tasarım, veri toplama, analiz, raporlama","Veri toplama, problem tanımlama, rapor, analiz","Rapor, analiz, veri toplama, problem tanımlama","Analiz, tasarım, rapor, veri toplama"],"Önce hedefi bilin, sonra planlayın, toplayın, çözümleyin, sunun."],
+[3,"Bir reklam kampanyasının randevu sayısını artırıp artırmadığını sınamak hangi araştırma türüdür?",["Nedensel araştırma","Keşfedici araştırma","Tanımlayıcı araştırma","Gözlem araştırması"],"“Bu ilaç baş ağrısını geçirdi mi?” sorusunda neden-sonuç ilişkisi aranır."],
+[3,"Hasta memnuniyet düzeyini sayısal olarak tanımlamak hangi araştırma türüdür?",["Tanımlayıcı araştırma","Keşfedici araştırma","Nedensel araştırma","Deneysel araştırma"],"Durumu tarif eder: kaç kişi memnun, kaç kişi değil."],
+[3,"Hastane girişinde karşılaşılan ilk 50 hastaya anket uygulamak hangi örnekleme yöntemidir?",["Kolayda örnekleme (olasılıksız)","Basit tesadüfi örnekleme","Tabakalı örnekleme","Sistematik örnekleme"],"Sokakta önüne çıkan ilk kişiye sorarak anket yapmak gibi; seçim kolaylığa göre yapılır."],
+[3,"Evrendeki her bireyin örnekleme seçilme şansının eşit olması hangi yöntemin özelliğidir?",["Basit tesadüfi örnekleme","Kolayda örnekleme","Yargısal örnekleme","Kota örneklemesi"],"Kura çekmek gibi; herkesin ismi torbada ve şansı aynıdır."],
+[3,"Bir ölçüm aracının tutarlı sonuç vermesine ne ad verilir?",["Güvenilirlik","Geçerlilik","Evren","Örneklem"],"Aynı tartıda ardı ardına tartılınca aynı sonucu görmek güvenilirliktir."],
+[3,"Bir ölçüm aracının gerçekten ölçmek istediği şeyi ölçmesine ne denir?",["Geçerlilik","Güvenilirlik","Örnekleme","Evren"],"Boyu ölçmek için metre kullanmak geçerlidir; terazi kullanmak geçerli değildir."],
+[3,"Gizli müşteri (mystery shopper) yöntemi hangi veri toplama tekniğine girer?",["Gözlem","Anket","Odak grup","Deney"],"Müşteri gibi görünen bir kişi hizmetin nasıl sunulduğunu gözlemler."],
+[3,"Anketin avantajlarından biri hangisidir?",["Geniş kitleye düşük maliyetle ulaşılabilmesi","Derinlemesine duygu analizine izin vermesi","Cevap vermeyenlerin hiç olmaması","Her zaman yüz yüze yapılması"],"Çok kişiye aynı soruları sorup sayısal veri alırsınız."],
+[3,"Rakiplerin fiyat ve kampanyalarını sürekli izleyen yapı hangi alt sisteme girer?",["Pazarlama istihbarat sistemi","İç kayıtlar sistemi","Karar destek sistemi","Araştırma sistemi"],"Mahalledeki diğer dükkânların fiyatını her gün gezip öğrenmek gibi."],
+[3,"Reklamın etkisini ölçmeye yönelik çalışma hangi uygulama alanına girer?",["Reklam araştırması","Dağıtım araştırması","Fiyat araştırması","Ambalaj araştırması"],"Reklamdan sonra kaç kişinin kurumu hatırladığını ölçmek gibi."],
+[3,"Likert ölçeği hangi türde bir ölçektir?",["Katılma derecesini gösteren (örn. 1-5) derecelendirme ölçeği","Evet-hayır ölçeği","Kelime tamamlama ölçeği","Sıralama ölçeği"],"“Kesinlikle katılıyorum”dan “kesinlikle katılmıyorum”a uzanan beşli ölçek."],
+[3,"Pazarlama araştırmasının temel yararı aşağıdakilerden hangisidir?",["Karar verirken belirsizliği ve riski azaltmak","Fiyatı otomatik belirlemek","Rakipleri ortadan kaldırmak","Reklam maliyetini sıfırlamak"],"Yola çıkmadan harita bakmak gibi: yanlış yola girme riski azalır."],
+[3,"Bir hastanın açık uçlu görüşmede kendi sözleriyle derin görüşünü anlatması hangi yöntem türüdür?",["Nitel yöntem","Nicel yöntem","Deneysel yöntem","İstatistiksel yöntem"],"Sayı yerine neden ve duygu önemlidir."],
+
+// ---- Bölüm 5: Bölümlendirme, hedef pazar, konumlandırma ----
+[4,"Pazarlama stratejisi geliştirmede doğru sıra hangisidir?",["Bölümlendirme, hedef pazar seçimi, konumlandırma","Konumlandırma, bölümlendirme, hedef seçimi","Hedef seçimi, konumlandırma, bölümlendirme","Fiyatlama, bölümlendirme, reklam"],"Önce pazarı parçalara ayırır, sonra hangisini hedeflediğine karar verir, ardından zihinde yer edinirsiniz."],
+[4,"Pazar bölümlendirmenin yararlarından biri hangisidir?",["Kaynakları doğru segmente yönlendirebilmek","Hiç rakip bırakmamak","Fiyatı sıfırlamak","Müşteri sayısını azaltmak"],"Her yere ilaç püskürtmek yerine sorunlu bölgeye uygulamak daha verimlidir."],
+[4,"Küçük ve özel ihtiyaçları olan bir müşteri grubuna odaklanmak hangi stratejidir?",["Niş pazarlama","Kitlesel pazarlama","Farklılaştırılmamış pazarlama","Dağıtım stratejisi"],"Sadece spor yaralanmalarında uzmanlaşan bir klinik gibi."],
+[4,"Her bireye ayrı teklif geliştirmeyi amaçlayan yaklaşım hangisidir?",["Bireysel (kişiye özel) pazarlama","Kitlesel pazarlama","Niş pazarlama","Farklılaştırılmamış pazarlama"],"Terzinin sizin ölçünüze göre dikmesi gibi."],
+[4,"Pazarın bütününe tek bir pazarlama karması sunan strateji hangisidir?",["Farklılaştırılmamış pazarlama","Farklılaştırılmış pazarlama","Yoğunlaştırılmış pazarlama","Bireysel pazarlama"],"Tüm nüfus için aynı aşı kampanyası yapmak gibi."],
+[4,"Hastanın iyi bir segment olması için hangi özellik aranmaz?",["Ulaşılamaz olması","Ölçülebilir olması","Yeterince büyük olması","Ulaşılabilir olması"],"Ulaşamayacağınız bir gruba hizmet sunamazsınız."],
+[4,"Hastanenin hizmetini “en deneyimli uzman kadro” üzerinden konumlandırması hangi stratejiye örnektir?",["Özellik/kalite temelli konumlandırma","Fiyat temelli konumlandırma","Kullanıcı temelli konumlandırma","Rakip temelli konumlandırma"],"“En deneyimli” demek kuruluşun öne çıkardığı özelliği gösterir."],
+[4,"Hedef kitlenin zihnindeki yerini değiştirmek için yapılan çalışma nedir?",["Yeniden konumlandırma","Bölümlendirme","Segmentasyon","Dağıtım"],"Eski imajlı bir mağazanın yeni tarzıyla yeniden tanıtılması gibi."],
+[4,"Rakiplerle kıyaslamayı iki boyutlu bir grafikte gösteren araç hangisidir?",["Algı (konumlandırma) haritası","Başabaş analizi","SWOT matrisi","BCG matrisi"],"Hastaneleri “fiyat” ve “kalite” eksenine koyup yerlerini gösterir."],
+[4,"Farklılaştırma boyutlarından “personel farklılaştırması” neyi ifade eder?",["Daha eğitimli ve güler yüzlü çalışanlarla ayrışmak","Daha ucuz hizmet sunmak","Reklamı artırmak","Binayı büyütmek"],"Aynı fiyattaki iki lokantadan garsonu daha ilgili olan öne çıkar."],
+[4,"Bir hastanenin tıbbi cihaz alım sürecinde müşteri olması hangi pazar türüne girer?",["Kurumsal pazar","Tüketici pazarı","Kamu pazarı","Yeniden satış pazarı"],"Kişi kendi kullanımı için değil, kurum adına alım yaptığında kurumsal pazar oluşur."],
+[4,"Hedef pazar seçiminde dikkate alınan ölçütlerden biri hangisidir?",["Segmentin büyüklüğü ve büyüme potansiyeli","Rakibin logosu","Çalışan sayısı","Bina rengi"],"Küçük ve büyümeyen bir pazarın kazancı düşük olur."],
+[4,"Aranan faydaya göre segmentasyon hangi ölçütün parçasıdır?",["Davranışsal","Demografik","Coğrafi","Psikografik"],"Kimi “hızlı randevu”, kimi “uzman hekim” arar; fayda beklentisi davranıştır."],
+[4,"Aile yaşam döngüsü evresine (bekâr, evli, çocuklu) göre bölme hangi kriterdir?",["Demografik","Coğrafi","Psikografik","Davranışsal"],"Hayat dönemi, yaş ve aile durumu gibi nüfus bilgileriyle ilgilidir."],
+[4,"Farklılaştırılmış pazarlama stratejisinin dezavantajı nedir?",["Maliyetlerin artması","Tek segmentte kalma riski","Pazar payının düşmesi","Hiç reklam yapılamaması"],"Her gruba ayrı hizmet sunmak ayrı kaynak ve emek ister."],
+
+// ---- Bölüm 6: Ürün ----
+[5,"Satın almadan önce uzun süre araştırma ve karşılaştırma yapılan mallara ne denir?",["Seçmeli mallar","Kolayda mallar","Özel mallar","Yeniden satış malları"],"Beyaz eşya alırken birkaç mağaza gezmek gibi."],
+[5,"Ürün hayat seyrinin giriş aşamasının özelliği nedir?",["Satışlar düşüktür, tanıtım maliyeti yüksektir","Satışlar zirvededir","Rekabet çok yoğundur","Ürün pazardan çekilir"],"Yeni açılan kafeyi kimse tanımaz; tanıtım için çok harcama yapılır."],
+[5,"Ürün hayat seyrinin büyüme aşamasında ne olur?",["Satışlar ve kâr hızla artar","Satışlar durur","Ürün pazardan silinir","Reklam gereksiz hale gelir"],"Kafe tanınınca müşteri hızla artar."],
+[5,"Olgunluk aşamasının özelliği hangisidir?",["Satışlar doruğa ulaşır ve rekabet yoğunlaşır","Satışlar yok denecek kadar azdır","Ürün henüz tanınmamıştır","Tek rakip vardır"],"Semtte herkesin bildiği ama sürekli yeni rakibin açıldığı aşamadır."],
+[5,"Yeni ürün geliştirme sürecinin doğru sıralaması hangisidir?",["Fikir üretme, fikir eleme, konsept testi, iş analizi, ürün geliştirme, pazar testi, ticarileştirme","Ticarileştirme, fikir üretme, eleme, iş analizi","İş analizi, ticarileştirme, fikir üretme","Pazar testi, fikir üretme, ticarileştirme"],"Önce fikir, sonra eleme, sonra deneme ve en son piyasaya çıkış."],
+[5,"Fikir eleme aşamasının amacı nedir?",["Zayıf fikirleri erken aşamada ayıklamak","Ürünü piyasaya sürmek","Fiyat belirlemek","Reklam hazırlamak"],"Daha tohum aşamasındayken çürük olanı ayıklamak masrafı azaltır."],
+[5,"Yeni ürünün sınırlı bir bölgede denenmesi hangi aşamadır?",["Pazar testi","Ticarileştirme","Fikir üretme","Konsept testi"],"Yeni menüyü önce tek şubede denemek gibi."],
+[5,"Marka adının tanımı hangisidir?",["Markanın sözle ifade edilen kısmı","Markanın simgesi","Markanın rengi","Markanın fiyatı"],"Telefonda “Nike” diye söylediğiniz kısım marka adı, yanındaki tik ise sembolüdür."],
+[5,"Marka sadakati nedir?",["Müşterinin aynı markayı tekrar tekrar tercih etmesi","Markanın çok sayıda ürünü olması","Markanın ucuz olması","Markanın reklamı"],"Hep aynı berbere gitmek gibi."],
+[5,"Hastanın bir hastanede yaşadığı tedavinin klinik başarısı hizmetin hangi kalite boyutudur?",["Teknik kalite (ne alındı)","İşlevsel kalite (nasıl sunuldu)","Fiziksel kalite","Fiyat kalitesi"],"Yemeğin lezzeti teknik, garsonun tutumu işlevsel kalitedir."],
+[5,"Hastaya sunulan davranış, ilgi ve iletişim biçimi hangi kalite boyutudur?",["İşlevsel kalite","Teknik kalite","Maliyet kalitesi","Sosyal kalite"],"Aynı yemeği farklı bir üslupla sunan garson, hizmetin nasıl sunulduğunu değiştirir."],
+[5,"Birden fazla hizmeti bir arada tek fiyatla sunmaya (check-up paketi gibi) ne denir?",["Paketleme (bundling)","Penetrasyon","Skimming","Segmentasyon"],"Menüde ana yemek, içecek ve tatlıyı tek fiyatla vermek gibi."],
+[5,"Saf maldan saf hizmete uzanan sürekliliğin hizmet ucuna en yakın örnek hangisidir?",["Muayene","Cep telefonu","Tuz","Kalem"],"Muayene tamamen hizmettir; elle tutulur bir mal yoktur."],
+[5,"Mevcut ürün hattına daha üst kalitede ürün eklemek hangi stratejidir?",["Yukarı doğru hat genişletme","Aşağı doğru hat genişletme","Hattan çıkarma","Hat daraltma"],"Standart paketin yanına VIP paket eklemek gibi."],
+[5,"Ürün karmasının derinliği neyi ifade eder?",["Bir hat içindeki çeşit sayısını","Hat sayısını","Fiyat aralığını","Marka sayısını"],"Bir bölümdeki alt hizmet sayısı derinliktir."],
+[5,"Bir markanın piyasada tanınırlık ve güvenden kaynaklanan ek değerine ne ad verilir?",["Marka değeri (brand equity)","Maliyet","Stok değeri","Reklam payı"],"Aynı kalitedeki iki tişörtten markalısına daha çok para verirsiniz; bu fark marka değeridir."],
+
+// ---- Bölüm 7: Fiyat ----
+[6,"Hayati bir ilacın fiyatı artsa da talebin pek azalmaması neyi gösterir?",["Talebin fiyat esnekliğinin düşük olduğunu","Talebin fiyat esnekliğinin yüksek olduğunu","Arzın arttığını","Rekabetin arttığını"],"Ekmek pahalansa da almaya devam edersiniz; zorunlu ihtiyaçta fiyat duyarlılığı azdır."],
+[6,"Estetik operasyonlar gibi ertelenebilir hizmetlerde talep genellikle nasıldır?",["Fiyata duyarlıdır (esnek)","Fiyata duyarsızdır","Hiç değişmez","Sıfır olur"],"Tatil gibi: fiyat artınca vazgeçilebilir."],
+[6,"Fiyatı etkileyen iç faktörlerden biri hangisidir?",["Maliyetler","Rekabet","Devlet düzenlemesi","Ekonomik koşullar"],"Maliyet işletmenin kendi içinden gelir; diğerleri dışarıdandır."],
+[6,"Fiyatı etkileyen dış faktörlerden biri hangisidir?",["Talebin yapısı ve rekabet","Üretim maliyeti","Pazarlama amacı","Kurum imajı"],"Müşteri ve rakipler işletmenin dışındadır."],
+[6,"Toplam gelirin toplam maliyete eşit olduğu noktaya ne ad verilir?",["Başabaş noktası","Kâr noktası","Zarar noktası","Pazar payı"],"Çay ocağının masraflarını çıkaran ama henüz kâr etmeyen gün."],
+[6,"Hizmeti müşterinin algıladığı değere göre fiyatlamak hangi yöntemdir?",["Müşteri değerine dayalı fiyatlama","Maliyet odaklı fiyatlama","Rekabete dayalı fiyatlama","Zorunlu fiyatlama"],"Aynı su şişesi çölde daha değerli algılandığından daha pahalı satılabilir."],
+[6,"Devletin belirlediği tarifelere (örneğin SUT fiyatları) uymak hangi fiyatlama türüdür?",["Zorunlu (yasal) fiyatlama","Maliyet odaklı fiyatlama","Dinamik fiyatlama","Psikolojik fiyatlama"],"Taksimetre tarifesi devlet tarafından belirlenmişse sürücü kendi fiyatını koyamaz."],
+[6,"Öğrenci ve emekliye farklı fiyat uygulamak hangi stratejidir?",["Bölümlere (müşteri gruplarına) göre fiyatlama","Coğrafi fiyatlama","Psikolojik fiyatlama","Dinamik fiyatlama"],"Sinemada öğrenci bileti gibi."],
+[6,"Yüksek fiyatın yüksek kalite olarak algılanması hangi fiyatlama yaklaşımına dayanır?",["Prestij fiyatlaması","Penetrasyon fiyatlaması","Psikolojik tek rakam","İndirimli fiyatlama"],"Pahalı parfümün daha iyi koktuğunu düşünürüz."],
+[6,"Talebe göre fiyatın sürekli değişmesi hangi stratejidir?",["Dinamik fiyatlama","Sabit fiyatlama","Zorunlu fiyatlama","Coğrafi fiyatlama"],"Uçak biletinin tarihe ve doluluğa göre değişmesi gibi."],
+[6,"Peşin ödeme yapan hastaya yapılan indirim hangi türdür?",["Nakit indirimi","Mevsimsel indirim","Miktar indirimi","Promosyon indirimi"],"Pazarda “peşin verirsen indirim yaparım” demek gibi."],
+[6,"Fiyat belirleme sürecinin doğru sıralaması hangisidir?",["Amaç belirleme, talep ve maliyet tahmini, rakip analizi, yöntem seçimi, nihai fiyat","Nihai fiyat, amaç, rakip","Maliyet, reklam, indirim","Rakip, dağıtım, tutundurma"],"Önce niyet, sonra hesap, sonra kıyas ve karar."],
+[6,"İşletmenin zor dönemde sadece ayakta kalmak amacıyla maliyetin biraz üstünde fiyat belirlemesi hangi fiyat amacıdır?",["Hayatta kalma","Kâr maksimizasyonu","Pazar payı artırma","Prestij"],"Ekonomik kriz döneminde esnafın sadece kirayı çıkarma gayreti gibi."],
+[6,"Rakiplerin piyasadaki yaygın fiyatını esas almak hangi yöntemdir?",["Rekabete dayalı fiyatlama","Maliyet odaklı fiyatlama","Talebe dayalı fiyatlama","Zorunlu fiyatlama"],"Yan dükkân 10 TL ise siz de 10 TL dersiniz."],
+[6,"Sigortası olan hastanın hizmeti gereğinden fazla talep etmesi hangi kavramla ilişkilidir?",["Ahlaki tehlike (moral hazard)","Talep esnekliği","Fiyat ayrımcılığı","Kanal çatışması"],"Hesabı başkası ödüyorsa gereksiz yere daha çok sipariş verme eğilimi doğabilir."],
+[6,"İlk muayenenin ücretsiz yapılması hangi fiyatlandırma türüne yakındır?",["Promosyon fiyatlaması","Prestij fiyatlaması","Dinamik fiyatlama","Coğrafi fiyatlama"],"Market kasasında deneme ürününü bedava dağıtmak gibi."],
+
+// ---- Bölüm 8: Tutundurma ----
+[7,"İletişim sürecinde mesajın alıcıya doğru ulaşmasını engelleyen unsura ne denir?",["Gürültü","Geri bildirim","Kodlama","Kanal"],"Radyoda parazit varsa mesaj bozulur."],
+[7,"İletişim sürecinde göndericinin mesajı semboller haline getirmesine ne denir?",["Kodlama","Kod çözme","Geri bildirim","Gürültü"],"Düşünceyi kelimelere dökmek kodlamadır; dinleyenin onu anlaması kod çözmedir."],
+[7,"Bütünleşik pazarlama iletişiminin (BPİ) temel fikri nedir?",["Tüm iletişim araçlarıyla tek ve tutarlı mesaj vermek","Yalnızca reklam yapmak","Her araçtan farklı mesaj vermek","Sadece sosyal medyaya yönelmek"],"Bir orkestra gibi: her enstrüman aynı melodiyi çalar."],
+[7,"Salgın dönemlerinde doğru ve yanlış bilginin aşırı yayılmasına ne ad verilir?",["Infodemi","Pandemi","Epidemi","Endemi"],"Bilgi bolluğu içinde doğruyu bulmakta zorlanmak."],
+[7,"Sigarayı bıraktırma kampanyası gibi davranış değişikliği hedefleyen girişimler hangi alana girer?",["Sosyal pazarlama","Satış geliştirme","Kişisel satış","Doğrudan satış"],"Amaç ürün satmak değil, toplumun faydasına davranışı değiştirmektir."],
+[7,"Tutundurmanın temel amaçlarından biri hangisidir?",["Bilgilendirme, ikna ve hatırlatma","Maliyet düşürme","Stok artırma","Personel işe alma"],"Reklamı gören kişi önce bilgilenir, sonra ikna olur, sonra hatırlar."],
+[7,"İlaç firmasının hekimlere doğrudan ürün tanıtması hangi stratejidir?",["İtme (push) stratejisi","Çekme (pull) stratejisi","Dağıtım stratejisi","Fiyat stratejisi"],"Ürün kanal boyunca aracılara itilir."],
+[7,"Hastalara doğrudan ulaşıp kendilerinin talep oluşturmasını sağlamak hangi stratejidir?",["Çekme (pull) stratejisi","İtme stratejisi","Dağıtım stratejisi","Fiyatlama stratejisi"],"Çocuk reklamını görüp “bunu alalım” diye istediğinde, aile tüketici talebine çekilmiş olur."],
+[7,"Reklamın dezavantajlarından biri hangisidir?",["Geri bildirimin sınırlı ve maliyetin yüksek olması","İki yönlü iletişim olması","Mesajı kontrol edememek","Tüm gün kişisel görüşmeye dayanması"],"Televizyondaki reklamınız kime nasıl etki ettiğini sorgulamaz, bedeli ise yüksektir."],
+[7,"Halkla ilişkilerin reklamdan farkı nedir?",["Medyada ücretsiz yer bulma ve itibar kazanma yönü","Her zaman ücretli olması","Kişisel olması","Sadece satış odaklı olması"],"Haber olmak ücretli reklamdan daha güvenilir bulunur."],
+[7,"Sağlık hizmetlerinde reklam ve tanıtım için hangisi doğrudur?",["Yasal ve etik düzenlemelerle sınırlandırılmıştır","Hiçbir sınırlama yoktur","Her türlü vaat serbesttir","Sadece televizyonda yasaktır"],"Doktorun “%100 kesin tedavi” demesi yanıltıcıdır; bu nedenle düzenlemeler vardır."],
+[7,"Kişisel satışta müşterinin “pahalı” gibi çekincelerini yanıtlamak hangi aşamadır?",["İtirazların karşılanması","Sunum","Takip","Potansiyel müşteri bulma"],"Pazarda “çok pahalı” diyen alıcıya nedenini anlatmak gibi."],
+[7,"Kurumsal sosyal sorumluluk etkinlikleri ve sponsorluklar hangi tutundurma öğesine girer?",["Halkla ilişkiler","Reklam","Kişisel satış","Satış geliştirme"],"Hastanenin mahalle okuluna sağlık taraması düzenlemesi gibi."],
+[7,"Randevu hatırlatma SMS’i hangi tutundurma türüne yakındır?",["Doğrudan pazarlama","Reklam","Halkla ilişkiler","Sponsorluk"],"Kişiye özel ve doğrudan gönderilen mesajdır."],
+[7,"Sosyal medyanın sağlık kurumları için bir riski nedir?",["Olumsuz yorumların hızla yayılması","Hasta ile iletişimin kesilmesi","Maliyetin artması","Dağıtımın bozulması"],"Bir mahalle dedikodusu gibi yayılır, hızla kontrolden çıkabilir."],
+[7,"Tedavi sonucu hakkında kesin ve abartılı vaatte bulunmak hangi sorunu doğurur?",["Etik ihlali","Fiyat avantajı","Dağıtım kolaylığı","Pazar payı artışı"],"Güven hizmetinde gerçeği yansıtmayan vaat, hasta güvenini zedeler."]
+];
+
+var Q2b=[
+// ---- Bölüm 9: Dağıtım ----
+[8,"Dağıtım kanalı nedir?",["Ürünün üreticiden tüketiciye ulaşmasında yer alan kuruluşlar ve süreçler","Ürünün fiyat listesi","Ürünün reklam planı","Ürünün üretim hattı"],"Fabrikadan sofraya giden yol: toptancı, market ve eve teslimat gibi halkalar."],
+[8,"Ürünün aracısız doğrudan tüketiciye ulaştırılması hangi kanal türüdür?",["Doğrudan kanal","Dolaylı kanal","Uzun kanal","Karma kanal"],"Çiftçinin ürününü pazarda kendisi satması gibi."],
+[8,"İlaç üreticisinden depoya, eczaneye ve hastaya uzanan yapı hangi kanaldır?",["Dolaylı (aracılı) kanal","Doğrudan kanal","Sıfır seviyeli kanal","Kanalsız dağıtım"],"Arada toptancı ve perakendeci halkalarının bulunması dolaylı kanal demektir."],
+[8,"Ürünün belirli bölgede yalnızca bir yetkili satıcıda bulunması hangi dağıtım biçimidir?",["Münhasır (özel) dağıtım","Yoğun dağıtım","Seçici dağıtım","Doğrudan dağıtım"],"Bir marka arabanın şehirde tek yetkili bayisi gibi."],
+[8,"Ürünün mümkün olan her satış noktasında bulunması hangi dağıtım biçimidir?",["Yoğun dağıtım","Münhasır dağıtım","Seçici dağıtım","Doğrudan dağıtım"],"Sakız ve su, her bakkalda ve büfede bulunur."],
+[8,"Sağlık sisteminde hastanın ilk basamaktan (aile hekimi) üst basamak sağlık kuruluşuna yönlendirilmesine ne ad verilir?",["Sevk sistemi","Triaj","Dinamik fiyatlama","Segmentasyon"],"Sorunu önce mahalle doktoru çözmeye çalışır, gerekirse uzmana “sevk” eder."],
+[8,"Poliklinik hizmetlerinin akşam ve hafta sonu da açık olması hangi erişilebilirlik boyutudur?",["Zamansal erişilebilirlik","Coğrafi erişilebilirlik","Finansal erişilebilirlik","Kültürel erişilebilirlik"],"Eczanenin nöbetçi olması gibi; hizmete ne zaman ulaşılabildiği."],
+[8,"Hastanenin ulaşım ağlarına yakın olması hangi erişilebilirlik boyutudur?",["Coğrafi erişilebilirlik","Zamansal erişilebilirlik","Finansal erişilebilirlik","Kültürel erişilebilirlik"],"Hizmet ne kadar uzaktaysa o kadar zor ulaşılır."],
+[8,"Aşıların belirli bir sıcaklıkta taşınıp depolanması hangi kavramla ilgilidir?",["Soğuk zincir (fiziksel dağıtım)","Pazar bölümlendirme","İtme stratejisi","Konumlandırma"],"Dondurmanın eriyip bozulmaması için buzdolabı kamyonuyla taşınması gibi."],
+[8,"Aynı seviyedeki iki hastanenin birleşmesi hangi bütünleşme yönüdür?",["Yatay bütünleşme","Dikey bütünleşme","Geriye doğru bütünleşme","İleriye doğru bütünleşme"],"İki komşu fırının tek işletme olması gibi."],
+[8,"Üreticinin kendi dağıtım ve perakende halkalarını da satın alması hangi bütünleşme türüdür?",["Dikey bütünleşme","Yatay bütünleşme","Kanal çatışması","Konglomera"],"Fırın, kendi un fabrikasını ve kendi şubelerini de açıyor."],
+[8,"Dağıtım kanalı seçimini etkileyen faktörlerden biri hangisidir?",["Ürünün özellikleri ve pazarın yapısı","Personelin ayakkabı numarası","Binanın rengi","Reklam müziği"],"Çabuk bozulan ürünü uzun kanaldan satmak zordur."],
+[8,"Hastaneye ulaşım süresinin uzaması hastanın hizmeti kullanma kararını nasıl etkiler?",["Hizmete erişimi ve kullanımı azaltabilir","Fiyatı otomatik düşürür","Hiçbir etkisi olmaz","Reklamı etkisizleştirir"],"Uzak markete gitmek yerine yakın bakkaldan almak gibi."],
+[8,"Telefonla veya internetle randevu alınabilmesi neyi sağlar?",["Hizmete erişimi kolaylaştırır","Hizmeti soyutlaştırır","Fiyatı yükseltir","Rekabeti kaldırır"],"Sıra beklemeden evden randevu alabilmek ulaşım engelini azaltır."],
+[8,"Hizmetlerde dağıtım kararında en çok hangi unsur öne çıkar?",["Yer (lokasyon) seçimi","Stoklama","Toptan satış","Ambalajlama"],"Hizmet taşınamadığı için konum kritik hale gelir."],
+
+// ---- Bölüm 10: İnsan ----
+[9,"Hizmet pazarlamasında “insan” öğesi kimleri kapsar?",["Personeli ve hizmet sürecindeki müşterileri","Yalnızca yöneticileri","Yalnızca hekimleri","Yalnızca rakipleri"],"Restoranın deneyimini hem garson hem de diğer müşteriler biçimlendirir."],
+[9,"Bekleme salonundaki diğer hastaların davranışlarının hizmet deneyimini etkilemesi neyi gösterir?",["Müşteriler arası etkileşimi","Fiyat esnekliğini","Dağıtım kanalını","Marka sadakatini"],"Sinemada yan koltukta gürültü yapan biri, filmin zevkini etkiler."],
+[9,"Sağlık kurumlarında “iç müşteri” kimdir?",["Çalışanlar","Hastalar","Hasta yakınları","Tedarikçiler"],"Mutfak çalışanı garsonun iç müşterisidir; çünkü ona hizmet verir."],
+[9,"Dış müşteri kimdir?",["Hasta ve hasta yakınları","Hastane çalışanları","Yönetim kurulu","Personel şefi"],"Kurumun dışından gelip hizmeti kullananlardır."],
+[9,"Hasta ile doğrudan temas eden personele ne ad verilir?",["Ön saha (temas) personeli","Destek personeli","İç denetçi","Tedarikçi"],"Garson ön sahada, aşçı arka sahadadır."],
+[9,"Çalışana müşteri sorununu çözerken karar verme yetkisi vermeye ne ad verilir?",["Yetkilendirme (empowerment)","Standartlaşma","Segmentasyon","Fiyat ayrımcılığı"],"Garsona “müşteriyi memnun etmek için gerekirse ücretsiz tatlı ver” yetkisi vermek gibi."],
+[9,"Hastanın ilaç talimatlarına uymasının tedavi sonucunu etkilemesi neyi gösterir?",["Müşterinin hizmet üretimine katılımını","Hizmetin stoklanabilirliğini","Fiyat esnekliğini","Dağıtımın kısalığını"],"Diyetisyen plan verir; uygulama hastaya bağlıdır; sonuç ikisinin ortak işidir."],
+[9,"İç pazarlamanın temel amacı nedir?",["Çalışanları memnun edip dış müşteriye daha iyi hizmet vermelerini sağlamak","Yeni hasta çekmek","Reklam yapmak","Fiyat düşürmek"],"Mutlu çalışan, mutlu müşteri yaratır."],
+[9,"İç pazarlama araçlarından biri hangisidir?",["Eğitim ve ödüllendirme","Televizyon reklamı","İndirim kuponu","Bilboard"],"Çalışanı geliştirmek ve motive etmek iç müşteriye yönelik çalışmadır."],
+[9,"Personelin farklı gün ve kişilerde farklı hizmet düzeyi sergilemesi hizmetin hangi özelliğiyle ilgilidir?",["Değişkenlik","Soyutluk","Dayanıksızlık","Ayrılmazlık"],"Aynı garson bazı günler çok ilgili, bazı günler yorgun olabilir."],
+[9,"Rol belirsizliği yaşayan çalışanın hizmet kalitesine etkisi nedir?",["Kaliteyi düşürebilir","Kaliteyi otomatik artırır","Hiçbir etkisi olmaz","Fiyatı etkiler"],"Kimin ne yapacağı belli değilse müşteri ortada kalır."],
+[9,"Hastaya doğru ve zamanında bilgi vermek hangi öğenin önemini gösterir?",["İnsan (personel) davranışı","Fiyat","Dağıtım","Ambalaj"],"Hastanın kafasındaki belirsizliği personelin iletişimi giderir."],
+
+// ---- Bölüm 11: Süreç ----
+[10,"Süreç kavramı en doğru hangisidir?",["Girdileri çıktıya dönüştüren faaliyetler dizisi","Yalnızca makine hatları","Yalnızca belgelendirme","Fiyat belirleme yöntemi"],"Hamur girdi, ekmek çıktı; arada yoğurma, mayalama, pişirme süreçtir."],
+[10,"Hizmet sürecinin görünen ve görünmeyen aşamalarını gösteren şema nedir?",["Hizmet planı (service blueprint)","BCG matrisi","SWOT tablosu","Algı haritası"],"Restoranda müşterinin gördüğü masa ve görmediği mutfak aynı şemada gösterilir."],
+[10,"Hastanın kayıt, bekleme, muayene ve ödeme adımları nasıl bir yapıdır?",["Hizmet süreci","Dağıtım kanalı","Pazar bölümü","Ürün karması"],"Hastanın hizmet boyunca izlediği yol haritasıdır."],
+[10,"Süreçte işlerin yığıldığı ve akışı yavaşlatan noktaya ne denir?",["Darboğaz","Başabaş noktası","Pazar payı","Konumlandırma"],"Şişenin boynu gibi, her şey orada sıkışır."],
+[10,"Bekleme süresini katlanılır kılmak için ne yapılabilir?",["Bilgilendirme ve oyalayıcı unsurlar sunmak","Süreci uzatmak","Bekleme alanını kaldırmak","Personeli azaltmak"],"Asansörde ayna olması beklemenin sıkıcılığını azaltır."],
+[10,"Acil serviste hastaların aciliyet derecesine göre sıralanması hangi kavramdır?",["Triyaj","Sevk","Segmentasyon","Hat genişletme"],"Önce kanaması olan, sonra el ağrısı olan hastanın görülmesi gibi."],
+[10,"Hasta kabul işlemleri hangi süreç türüne girer?",["Ana (temel) süreç","Destek süreci","Yönetim süreci","Kalite süreci"],"Hastaya doğrudan hizmet sunan işlemler ana süreçtir."],
+[10,"Sterilizasyon ve temizlik hizmetleri hangi süreç türüne girer?",["Destek süreci","Ana süreç","Stratejik süreç","Dağıtım süreci"],"Ana işi mümkün kılan arka plandaki hizmetlerdir."],
+[10,"Süreç hiyerarşisinin doğru sıralaması hangisidir?",["Süreç, alt süreç, faaliyet, görev","Görev, süreç, faaliyet, alt süreç","Faaliyet, süreç, görev, alt süreç","Alt süreç, görev, süreç, faaliyet"],"Büyükten küçüğe: ana iş, alt iş, adım, tek bir görev."],
+[10,"Planla-Uygula-Kontrol Et-Önlem Al döngüsü hangi yaklaşımla ilişkilidir?",["Sürekli iyileştirme","Fiyat farklılaştırma","Segmentasyon","Marka yönetimi"],"Her tur sonrası bir parça daha iyileştirmek gibi."],
+[10,"Randevu sistemi süreçte neyi sağlar?",["Talebi zamana yaymayı ve beklemeyi azaltmayı","Fiyatı artırmayı","Hizmeti stoklamayı","Dağıtımı kısaltmayı"],"Kuaförde randevu, herkesin aynı anda gelmesini engeller."],
+[10,"Mevcut süreçleri baştan ve köklü biçimde yeniden tasarlamaya ne denir?",["Süreç yeniden mühendisliği","Hat daraltma","Segmentasyon","İç denetim"],"Yamayı bırakıp binayı yeniden planlamak gibi."],
+[10,"Hasta kayıt otomasyonu ve e-reçete süreçte neyi sağlar?",["Hız ve hata azaltımı","Kanal uzaması","Soyutluk","Fiyat esnekliği"],"Kâğıt işi yerine tek tuşla işlem yapmak gibi."],
+[10,"Pik saatlerde talep kapasiteyi aşarsa ne olur?",["Bekleme süresi uzar, kalite algısı düşer","Hizmet daha ucuz olur","Dağıtım hızlanır","Rekabet kalkar"],"Öğle arası banka şubesinde uzun kuyruk oluşması gibi."],
+
+// ---- Bölüm 12: Fiziksel kanıtlar ----
+[11,"Fiziksel kanıtlar hizmet pazarlamasında neyi sağlar?",["Hizmetin soyutluğunu azaltıp beklentiyi şekillendirir","Hizmeti stoklanabilir yapar","Fiyatı düşürür","Rekabeti kaldırır"],"Lokantanın temiz ve düzenli görünmesi, yemeğin de temiz hazırlandığı izlenimini verir."],
+[11,"Hizmetin sunulduğu ortama ve atmosfer unsurlarına ne denir?",["Hizmet ortamı (servicescape)","Pazar segmenti","Süreç haritası","Algı haritası"],"Hizmetin sahnesi: mekân, ışık, koku, müzik."],
+[11,"Hastane girişinin düzenli ve temiz olması neyi etkiler?",["İlk izlenimi","Fiyatın belirlenmesini","Stok yönetimini","Sevk sistemini"],"Kapıdan girer girmez karşılaşılan görüntü, tüm deneyimi renklendirir."],
+[11,"Yönlendirme tabelaları ve işaretler neden önemlidir?",["Hastanın yolunu bulmasını ve kaygıyı azaltmasını sağlar","Maliyeti artırır","Reklamı kısıtlar","Fiyatı düşürür"],"Alışveriş merkezinde yönlendirme levhaları olmasa dolaşıp dururduk."],
+[11,"Hastane otoparkı ve ulaşım kolaylığı hangi tür fiziksel kanıt grubundadır?",["Hastane dışı fiziksel kanıtlar","Hastane içi fiziksel kanıtlar","Personel kanıtları","Süreç kanıtları"],"Binaya girmeden önceki deneyimin parçasıdır."],
+[11,"Hasta odasının mahremiyet sağlayacak şekilde tasarlanması hangi grupta yer alır?",["Hastane içi fiziksel kanıtlar","Hastane dışı fiziksel kanıtlar","Tanıtım","Fiyat"],"Odanın içindeki konfor ve gizlilik fiziksel çevrenin bir parçasıdır."],
+[11,"Sakinleştirici etkisi nedeniyle sağlık kuruluşlarında sıkça tercih edilen renkler hangileridir?",["Mavi ve yeşil tonları","Kırmızı ve turuncu","Siyah","Parlak sarı"],"Soğuk renkler dinlendirici bir his yaratır."],
+[11,"Hastane gürültüsünün hasta deneyimine etkisi nedir?",["Memnuniyeti olumsuz etkileyebilir","Fiyatı etkiler","Etkisi yoktur","Dağıtımı hızlandırır"],"Gürültülü bir restoranda sohbet edemezsiniz; konfor düşer."],
+[11,"Standart personel kıyafeti (üniforma) neyi güçlendirir?",["Profesyonellik ve güven algısını","Fiyatı","Dağıtımı","Segmentasyonu"],"İtfaiyeciyi ya da pilotu üniformasından tanıyıp güvenmek gibi."],
+[11,"Kurumun web sitesi hizmet öncesinde hangi rolü oynar?",["Dijital bir fiziksel kanıt (ipucu) olarak güven oluşturur","Fiyatı belirler","Dağıtımı sağlar","Süreci yönetir"],"Müşteri henüz kapıdan girmeden siteye bakıp kuruma dair bir fikir edinir."],
+[11,"Hastane adının ve logosunun hatırlanır olması hangi fiziksel kanıt unsurudur?",["İsimlendirme ve semboller","Hasta odası","Ulaşım","Otopark"],"İsim ve logo kurumun tanıtım ve kimlik işaretleridir."],
+[11,"Yeşil alan ve peyzajın hastaya olumlu etkisi nedir?",["Rahatlatıcı ve iyileştirici bir atmosfer yaratması","Fiyatı artırması","Sevk sistemini kolaylaştırması","Rekabeti ortadan kaldırması"],"Hastane bahçesinde yürümek bile moral verir."],
+[11,"Çalışanların nezaketi ve davranışları da hangi öğe içinde değerlendirilir?",["Fiziksel kanıt olarak görülen davranışlar","Fiyat","Dağıtım","Süreç hızı"],"Müşteri personelin davranışını hizmetin kalitesinin bir göstergesi sayar."],
+[11,"Aydınlatma, ısı, koku ve müzik gibi çevresel koşullara ne ad verilir?",["Ambiyans unsurları","Süreç unsurları","Segment unsurları","Marka unsurları"],"Mekânın havasını belirleyen görünmeyen ayrıntılardır."],
+
+// ---- Bölüm 13: Yeni yaklaşımlar ----
+[12,"Nöropazarlama nedir?",["Tüketici davranışını beyin görüntüleme gibi tekniklerle inceleyen yaklaşım","Yalnızca anket yöntemi","Sadece reklam yazma","Fiyat belirleme tekniği"],"Müşteriye “ne düşünüyorsun” demek yerine beyninin tepkisini ölçmek gibidir."],
+[12,"Nöropazarlamada kullanılan tekniklerden biri hangisidir?",["EEG ve göz izleme (eye tracking)","Mülakat","Ankete cevap","Kupon dağıtımı"],"Bu cihazlar tüketicinin bilinçaltı tepkilerini ölçer."],
+[12,"Nöropazarlamanın tüketici araştırmalarına katkısı nedir?",["Kişinin söylemediği ya da farkında olmadığı tepkileri ortaya çıkarabilmesi","Fiyatı düşürmesi","Dağıtımı kısaltması","Reklamı yasaklaması"],"İnsanlar her zaman gerçek düşüncesini söyleyemez; beyin tepkisi daha dürüst olabilir."],
+[12,"Gerilla pazarlamanın temel özelliği nedir?",["Düşük maliyetli, yaratıcı ve sürpriz içeren yöntemler kullanması","Çok yüksek reklam bütçesi gerektirmesi","Sadece televizyonda yapılması","Fiyatın sıfırlanması"],"Kalabalık meydanda beklenmedik bir gösteri yapıp ses getirmek gibi."],
+[12,"Gerilla pazarlama kavramının öncüsü olarak bilinen isim kimdir?",["Jay Conrad Levinson","Philip Kotler","Abraham Maslow","Michael Porter"],"Levinson, düşük bütçeli ve yaratıcı küçük işletme pazarlamasını bu adla ortaya koymuştur."],
+[12,"İlişkisel pazarlamanın odağı nedir?",["Müşteriyle uzun dönemli ilişki kurmak","Tek seferlik satış","Fiyat savaşı","Dağıtım hızı"],"Hep gittiğiniz esnafın sizi tanıması ve ilgilenmesi gibi."],
+[12,"Mevcut müşteriyi elde tutmak yeni müşteri kazanmaya göre genellikle nasıldır?",["Daha az maliyetlidir","Daha pahalıdır","Aynı maliyetlidir","Mümkün değildir"],"Eski müşteriyi memnun tutmak yeni müşteri bulmaktan genelde daha ucuzdur."],
+[12,"Müşteri ilişkileri yönetiminin (CRM) sağlıkta örnek kullanımı nedir?",["Hasta takip ve kontrol hatırlatma sistemleri","Tıbbi cihaz alımı","Ruhsat başvurusu","Bina tasarımı"],"Berberin “saç kesiminizin zamanı geldi” diye mesaj atması gibi."],
+[12,"Müşterinin kuruma yaşam boyu getireceği toplam değere ne denir?",["Müşteri yaşam boyu değeri","Başabaş noktası","Marka sadakati","Ürün hayat seyri"],"Hep aynı markete giden müşteri, yıllar içinde büyük bir gelir getirir."],
+[12,"Yeşil pazarlamanın temel fikri nedir?",["Çevre dostu ürün, süreç ve iletişimle değer yaratmak","Sadece yeşil renk kullanmak","Fiyatı düşürmek","Reklam yasaklamak"],"Geri dönüşüme uygun ambalaj kullanan firma gibi."],
+[12,"Çevreci olmadığı hâlde çevreci gibi görünmeye çalışmaya ne denir?",["Yeşil aklama (greenwashing)","Yeşil pazarlama","Sürdürülebilirlik","Çevre taraması"],"Üzerine yaprak çizip ürünü doğa dostu gibi göstermek, ama gerçekte kirletmek gibi."],
+[12,"Sağlık kurumlarında atık yönetimi ve enerji verimliliği hangi yaklaşımla ilişkilidir?",["Yeşil pazarlama","Gerilla pazarlama","Nöropazarlama","Niş pazarlama"],"Çevreye duyarlı bir hastane olduğunu gösteren uygulamalardır."],
+[12,"İlişkisel pazarlama ile işlem odaklı pazarlama arasındaki fark nedir?",["İlişkisel pazarlama uzun vadeli sadakat, işlem odaklı pazarlama tek seferlik satış üzerinedir","İkisi aynıdır","İlişkisel pazarlama fiyat odaklıdır","İşlem odaklı pazarlama sadakat arar"],"Mahalle esnafı ile yolun üzerindeki geçici tezgâh arasındaki fark gibidir."],
+
+// ---- Bölüm 14: Planlama ve değerlendirme ----
+[13,"Misyon neyi ifade eder?",["Kurumun var oluş nedenini","Gelecekte ulaşmak istediği konumu","Kısa vadeli satış hedefini","Aylık bütçeyi"],"“Biz neden varız?” sorusunun cevabı."],
+[13,"Vizyon neyi ifade eder?",["Kurumun gelecekte ulaşmak istediği konumu","Kurumun mevcut gelirini","Rakiplerin listesi","Çalışan sayısı"],"“Beş yıl sonra nerede olmak istiyoruz?” sorusunun cevabı."],
+[13,"Hedefin amaçtan farkı nedir?",["Hedef ölçülebilir ve zamanla sınırlıdır","Hedef genel ve soyuttur","Hedef sadece rakip analizi içindir","Fark yoktur"],"“Sağlıklı olmak” amaçtır; “3 ayda 5 kilo vermek” hedeftir."],
+[13,"SWOT analizinde iç çevre unsurları hangileridir?",["Güçlü ve zayıf yönler","Fırsatlar ve tehditler","Fiyat ve dağıtım","Misyon ve vizyon"],"Evin içindeki durum: güçlü ve zayıf yönler; dışındaki durum: fırsat ve tehdit."],
+[13,"SWOT analizinde dış çevre unsurları hangileridir?",["Fırsatlar ve tehditler","Güçlü ve zayıf yönler","Maliyet ve kâr","Sevk ve triyaj"],"Dışarıdaki hava (fırsat/tehdit) siz değiştiremezsiniz."],
+[13,"Bölgeye yeni büyük bir rakip hastane açılması SWOT’ta neyi temsil eder?",["Tehdit","Fırsat","Güçlü yön","Zayıf yön"],"Mahalleye zincir bir market açılması esnafa tehdit olur."],
+[13,"Kurumun deneyimli uzman kadrosuna sahip olması SWOT’ta neyi temsil eder?",["Güçlü yön","Zayıf yön","Fırsat","Tehdit"],"Kurumun içinde olan ve avantaj sağlayan özelliktir."],
+[13,"BCG matrisinde pazar büyüme oranı yüksek, göreceli pazar payı yüksek olan birim hangisidir?",["Yıldız","Nakit ineği","Soru işareti","Köpek"],"Hem hızla büyüyen hem de lider durumda olan parlak bir ürün."],
+[13,"BCG matrisinde düşük büyüme oranı, yüksek pazar payına sahip birim hangisidir?",["Nakit ineği","Yıldız","Soru işareti","Köpek"],"Artık büyümüyor ama istikrarlı nakit sağlayan ürün."],
+[13,"BCG matrisinde yüksek büyüme oranı, düşük pazar payına sahip birim hangisidir?",["Soru işareti","Yıldız","Nakit ineği","Köpek"],"Potansiyeli var ama başarısı belirsiz; yatırım yapmalı mı karar verilir."],
+[13,"BCG matrisinde düşük büyüme, düşük pazar payına sahip birim hangisidir?",["Köpek","Yıldız","Nakit ineği","Soru işareti"],"Ne büyüyor ne pay alıyor; elden çıkarma düşünülebilir."],
+[13,"Ansoff matrisinde mevcut ürünle yeni pazara girmek hangi stratejidir?",["Pazar geliştirme","Pazara nüfuz","Ürün geliştirme","Çeşitlendirme"],"Aynı hizmeti başka şehirde sunmak."],
+[13,"Ansoff matrisinde mevcut pazarda yeni ürün sunmak hangi stratejidir?",["Ürün geliştirme","Pazar geliştirme","Pazara nüfuz","Çeşitlendirme"],"Mevcut hastalarına yeni bir tarama hizmeti eklemek gibi."],
+[13,"Ansoff matrisinde yeni ürünle yeni pazara girmek hangi stratejidir ve riski nasıldır?",["Çeşitlendirme; en yüksek riskli","Pazara nüfuz; en düşük riskli","Ürün geliştirme; risksiz","Pazar geliştirme; en düşük riskli"],"Hem yeni işe hem yeni müşteriye girmek bilinmeyen alana adım atmaktır."],
+[13,"Mevcut ürünü mevcut pazarda daha çok satmayı hedefleyen Ansoff stratejisi hangisidir?",["Pazara nüfuz","Çeşitlendirme","Pazar geliştirme","Ürün geliştirme"],"Aynı müşteriye aynı hizmeti daha sık kullandırmak."],
+[13,"General Electric–McKinsey matrisi kaç hücrelidir ve hangi iki boyutu kullanır?",["9 hücreli; sektör çekiciliği ve rekabet gücü","4 hücreli; büyüme ve pay","6 hücreli; ürün ve pazar","16 hücreli; fiyat ve maliyet"],"BCG 4 hücreliyken GE-McKinsey daha ayrıntılı olan 9 hücreli matristir."],
+[13,"Stratejik pazarlama planlama sürecinin doğru sıralaması hangisidir?",["Durum analizi, SWOT, amaç ve hedefler, strateji, uygulama, kontrol","Kontrol, uygulama, strateji, durum analizi","Strateji, SWOT, durum analizi, kontrol","Uygulama, strateji, SWOT, amaç"],"Önce durumu bil, sonra hedef koy, plan yap, uygula, kontrol et."],
+[13,"Plandaki sonuçların hedefle karşılaştırılıp sapma varsa düzeltme yapılması hangi aşamadır?",["Kontrol (değerlendirme)","Uygulama","Durum analizi","Misyon belirleme"],"Yolda pusula kontrolü: sapma varsa rotayı düzeltmek."],
+[13,"Strateji ile taktik arasındaki fark nedir?",["Strateji uzun vadeli yön, taktik kısa vadeli uygulama","Strateji kısa vadeli, taktik uzun vadeli","Aynı şeylerdir","Taktik her zaman daha önemlidir"],"Strateji haritadaki varış noktasıdır, taktik yoldaki dönüşlerdir."],
+[13,"Durum analizinde incelenen unsurlar hangileridir?",["İç çevre, müşteri çevresi ve dış çevre","Yalnızca fiyat","Yalnızca reklam","Yalnızca dağıtım"],"Önce nerede durduğunuzu bilmek gerekir: içeriyi, müşteriyi ve dışarıyı birlikte görmek."]
+];
+
+
+var MAPO=[0,0,1,2,3,4,5,6,7,8],M10=[9,9,10,11,9,9],c10=0;
+Q.forEach(function(q){ if(q[0]===10){q[0]=M10[c10++]}else{q[0]=MAPO[q[0]]} });
+Q=Q.concat(Q2a,Q2b);
+
+
+var app=document.getElementById('app');
+var nav=document.getElementById('nav');
+var store={get:function(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set:function(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+
+// ---- durum ----
+var REC=store.get('shp_rec',{});      // soru id -> 'c' (son cevap doğru) | 'w' (son cevap yanlış)
+var MARK=store.get('shp_mark',[]);    // kaydedilen soru id'leri
+var HIST=store.get('shp_hist',[]);    // sınav geçmişi
+(function migrate(){
+  if(store.get('shp_migrated',0))return;
+  var old=store.get('shp_wrong',[]);old.forEach(function(id){REC[id]='w'});
+  store.set('shp_rec',REC);store.set('shp_migrated',1);
+})();
+function save(){store.set('shp_rec',REC);store.set('shp_mark',MARK);store.set('shp_hist',HIST)}
+
+var TAB='home',VIEW={t:'tab'},sess=null,timer=null,examCfg={n:20,chs:null};
+var SHORT=TOPICS.map(function(t){return t.replace(/^Bölüm \d+ · /,'')});
+
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+function idsOf(ch){var r=[];Q.forEach(function(q,i){if(ch===null||q[0]===ch)r.push(i)});return r}
+function cnt(ids){var c=0,w=0;ids.forEach(function(i){if(REC[i]==='c')c++;else if(REC[i]==='w')w++});return {n:ids.length,c:c,w:w,u:ids.length-c-w}}
+function pct(a,b){return b?Math.round(100*a/b):0}
+function fmt(s){var m=Math.floor(s/60),r=s%60;return m+':'+(r<10?'0':'')+r}
+function ring(p,size){
+  var r=size/2-7,C=2*Math.PI*r;
+  return '<svg width="'+size+'" height="'+size+'" viewBox="0 0 '+size+' '+size+'"><circle cx="'+size/2+'" cy="'+size/2+'" r="'+r+'" fill="none" stroke="var(--line)" stroke-width="8"/><circle cx="'+size/2+'" cy="'+size/2+'" r="'+r+'" fill="none" stroke="var(--acc)" stroke-width="8" stroke-linecap="round" stroke-dasharray="'+(C*p/100).toFixed(1)+' '+C.toFixed(1)+'" transform="rotate(-90 '+size/2+' '+size/2+')"/></svg>';
+}
+
+// ---- gezinme ----
+function go(tab){TAB=tab;VIEW={t:'tab'};render()}
+function open_(v){VIEW=v;render()}
+function render(){
+  clearInterval(timer);
+  nav.style.display='flex';
+  if(VIEW.t==='chapter')viewChapter(VIEW.ch);
+  else if(VIEW.t==='setup')viewSetup();
+  else if(TAB==='home')viewHome();
+  else if(TAB==='exam')viewSetup();
+  else viewStats();
+  var bs=nav.querySelectorAll('button');
+  var cur=VIEW.t==='chapter'?'home':(VIEW.t==='setup'?'exam':TAB);
+  bs.forEach(function(b){b.className=b.getAttribute('data-t')===cur?'on':''});
+  window.scrollTo(0,0);
+}
+nav.addEventListener('click',function(e){var b=e.target.closest('button');if(b)go(b.getAttribute('data-t'))});
+
+// ---- ana sayfa ----
+function viewHome(){
+  var all=cnt(idsOf(null)),p=pct(all.c,all.n),ans=all.c+all.w;
+  var h='<header><h1>Sağlık Hizmetleri Pazarlaması</h1><p class="sub">AUZEF · Sağlık Yönetimi Lisans Tamamlama</p></header>';
+  h+='<section class="card hero"><div class="ringbox">'+ring(p,96)+'<div class="rtxt"><b>%'+p+'</b></div></div><div class="hstats">'+
+    '<div><b>'+all.n+'</b><span>toplam soru</span></div><div><b>'+ans+'</b><span>çözülen</span></div>'+
+    '<div><b class="g">'+all.c+'</b><span>doğru</span></div><div><b class="r">'+all.w+'</b><span>yanlış</span></div></div></section>';
+  var next=shuffle(idsOf(null).filter(function(i){return !REC[i]})).slice(0,10);
+  var lab=next.length?'Çözülmemiş '+next.length+' soru':(all.w?'Yanlışlarını tekrar et':'Hepsini karışık çöz');
+  h+='<button class="cta" onclick="startContinue()"><span>Devam et</span><small>'+lab+'</small></button>';
+  var tools=[];
+  if(all.w)tools.push('<button class="chip" onclick="startWrong(null)">Yanlışlarım · '+all.w+'</button>');
+  if(MARK.length)tools.push('<button class="chip" onclick="startMarked()">Kaydedilenler · '+MARK.length+'</button>');
+  if(tools.length)h+='<div class="chips">'+tools.join('')+'</div>';
+  h+='<h2>Bölümler</h2>';
+  TOPICS.forEach(function(t,i){
+    var c=cnt(idsOf(i)),pp=pct(c.c,c.n);
+    h+='<button class="row" onclick="open_({t:\'chapter\',ch:'+i+'})"><div class="rn">'+(i+1)+'</div><div class="rm"><b>'+esc(SHORT[i])+'</b>'+
+      '<div class="bar"><i style="width:'+pp+'%"></i></div><small>'+c.n+' soru · '+c.c+' doğru'+(c.w?' · '+c.w+' yanlış':'')+'</small></div><div class="rp">%'+pp+'</div></button>';
+  });
+  h+='<p class="foot">Sorular özgündür; gerçek çıkmış soru değildir. Bölüm sırası AUZEF 2023 ders kitabının içindekilerine göredir.</p>';
+  app.innerHTML=h;
+}
+function startContinue(){
+  var un=shuffle(idsOf(null).filter(function(i){return !REC[i]})).slice(0,10);
+  if(!un.length)un=shuffle(idsOf(null).filter(function(i){return REC[i]==='w'})).slice(0,10);
+  if(!un.length)un=shuffle(idsOf(null)).slice(0,10);
+  begin(un,{mode:'learn',title:'Devam'});
+}
+function startWrong(ch){var ids=shuffle(idsOf(ch).filter(function(i){return REC[i]==='w'}));if(ids.length)begin(ids,{mode:'learn',title:'Yanlışlarım'})}
+function startMarked(){var ids=MARK.slice();if(ids.length)begin(shuffle(ids),{mode:'learn',title:'Kaydedilenler'})}
+
+// ---- bölüm ----
+function viewChapter(ch){
+  var ids=idsOf(ch),c=cnt(ids),p=pct(c.c,c.n);
+  var h='<div class="topbar"><button class="back" onclick="go(\'home\')">‹ Bölümler</button></div>';
+  h+='<header><div class="kick">Bölüm '+(ch+1)+'</div><h1>'+esc(SHORT[ch])+'</h1></header>';
+  h+='<section class="card"><div class="mini"><div><b>'+c.n+'</b><span>soru</span></div><div><b class="g">'+c.c+'</b><span>doğru</span></div><div><b class="r">'+c.w+'</b><span>yanlış</span></div><div><b>'+c.u+'</b><span>yeni</span></div></div><div class="bar big"><i style="width:'+p+'%"></i></div></section>';
+  h+='<button class="cta" onclick="startChapter('+ch+',\'all\')"><span>Tümünü çöz</span><small>'+c.n+' soru · karışık sıra</small></button>';
+  h+='<div class="chips"><button class="chip" '+(c.u?'':'disabled')+' onclick="startChapter('+ch+',\'new\')">Yeni sorular · '+c.u+'</button><button class="chip" '+(c.w?'':'disabled')+' onclick="startChapter('+ch+',\'wrong\')">Yanlışlarım · '+c.w+'</button></div>';
+  h+='<h2>Soru listesi</h2>';
+  ids.forEach(function(id,k){
+    var st=REC[id]||'u',q=Q[id];
+    h+='<button class="qrow" onclick="startFrom('+ch+','+k+')"><span class="dot '+st+'"></span><span class="qt">'+esc(q[1])+'</span>'+(MARK.indexOf(id)>=0?'<span class="star">★</span>':'')+'</button>';
+  });
+  app.innerHTML=h;
+}
+function startChapter(ch,kind){
+  var ids=idsOf(ch);
+  if(kind==='new')ids=ids.filter(function(i){return !REC[i]});
+  if(kind==='wrong')ids=ids.filter(function(i){return REC[i]==='w'});
+  if(ids.length)begin(shuffle(ids),{mode:'learn',title:SHORT[ch],ch:ch});
+}
+function startFrom(ch,k){begin(idsOf(ch),{mode:'learn',title:SHORT[ch],ch:ch,start:k})}
+
+// ---- deneme kurulumu ----
+function viewSetup(){
+  if(!examCfg.chs)examCfg.chs=TOPICS.map(function(_,i){return i});
+  var pool=0;examCfg.chs.forEach(function(c){pool+=idsOf(c).length});
+  var n=Math.min(examCfg.n,pool),mins=Math.round(n*1.5);
+  var h='<header><h1>Deneme sınavı</h1><p class="sub">AUZEF formatı: çoktan seçmeli, süreli. Sonuçlar sınav bitince gösterilir.</p></header>';
+  h+='<h2>Soru sayısı</h2><div class="seg">';
+  [20,40,60].forEach(function(k){h+='<button class="'+(examCfg.n===k?'on':'')+'" onclick="examCfg.n='+k+';viewSetup();setTab()">'+k+'</button>'});
+  h+='</div><p class="sub">Süre: '+mins+' dakika (soru başına 1,5 dk). AUZEF vizesinde 20 soru / 30 dakika.</p>';
+  h+='<h2>Bölümler</h2><div class="chips"><button class="chip" onclick="selAll(1)">Hepsi</button><button class="chip" onclick="selAll(0)">Hiçbiri</button><button class="chip" onclick="selRange()">1–7</button></div>';
+  TOPICS.forEach(function(t,i){
+    var on=examCfg.chs.indexOf(i)>=0;
+    h+='<button class="chk '+(on?'on':'')+'" onclick="togCh('+i+')"><span class="box">'+(on?'✓':'')+'</span><span>'+esc(TOPICS[i])+'</span><small>'+idsOf(i).length+'</small></button>';
+  });
+  h+='<button class="cta" '+(pool?'':'disabled')+' onclick="startExam()"><span>Sınavı başlat</span><small>'+n+' soru · '+mins+' dakika</small></button>';
+  app.innerHTML=h;
+}
+function setTab(){var bs=nav.querySelectorAll('button');bs.forEach(function(b){b.className=b.getAttribute('data-t')==='exam'?'on':''})}
+function togCh(i){var p=examCfg.chs.indexOf(i);if(p>=0)examCfg.chs.splice(p,1);else examCfg.chs.push(i);var y=window.scrollY;viewSetup();setTab();window.scrollTo(0,y)}
+function selAll(on){examCfg.chs=on?TOPICS.map(function(_,i){return i}):[];viewSetup();setTab()}
+function selRange(){examCfg.chs=[0,1,2,3,4,5,6];viewSetup();setTab()}
+function startExam(){
+  var ids=[];examCfg.chs.forEach(function(c){ids=ids.concat(idsOf(c))});
+  var n=Math.min(examCfg.n,ids.length);
+  begin(shuffle(ids).slice(0,n),{mode:'exam',title:'Deneme sınavı',secs:Math.round(n*90)});
+}
+
+// ---- oturum ----
+function begin(ids,o){
+  sess={mode:o.mode,title:o.title,ch:o.ch,i:o.start||0,t0:Date.now(),end:o.secs?Date.now()+o.secs*1000:0,secs:o.secs||0,nav:false,confirm:false,
+    items:ids.map(function(id){var q=Q[id];return {id:id,flag:false,pick:-1,opts:shuffle([{t:q[2][0],c:1},{t:q[2][1],c:0},{t:q[2][2],c:0},{t:q[2][3],c:0}])}})};
+  nav.style.display='none';
+  if(sess.end)timer=setInterval(tick,1000);
+  show();
+}
+function tick(){
+  var left=Math.max(0,Math.round((sess.end-Date.now())/1000));
+  var el=document.getElementById('tm');if(el){el.textContent=fmt(left);el.className='tm'+(left<=300?' low':'')}
+  if(left<=0){clearInterval(timer);finish()}
+}
+function leave(){clearInterval(timer);sess=null;render()}
+function show(){
+  var it=sess.items[sess.i],q=Q[it.id],n=sess.items.length,exam=sess.mode==='exam';
+  var done=!exam&&it.pick>=0;
+  var left=exam?Math.max(0,Math.round((sess.end-Date.now())/1000)):0;
+  var marked=exam?it.flag:MARK.indexOf(it.id)>=0;
+  var h='<div class="qtop"><button class="back" onclick="'+(exam?'askExit()':'leave()')+'">‹ '+(exam?'Çık':'Geri')+'</button><span class="pos">'+(sess.i+1)+' / '+n+'</span>'+
+    (exam?'<span id="tm" class="tm'+(left<=300?' low':'')+'">'+fmt(left)+'</span>':'<span class="ttl">'+esc(sess.title)+'</span>')+'</div>';
+  h+='<div class="bar"><i style="width:'+pct(sess.i+(done?1:0),n)+'%"></i></div>';
+  if(exam){
+    h+='<div class="strip">';
+    sess.items.forEach(function(x,k){h+='<button class="sq'+(k===sess.i?' cur':'')+(x.pick>=0?' ans':'')+(x.flag?' flag':'')+'" onclick="jump('+k+')">'+(k+1)+'</button>'});
+    h+='</div>';
+  }
+  h+='<div class="qhead"><span class="tag">'+esc(SHORT[q[0]])+'</span><button class="starb'+(marked?' on':'')+'" onclick="toggleMark()">'+(marked?'★':'☆')+' '+(exam?'İşaretle':'Kaydet')+'</button></div>';
+  h+='<div class="q">'+esc(q[1])+'</div>';
+  it.opts.forEach(function(o,k){
+    var cls='opt';
+    if(done){if(o.c)cls+=' ok';else if(k===it.pick)cls+=' bad'}
+    else if(exam&&k===it.pick)cls+=' sel';
+    h+='<button class="'+cls+'" onclick="pick('+k+')"><span class="l">'+'ABCD'[k]+'</span><span class="t">'+esc(o.t)+'</span></button>';
+  });
+  if(done){
+    var ok=it.opts[it.pick].c;
+    h+='<div class="exp '+(ok?'good':'badx')+'"><b>'+(ok?'Doğru':'Yanlış')+'</b><p>'+esc(q[3])+'</p></div>';
+  }
+  var last=sess.i===n-1;
+  h+='<div class="dock">';
+  if(exam){
+    h+='<button class="sec" '+(sess.i?'':'disabled')+' onclick="jump('+(sess.i-1)+')">‹ Önceki</button>';
+    h+=last?'<button class="pri" onclick="askFinish()">Sınavı bitir</button>':'<button class="pri" onclick="jump('+(sess.i+1)+')">Sonraki ›</button>';
+  }else{
+    h+='<button class="sec" '+(sess.i?'':'disabled')+' onclick="jump('+(sess.i-1)+')">‹ Önceki</button>';
+    h+='<button class="pri" '+(done||last?'':'disabled')+' onclick="'+(last?'finish()':'jump('+(sess.i+1)+')')+'">'+(last?'Bitir':'Sonraki ›')+'</button>';
+  }
+  h+='</div>';
+  if(exam&&last===false)h+='<button class="link center" onclick="askFinish()">Sınavı şimdi bitir</button>';
+  if(sess.confirm){
+    var blank=sess.items.filter(function(x){return x.pick<0}).length;
+    h+='<div class="sheet"><div class="box2"><h3>Sınav bitirilsin mi?</h3><p>'+(blank?blank+' soru boş. Boş sorular yanlış sayılır.':'Tüm sorular cevaplandı.')+'</p><div class="dock"><button class="sec" onclick="sess.confirm=false;show()">Devam et</button><button class="pri" onclick="finish()">Bitir</button></div></div></div>';
+  }
+  if(sess.exit){
+    h+='<div class="sheet"><div class="box2"><h3>Sınavdan çıkılsın mı?</h3><p>Cevapların kaydedilmez.</p><div class="dock"><button class="sec" onclick="sess.exit=false;show()">Devam et</button><button class="pri" onclick="leave()">Çık</button></div></div></div>';
+  }
+  app.innerHTML=h;
+  window.scrollTo(0,0);
+  var st=document.querySelector('.strip .cur');if(st&&st.scrollIntoView)try{st.scrollIntoView({inline:'center',block:'nearest'})}catch(e){}
+}
+function askExit(){sess.exit=true;show()}
+function askFinish(){sess.confirm=true;show()}
+function jump(k){if(k<0||k>=sess.items.length)return;sess.i=k;sess.confirm=false;show()}
+function toggleMark(){
+  var it=sess.items[sess.i];
+  if(sess.mode==='exam'){it.flag=!it.flag}
+  else{var p=MARK.indexOf(it.id);if(p>=0)MARK.splice(p,1);else MARK.push(it.id);save()}
+  show();
+}
+function pick(k){
+  var it=sess.items[sess.i];
+  if(sess.mode==='learn'){
+    if(it.pick>=0)return;
+    it.pick=k;REC[it.id]=it.opts[k].c?'c':'w';save();
+  }else{it.pick=k}
+  show();
+}
+
+// ---- bitiş ----
+function finish(){
+  clearInterval(timer);
+  var n=sess.items.length,ok=0,bad=[],byCh={};
+  var dur=Math.round((Date.now()-sess.t0)/1000);
+  sess.items.forEach(function(it){
+    var good=it.pick>=0&&it.opts[it.pick].c,ch=Q[it.id][0];
+    if(sess.mode==='exam'){
+      byCh[ch]=byCh[ch]||{n:0,c:0};byCh[ch].n++;
+      if(good){ok++;byCh[ch].c++}
+      if(it.pick>=0)REC[it.id]=good?'c':'w';
+      if(!good)bad.push(it);
+    }else{if(good)ok++}
+  });
+  if(sess.mode==='exam')HIST.push({t:Date.now(),ok:ok,n:n,sec:dur});
+  save();
+  var p=pct(ok,n),h='';
+  nav.style.display='none';
+  if(sess.mode==='exam'){
+    h+='<div class="topbar"><button class="back" onclick="leave()">‹ Ana sayfa</button></div>';
+    h+='<header class="ctr"><div class="kick">Sınav sonucu</div><div class="score">'+ok+'<small> / '+n+'</small></div><p class="sub">%'+p+' · Süre '+fmt(dur)+'</p></header>';
+    h+='<h2>Bölümlere göre</h2>';
+    Object.keys(byCh).sort(function(a,b){return a-b}).forEach(function(c){
+      var v=byCh[c],pp=pct(v.c,v.n);
+      h+='<div class="rowr"><div class="rm"><b>'+esc(SHORT[c])+'</b><div class="bar"><i style="width:'+pp+'%"></i></div></div><div class="rp">'+v.c+'/'+v.n+'</div></div>';
+    });
+    if(bad.length){
+      h+='<h2>Yanlış ve boş sorular · '+bad.length+'</h2>';
+      bad.forEach(function(it){
+        var q=Q[it.id],c=it.opts.filter(function(o){return o.c})[0].t;
+        h+='<div class="rev"><b>'+esc(q[1])+'</b><p class="you">'+(it.pick>=0?'Cevabın: '+esc(it.opts[it.pick].t):'Boş bıraktın')+'</p><p class="cor">Doğru: '+esc(c)+'</p><p class="why">'+esc(q[3])+'</p></div>';
+      });
+      h+='<button class="cta" onclick="retryBad()"><span>Yanlışları tekrar çöz</span><small>'+bad.length+' soru</small></button>';
+    }else h+='<p class="sub ctr">Tüm sorular doğru. Harika.</p>';
+    window._bad=bad.map(function(x){return x.id});
+  }else{
+    h+='<div class="topbar"><button class="back" onclick="leave()">‹ Geri</button></div>';
+    h+='<header class="ctr"><div class="kick">Tur tamamlandı</div><div class="score">'+ok+'<small> / '+n+'</small></div><p class="sub">%'+p+' doğru</p></header>';
+    h+='<button class="cta" onclick="leave()"><span>Tamam</span><small>Bölümlere dön</small></button>';
+  }
+  app.innerHTML=h;window.scrollTo(0,0);
+}
+function retryBad(){begin(shuffle(window._bad),{mode:'learn',title:'Yanlışlar'})}
+
+// ---- istatistik ----
+function viewStats(){
+  var all=cnt(idsOf(null)),ans=all.c+all.w;
+  var h='<header><h1>İstatistikler</h1><p class="sub">Her sorunun son cevabına göre hesaplanır.</p></header>';
+  h+='<section class="card"><div class="mini"><div><b>'+ans+'</b><span>çözülen</span></div><div><b class="g">'+all.c+'</b><span>doğru</span></div><div><b class="r">'+all.w+'</b><span>yanlış</span></div><div><b>'+all.u+'</b><span>yeni</span></div></div>'+
+    '<div class="stack"><i class="sg" style="width:'+pct(all.c,all.n)+'%"></i><i class="sr" style="width:'+pct(all.w,all.n)+'%"></i></div></section>';
+  h+='<h2>Bölümler</h2>';
+  var rows=TOPICS.map(function(_,i){var c=cnt(idsOf(i));return {i:i,c:c,acc:c.c+c.w?pct(c.c,c.c+c.w):-1}});
+  rows.forEach(function(r){
+    h+='<div class="rowr"><div class="rm"><b>'+(r.i+1)+'. '+esc(SHORT[r.i])+'</b><div class="stack s"><i class="sg" style="width:'+pct(r.c.c,r.c.n)+'%"></i><i class="sr" style="width:'+pct(r.c.w,r.c.n)+'%"></i></div></div><div class="rp">'+(r.acc<0?'–':'%'+r.acc)+'</div></div>';
+  });
+  var weak=rows.filter(function(r){return r.c.c+r.c.w>=3}).sort(function(a,b){return a.acc-b.acc}).slice(0,3);
+  if(weak.length){
+    h+='<h2>Çalışman gereken bölümler</h2>';
+    weak.forEach(function(r){h+='<button class="row" onclick="open_({t:\'chapter\',ch:'+r.i+'})"><div class="rn">'+(r.i+1)+'</div><div class="rm"><b>'+esc(SHORT[r.i])+'</b><small>Doğru oranı %'+r.acc+'</small></div><div class="rp">›</div></button>'});
+  }
+  h+='<h2>Son denemeler</h2>';
+  if(!HIST.length)h+='<p class="sub">Henüz deneme sınavı çözülmedi.</p>';
+  HIST.slice(-8).reverse().forEach(function(x){
+    var d=new Date(x.t);
+    h+='<div class="rowr"><div class="rm"><b>'+x.ok+' / '+x.n+'</b><small>'+d.toLocaleDateString('tr-TR')+' · '+fmt(x.sec)+'</small></div><div class="rp">%'+pct(x.ok,x.n)+'</div></div>';
+  });
+  h+='<p class="foot"><button class="link" onclick="askReset()">İlerlemeyi sıfırla</button></p>';
+  app.innerHTML=h;
+}
+function askReset(){
+  app.insertAdjacentHTML('beforeend','<div class="sheet"><div class="box2"><h3>İlerleme sıfırlansın mı?</h3><p>Tüm cevaplar, kayıtlar ve deneme geçmişi silinir.</p><div class="dock"><button class="sec" onclick="render()">Vazgeç</button><button class="pri" onclick="doReset()">Sıfırla</button></div></div></div>');
+}
+function doReset(){REC={};MARK=[];HIST=[];save();render()}
+
+render();
+
+</script></body></html>
